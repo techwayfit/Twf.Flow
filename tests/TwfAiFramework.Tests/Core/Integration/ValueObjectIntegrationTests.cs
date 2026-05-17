@@ -1,9 +1,9 @@
 using FluentAssertions;
-using TwfAiFramework.Core.ValueObjects;
-using TwfAiFramework.Nodes.AI;
-using TwfAiFramework.Nodes.Data;
+using Twf.Flow.Core.ValueObjects;
+using Twf.Flow.Nodes.AI;
+using Twf.Flow.Nodes.Data;
 
-namespace TwfAiFramework.Tests.Core.Integration;
+namespace Twf.Flow.Tests.Core.Integration;
 
 /// <summary>
 /// Integration tests to verify value objects work correctly with node configurations.

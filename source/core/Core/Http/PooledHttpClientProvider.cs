@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace TwfAiFramework.Core.Http;
+namespace Twf.Flow.Core.Http;
 
 /// <summary>
 /// Pooled HTTP client provider with connection management and DNS refresh.
@@ -139,7 +139,7 @@ public sealed class PooledHttpClientProvider : IHttpClientProvider, IDisposable
         }
 
         // Add default headers for better API compatibility
-        client.DefaultRequestHeaders.Add("User-Agent", "TwfAiFramework/1.0");
+        client.DefaultRequestHeaders.Add("User-Agent", "Twf.Flow/1.0");
         client.DefaultRequestHeaders.ConnectionClose = false; // Keep-alive
 
         return client;

@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core;
+namespace Twf.Flow.Core;
 
 /// <summary>
 /// Describes the UI schema for a node type: the parameter form fields shown in the

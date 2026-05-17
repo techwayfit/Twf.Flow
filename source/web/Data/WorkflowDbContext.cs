@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using TwfAiFramework.Web.Models;
+using Twf.Flow.Web.Models;
 
-namespace TwfAiFramework.Web.Data;
+namespace Twf.Flow.Web.Data;
 
 public class WorkflowDbContext : DbContext
 {
@@ -102,7 +102,7 @@ public class NodeTypeEntity
     public bool IsEnabled { get; set; } = true;
     /// <summary>Short prefix for generating human-readable node IDs in the designer (e.g. "llm" → llm001).</summary>
     public string IdPrefix { get; set; } = "node";
-    /// <summary>Fully-qualified .NET type name used for dynamic instantiation (e.g. "TwfAiFramework.Nodes.AI.LlmNode, TwfAiFramework.Core").</summary>
+    /// <summary>Fully-qualified .NET type name used for dynamic instantiation (e.g. "Twf.Flow.Nodes.AI.LlmNode, Twf.Flow.Core").</summary>
     public string? FullTypeName { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace TwfAiFramework.Core;
+namespace Twf.Flow.Core;
 
 /// <summary>
 /// Configuration options for workflow execution.

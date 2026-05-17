@@ -1,6 +1,6 @@
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Web.Services.VariableResolution;
+namespace Twf.Flow.Web.Services.VariableResolution;
 
 /// <summary>
 /// Service responsible for resolving template variables in workflow parameters.

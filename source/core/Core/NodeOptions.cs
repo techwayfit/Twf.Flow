@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core;
+namespace Twf.Flow.Core;
 
 /// <summary>
 /// Per-node execution configuration. Controls retry behavior, timeouts,

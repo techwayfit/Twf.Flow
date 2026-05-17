@@ -1,9 +1,9 @@
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
-using TwfAiFramework.Web.Data;
-using TwfAiFramework.Web.Models;
+using Twf.Flow.Web.Data;
+using Twf.Flow.Web.Models;
 
-namespace TwfAiFramework.Web.Repositories;
+namespace Twf.Flow.Web.Repositories;
 
 /// <summary>
 /// SQLite-based workflow repository

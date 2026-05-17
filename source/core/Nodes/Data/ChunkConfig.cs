@@ -1,6 +1,6 @@
-using TwfAiFramework.Core.ValueObjects;
+using Twf.Flow.Core.ValueObjects;
 
-namespace TwfAiFramework.Nodes.Data;
+namespace Twf.Flow.Nodes.Data;
 
 /// <summary>
 /// Configuration for text chunking operations.

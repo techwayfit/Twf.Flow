@@ -2,7 +2,7 @@ using System.Net.Http;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace TwfAiFramework.Core.Http;
+namespace Twf.Flow.Core.Http;
 
 /// <summary>
 /// Default implementation of IHttpClientProvider.

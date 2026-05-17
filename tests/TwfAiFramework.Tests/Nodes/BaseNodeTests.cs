@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Tests.Nodes;
+namespace Twf.Flow.Tests.Nodes;
 
 /// <summary>
 /// Helper test node for testing BaseNode behavior and workflow execution.

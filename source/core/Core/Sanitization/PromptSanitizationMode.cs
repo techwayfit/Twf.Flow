@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core.Sanitization;
+namespace Twf.Flow.Core.Sanitization;
 
 /// <summary>
 /// Defines how prompt input should be sanitized before sending to LLM.

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Nodes.Control;
+namespace Twf.Flow.Nodes.Control;
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // LogNode — Explicit logging checkpoint

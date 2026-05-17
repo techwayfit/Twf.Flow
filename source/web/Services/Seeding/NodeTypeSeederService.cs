@@ -1,13 +1,13 @@
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
-using TwfAiFramework.Core;
-using TwfAiFramework.Web.Data;
-using TwfAiFramework.Web.Repositories;
-using TwfAiFramework.Web.Services.Schema;
-using TwfAiFramework.Web.Models.VisualNodes;
+using Twf.Flow.Core;
+using Twf.Flow.Web.Data;
+using Twf.Flow.Web.Repositories;
+using Twf.Flow.Web.Services.Schema;
+using Twf.Flow.Web.Models.VisualNodes;
 
-namespace TwfAiFramework.Web.Services.Seeding;
+namespace Twf.Flow.Web.Services.Seeding;
 
 /// <summary>
 /// Seeds (and keeps up-to-date) the NodeTypes table from the core assembly.

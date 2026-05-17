@@ -1,6 +1,6 @@
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Web.Services.Schema;
+namespace Twf.Flow.Web.Services.Schema;
 
 /// <summary>
 /// Service for discovering and accessing node schema definitions.

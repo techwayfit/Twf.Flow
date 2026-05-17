@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Tests.Core;
+namespace Twf.Flow.Tests.Core;
 
 /// <summary>
 /// Tests for NodeResult - the result of executing a single node.

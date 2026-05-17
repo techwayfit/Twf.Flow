@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Web.Models;
+namespace Twf.Flow.Web.Models;
 
 public enum WorkflowRunStatus
 {

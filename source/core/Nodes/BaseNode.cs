@@ -1,10 +1,10 @@
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 using Microsoft.Extensions.Logging;
 
-namespace TwfAiFramework.Nodes;
+namespace Twf.Flow.Nodes;
 
 /// <summary>
-/// Abstract base class for all TwfAiFramework nodes.
+/// Abstract base class for all Twf.Flow nodes.
 /// Automatically handles:
 ///   - Execution timing (start/end timestamps)
 ///   - Structured logging with node context

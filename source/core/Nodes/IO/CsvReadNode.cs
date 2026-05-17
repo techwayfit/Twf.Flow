@@ -1,6 +1,6 @@
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Nodes.IO;
+namespace Twf.Flow.Nodes.IO;
 
 /// <summary>
 /// Parses a CSV string from WorkflowData into a list of row dictionaries.

@@ -1,3 +1,3 @@
-namespace TwfAiFramework.Nodes.Data;
+namespace Twf.Flow.Nodes.Data;
 
 public enum MemoryMode { Read, Write }

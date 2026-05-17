@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core.Http;
+namespace Twf.Flow.Core.Http;
 
 /// <summary>
 /// Provides HttpClient instances for making HTTP requests.

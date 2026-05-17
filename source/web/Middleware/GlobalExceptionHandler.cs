@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TwfAiFramework.Web.Middleware;
+namespace Twf.Flow.Web.Middleware;
 
 /// <summary>
 /// Global exception handler that provides consistent error responses across the application.

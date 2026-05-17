@@ -1,9 +1,9 @@
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes;
 
-namespace TwfAiFramework.Web.Services.VariableResolution;
+namespace Twf.Flow.Web.Services.VariableResolution;
 
 /// <summary>
 /// Resolves template variables using {{variable}} syntax.

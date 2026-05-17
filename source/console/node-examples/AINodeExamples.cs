@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using TwfAiFramework.Core;
-using TwfAiFramework.Core.ValueObjects;
-using TwfAiFramework.Nodes.AI;
+using Twf.Flow.Core;
+using Twf.Flow.Core.ValueObjects;
+using Twf.Flow.Nodes.AI;
 
 namespace twf_ai_framework.console.node_examples;
 
@@ -87,7 +87,7 @@ public static class AINodeExamples
           });
 
         var input = new WorkflowData()
-            .Set("text", "TwfAiFramework is a workflow engine for building AI-powered applications.");
+            .Set("text", "Twf.Flow is a workflow engine for building AI-powered applications.");
 
         await workflow.RunAsync(input);
 

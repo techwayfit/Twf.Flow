@@ -1,17 +1,17 @@
 using System.Reflection;
 using Microsoft.Extensions.Logging;
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes;
-using TwfAiFramework.Web.Models.VisualNodes;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes;
+using Twf.Flow.Web.Models.VisualNodes;
 
-namespace TwfAiFramework.Web.Services.Schema;
+namespace Twf.Flow.Web.Services.Schema;
 
 /// <summary>
 /// Discovers NodeParameterSchema definitions by scanning:
 /// 1. Core assembly for INode subclasses with static Schema property
 /// 2. Web assembly for visual node schemas (UI-only nodes without business logic)
 /// 
-/// No manual registration is required — adding a Schema property to a node class
+/// No manual registration is required ï¿½ adding a Schema property to a node class
 /// or a static schema in the web layer is sufficient.
 /// The assemblies are scanned once (lazily) and the results are cached for the lifetime
 /// of the service (Singleton).

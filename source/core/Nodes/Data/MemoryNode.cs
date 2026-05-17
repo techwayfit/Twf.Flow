@@ -1,6 +1,6 @@
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Nodes.Data;
+namespace Twf.Flow.Nodes.Data;
 
 /// <summary>
 /// Reads from or writes to the workflow's global state memory.

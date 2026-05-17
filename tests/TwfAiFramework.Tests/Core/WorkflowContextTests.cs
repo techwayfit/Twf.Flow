@@ -1,7 +1,7 @@
 using twf_ai_framework.Core.Models;
-using TwfAiFramework.Core.Extensions;
+using Twf.Flow.Core.Extensions;
 
-namespace TwfAiFramework.Tests.Core;
+namespace Twf.Flow.Tests.Core;
 
 /// <summary>
 /// Tests for WorkflowContext - the execution context shared across all nodes.

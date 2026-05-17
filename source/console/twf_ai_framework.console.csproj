@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\core\twf_ai_framework.csproj" />
+    <ProjectReference Include="../core/Twf.Flow.csproj" />
   </ItemGroup>
 
 </Project>

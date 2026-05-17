@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using TwfAiFramework.Web.Data;
+using Twf.Flow.Web.Data;
 
-namespace TwfAiFramework.Web.Repositories;
+namespace Twf.Flow.Web.Repositories;
 
 public class SqliteNodeTypeRepository : INodeTypeRepository
 {

@@ -1,8 +1,8 @@
-using TwfAiFramework.Nodes.AI;
-using TwfAiFramework.Nodes.Data;
-using TwfAiFramework.Nodes.IO;
+using Twf.Flow.Nodes.AI;
+using Twf.Flow.Nodes.Data;
+using Twf.Flow.Nodes.IO;
 
-namespace TwfAiFramework.Core.Extensions;
+namespace Twf.Flow.Core.Extensions;
 
 // ─── Config Types ─────────────────────────────────────────────────────────────
 

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace TwfAiFramework.Core.Secrets;
+namespace Twf.Flow.Core.Secrets;
 
 /// <summary>
 /// Default implementation of ISecretProvider that supports multiple secret sources.

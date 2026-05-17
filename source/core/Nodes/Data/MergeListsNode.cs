@@ -1,6 +1,6 @@
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Nodes.Data;
+namespace Twf.Flow.Nodes.Data;
 
 /// <summary>
 /// Merges two lists from WorkflowData into a single output list.

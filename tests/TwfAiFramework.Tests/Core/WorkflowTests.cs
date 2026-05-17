@@ -1,8 +1,8 @@
-using TwfAiFramework.Core;
-using TwfAiFramework.Tests.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Tests.Nodes;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace TwfAiFramework.Tests.Core;
+namespace Twf.Flow.Tests.Core;
 
 /// <summary>
 /// Tests for Workflow builder and execution.

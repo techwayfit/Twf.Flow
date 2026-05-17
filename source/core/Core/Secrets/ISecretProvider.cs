@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core.Secrets;
+namespace Twf.Flow.Core.Secrets;
 
 /// <summary>
 /// Provides access to sensitive configuration values (API keys, connection strings, etc.)

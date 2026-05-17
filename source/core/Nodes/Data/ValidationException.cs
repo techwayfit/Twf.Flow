@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Nodes.Data;
+namespace Twf.Flow.Nodes.Data;
 
 public sealed class ValidationException : Exception
 {

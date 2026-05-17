@@ -1,6 +1,6 @@
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Tracking;
+namespace Twf.Flow.Tracking;
 
 /// <summary>Immutable report generated at the end of a workflow run.</summary>
 public sealed class WorkflowReport

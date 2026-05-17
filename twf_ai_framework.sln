@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "twf_ai_framework", "source\core\twf_ai_framework.csproj", "{711E2E06-D04E-4591-9F96-A20B1EBC9234}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twf.Flow", "source\core\Twf.Flow.csproj", "{711E2E06-D04E-4591-9F96-A20B1EBC9234}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "twf_ai_framework.tests", "tests\TwfAiFramework.Tests\twf_ai_framework.tests.csproj", "{605A879E-3034-EBED-E5B5-BD8683429FF5}"
 EndProject

@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using TwfAiFramework.Web.Data;
-using TwfAiFramework.Web.Repositories;
-using TwfAiFramework.Web.Services;
-using TwfAiFramework.Web.Services.NodeFactory;
-using TwfAiFramework.Web.Services.VariableResolution;
-using TwfAiFramework.Web.Services.Execution;
-using TwfAiFramework.Web.Services.GraphWalker;
-using TwfAiFramework.Web.Middleware;
-using TwfAiFramework.Web.Services.Database;
-using TwfAiFramework.Core.Http;
+using Twf.Flow.Web.Data;
+using Twf.Flow.Web.Repositories;
+using Twf.Flow.Web.Services;
+using Twf.Flow.Web.Services.NodeFactory;
+using Twf.Flow.Web.Services.VariableResolution;
+using Twf.Flow.Web.Services.Execution;
+using Twf.Flow.Web.Services.GraphWalker;
+using Twf.Flow.Web.Middleware;
+using Twf.Flow.Web.Services.Database;
+using Twf.Flow.Core.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,14 +59,14 @@ builder.Services.AddSingleton<IHttpClientProvider>(sp =>
 // Register workflow execution services (Refactored architecture)
 builder.Services.AddSingleton<IVariableResolver, TemplateVariableResolver>();
 builder.Services.AddSingleton<INodeFactory, ReflectionNodeFactory>();
-builder.Services.AddSingleton<TwfAiFramework.Web.Services.Schema.INodeSchemaProvider, TwfAiFramework.Web.Services.Schema.ReflectionNodeSchemaProvider>();
+builder.Services.AddSingleton<Twf.Flow.Web.Services.Schema.INodeSchemaProvider, Twf.Flow.Web.Services.Schema.ReflectionNodeSchemaProvider>();
 builder.Services.AddScoped<INodeExecutor, RetryableNodeExecutor>();
 builder.Services.AddScoped<IWorkflowGraphWalker, WorkflowGraphWalker>();
 builder.Services.AddScoped<WorkflowDefinitionRunner>();
 
 // Register database migration service
 builder.Services.AddScoped<IDatabaseMigrationService, DatabaseMigrationService>();
-builder.Services.AddScoped<TwfAiFramework.Web.Services.Seeding.INodeTypeSeeder, TwfAiFramework.Web.Services.Seeding.NodeTypeSeederService>();
+builder.Services.AddScoped<Twf.Flow.Web.Services.Seeding.INodeTypeSeeder, Twf.Flow.Web.Services.Seeding.NodeTypeSeederService>();
 
 // Register Unit of Work pattern
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

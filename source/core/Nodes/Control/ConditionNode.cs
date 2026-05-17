@@ -1,7 +1,7 @@
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes;
 
-namespace TwfAiFramework.Nodes.Control;
+namespace Twf.Flow.Nodes.Control;
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // ConditionNode — Adds conditional flags to WorkflowData

@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Tests.Core;
+namespace Twf.Flow.Tests.Core;
 
 /// <summary>
 /// Tests for NodeOptions - per-node execution configuration.

@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core;
+namespace Twf.Flow.Core;
 
 /// <summary>
 /// The result of executing a single node.

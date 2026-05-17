@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core;
+namespace Twf.Flow.Core;
 
 /// <summary>
 /// Describes a single input or output data slot on a node.
@@ -15,7 +15,7 @@ public record NodeData(
     string Description = "");
 
 /// <summary>
-/// The fundamental unit of work in TwfAiFramework — equivalent to a node in n8n.
+/// The fundamental unit of work in Twf.Flow — equivalent to a node in n8n.
 /// Every reusable operation (LLM call, HTTP request, transform, etc.) implements this.
 /// </summary>
 public interface INode

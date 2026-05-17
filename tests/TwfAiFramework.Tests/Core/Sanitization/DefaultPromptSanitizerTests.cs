@@ -1,6 +1,6 @@
-using TwfAiFramework.Core.Sanitization;
+using Twf.Flow.Core.Sanitization;
 
-namespace TwfAiFramework.Tests.Core.Sanitization;
+namespace Twf.Flow.Tests.Core.Sanitization;
 
 /// <summary>
 /// Tests for DefaultPromptSanitizer.

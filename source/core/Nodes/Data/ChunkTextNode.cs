@@ -1,9 +1,9 @@
-using TwfAiFramework.Core;
-using TwfAiFramework.Core.ValueObjects;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Core.ValueObjects;
+using Twf.Flow.Nodes;
 using System.Text.RegularExpressions;
 
-namespace TwfAiFramework.Nodes.Data;
+namespace Twf.Flow.Nodes.Data;
 
 /// <summary>
 /// Splits large text into overlapping chunks suitable for embedding and RAG.

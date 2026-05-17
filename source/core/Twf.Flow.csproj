@@ -6,7 +6,9 @@
     <Nullable>enable</Nullable>
 
     <!-- NuGet Package Metadata -->
-    <PackageId>TwfAiFramework</PackageId>
+    <PackageId>Twf.Flow</PackageId>
+    <AssemblyName>Twf.Flow</AssemblyName>
+    <RootNamespace>Twf.Flow</RootNamespace>
     <Version>2.1.0</Version>
     <Authors>Manas Nayak</Authors>
     <Company>Manas Nayak</Company>
@@ -23,11 +25,11 @@
 
 ### Developer Experience
 - Node key constants: every node now exposes `public const string InputXxx` / `OutputXxx` fields for all WorkflowData keys it reads or writes, eliminating magic strings and enabling IDE autocomplete and refactoring
-- Pipeline extension methods on `Workflow` (`using TwfAiFramework.Core.Extensions`):
+- Pipeline extension methods on `Workflow` (`using Twf.Flow.Core.Extensions`):
   - `AddAIPipeline(AIPipelineConfig)` — wires PromptBuilderNode → LlmNode → optional OutputParserNode in one call
   - `AddEmbeddingPipeline(EmbeddingPipelineConfig)` — optional ChunkTextNode → EmbeddingNode
   - `AddSearchAndSummarizePipeline(SearchAndSummarizeConfig)` — GoogleSearchNode → PromptBuilderNode → LlmNode
-- Typed result accessors on `WorkflowResult` and `WorkflowData` (`using TwfAiFramework.Core.Extensions`):
+- Typed result accessors on `WorkflowResult` and `WorkflowData` (`using Twf.Flow.Core.Extensions`):
   - `LlmResponse()`, `LlmModel()`, `PromptTokens()`, `CompletionTokens()`
   - `ParsedOutput()`, `Embedding()`, `Embeddings()`
   - `SearchResults()`, `HttpResponse()`, `HttpStatusCode()`

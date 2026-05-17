@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes.IO;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes.IO;
 
 namespace twf_ai_framework.console.node_examples;
 
@@ -72,7 +72,7 @@ public static class IONodeExamples
      body: new
    {
        title = "Test Post",
-         body = "This is a test post created by TwfAiFramework",
+         body = "This is a test post created by Twf.Flow",
   userId = 1
       }))
      .OnComplete(result =>
@@ -95,7 +95,7 @@ public static class IONodeExamples
        UrlTemplate = "https://jsonplaceholder.typicode.com/posts/1",
           Headers = new Dictionary<string, string>
      {
-          ["User-Agent"] = "TwfAiFramework/1.0",
+          ["User-Agent"] = "Twf.Flow/1.0",
             ["Accept"] = "application/json"
               },
       Timeout = TimeSpan.FromSeconds(10)
@@ -124,7 +124,7 @@ public static class IONodeExamples
    // Create a test file
     var testFilePath = Path.Combine(Path.GetTempPath(), "twf_test_doc.txt");
    await File.WriteAllTextAsync(testFilePath,
-    "TwfAiFramework Documentation\n" +
+    "Twf.Flow Documentation\n" +
      "============================\n\n" +
      "This is a sample document for demonstrating the FileReaderNode.\n" +
    "It contains multiple paragraphs and can be processed by the framework.\n\n" +
@@ -187,7 +187,7 @@ Console.WriteLine("\n??? 3. FileWriterNode Example ?????????????????????????????
             .UseLogger(logger)
         .AddStep("CreateReport", (data, ctx) =>
         {
-var report = "TwfAiFramework Execution Report\n" +
+var report = "Twf.Flow Execution Report\n" +
          "================================\n" +
      $"Generated: {DateTime.UtcNow:yyyy-MM-dd HH:mm:ss UTC}\n" +
       $"Workflow: {data.GetString("workflow_name")}\n" +
@@ -292,7 +292,7 @@ if (File.Exists(outputPath))
             });
 
         var input = new WorkflowData()
-            .Set("search_query", "TwfAiFramework .NET workflow engine")
+            .Set("search_query", "Twf.Flow .NET workflow engine")
         .Set("search_results_count", 5);
 
         try

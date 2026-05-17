@@ -1,10 +1,10 @@
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Web.Models;
+namespace Twf.Flow.Web.Models;
 
 /// <summary>
 /// Result of executing a <see cref="WorkflowDefinition"/> via
-/// <see cref="TwfAiFramework.Web.Services.WorkflowDefinitionRunner"/>.
+/// <see cref="Twf.Flow.Web.Services.WorkflowDefinitionRunner"/>.
 /// </summary>
 public sealed class WorkflowRunResult
 {
@@ -50,7 +50,7 @@ public sealed class WorkflowRunRequest
 }
 
 /// <summary>
-/// Emitted by <see cref="TwfAiFramework.Web.Services.WorkflowDefinitionRunner"/> after
+/// Emitted by <see cref="Twf.Flow.Web.Services.WorkflowDefinitionRunner"/> after
 /// each node starts or finishes executing. Serialised as a Server-Sent Event payload for
 /// the Runner UI.
 /// </summary>

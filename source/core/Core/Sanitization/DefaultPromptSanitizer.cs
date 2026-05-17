@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TwfAiFramework.Core.Sanitization;
+namespace Twf.Flow.Core.Sanitization;
 
 /// <summary>
 /// Default implementation of IPromptSanitizer with comprehensive sanitization

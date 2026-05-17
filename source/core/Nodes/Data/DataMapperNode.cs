@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Reflection;
 using System.Text.Json;
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Nodes.Data;
+namespace Twf.Flow.Nodes.Data;
 
 /// <summary>
 /// Maps values from source keys/paths to target keys in WorkflowData.

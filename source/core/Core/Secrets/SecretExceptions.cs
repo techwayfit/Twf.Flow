@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core.Secrets;
+namespace Twf.Flow.Core.Secrets;
 
 /// <summary>
 /// Exception thrown when a secret cannot be found in the secret store.

@@ -1,7 +1,7 @@
 using System.Text.Json;
-using TwfAiFramework.Nodes.Data;
+using Twf.Flow.Nodes.Data;
 
-namespace TwfAiFramework.Tests.Nodes;
+namespace Twf.Flow.Tests.Nodes;
 
 public class DataMapperNodeTests
 {

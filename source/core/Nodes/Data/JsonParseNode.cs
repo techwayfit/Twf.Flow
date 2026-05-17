@@ -1,7 +1,7 @@
 using System.Text.Json;
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Nodes.Data;
+namespace Twf.Flow.Nodes.Data;
 
 /// <summary>
 /// Parses a JSON string stored in WorkflowData into a structured object.

@@ -1,7 +1,7 @@
 using System.Text.Json;
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Nodes;
+namespace Twf.Flow.Nodes;
 
 /// <summary>
 /// Shared parameter-parsing helpers used by all node dictionary constructors.

@@ -1,6 +1,6 @@
-using TwfAiFramework.Web.Models;
+using Twf.Flow.Web.Models;
 
-namespace TwfAiFramework.Web.Repositories;
+namespace Twf.Flow.Web.Repositories;
 
 /// <summary>
 /// Interface for workflow persistence

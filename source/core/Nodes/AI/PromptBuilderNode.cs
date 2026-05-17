@@ -1,8 +1,8 @@
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes;
 using System.Text.RegularExpressions;
 
-namespace TwfAiFramework.Nodes.AI;
+namespace Twf.Flow.Nodes.AI;
 
 /// <summary>
 /// Builds dynamic prompts from templates with {{variable}} substitution.

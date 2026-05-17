@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core;
+namespace Twf.Flow.Core;
 
 /// <summary>
 /// Immutable workflow structure representing the architecture of a workflow.

@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
-using TwfAiFramework.Web.Repositories;
+using Twf.Flow.Web.Repositories;
 
-namespace TwfAiFramework.Web.Data;
+namespace Twf.Flow.Web.Data;
 
 /// <summary>
 /// Implements the Unit of Work pattern, coordinating repository operations

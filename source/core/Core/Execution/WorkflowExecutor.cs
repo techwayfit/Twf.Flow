@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using TwfAiFramework.Core.Execution;
+using Twf.Flow.Core.Execution;
 
-namespace TwfAiFramework.Core;
+namespace Twf.Flow.Core;
 
 /// <summary>
 /// Executes workflow structures built by <see cref="WorkflowBuilder"/>.

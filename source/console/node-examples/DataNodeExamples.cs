@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes.Data;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes.Data;
 
 namespace twf_ai_framework.console.node_examples;
 
@@ -45,8 +45,8 @@ public static class DataNodeExamples
       .UseLogger(logger)
             .AddNode(new ChunkTextNode(new ChunkConfig
           {
-                ChunkSize = TwfAiFramework.Core.ValueObjects.ChunkSize.FromValue(150),
-      Overlap = TwfAiFramework.Core.ValueObjects.ChunkOverlap.FromValue(20),
+                ChunkSize = Twf.Flow.Core.ValueObjects.ChunkSize.FromValue(150),
+      Overlap = Twf.Flow.Core.ValueObjects.ChunkOverlap.FromValue(20),
          Strategy = ChunkStrategy.Character
             }))
             .OnComplete(result =>
@@ -66,13 +66,13 @@ public static class DataNodeExamples
 
         var input = new WorkflowData()
             .Set("text",
-   "TwfAiFramework is a powerful workflow engine for building AI-powered applications. " +
+   "Twf.Flow is a powerful workflow engine for building AI-powered applications. " +
       "It provides a flexible, composable architecture that allows developers to chain together " +
      "AI models, data transformations, and control flow logic into sophisticated pipelines. " +
 "The framework supports parallel execution, error handling, conditional branching, and " +
    "loops, making it ideal for complex AI workflows. It's designed to work with any " +
       "OpenAI-compatible API, including OpenAI, Anthropic, Ollama, and Azure OpenAI.")
-.Set("source", "TwfAiFramework Documentation");
+.Set("source", "Twf.Flow Documentation");
 
         await workflow.RunAsync(input);
 
@@ -82,8 +82,8 @@ public static class DataNodeExamples
        .UseLogger(logger)
       .AddNode(new ChunkTextNode(new ChunkConfig
         {
-         ChunkSize = TwfAiFramework.Core.ValueObjects.ChunkSize.FromValue(30),
-        Overlap = TwfAiFramework.Core.ValueObjects.ChunkOverlap.FromValue(5),
+         ChunkSize = Twf.Flow.Core.ValueObjects.ChunkSize.FromValue(30),
+        Overlap = Twf.Flow.Core.ValueObjects.ChunkOverlap.FromValue(5),
     Strategy = ChunkStrategy.Word
    }))
             .OnComplete(result =>

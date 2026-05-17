@@ -1,7 +1,7 @@
-using TwfAiFramework.Core;
-using TwfAiFramework.Web.Models.VisualNodes;
+using Twf.Flow.Core;
+using Twf.Flow.Web.Models.VisualNodes;
 
-namespace TwfAiFramework.Web.Services;
+namespace Twf.Flow.Web.Services;
 
 /// <summary>
 /// Creates a minimal skeleton instance of each node type and reads its

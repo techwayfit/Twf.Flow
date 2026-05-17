@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Web.Middleware;
+namespace Twf.Flow.Web.Middleware;
 
 /// <summary>
 /// Middleware that ensures every request has a correlation ID for tracking across logs and services.

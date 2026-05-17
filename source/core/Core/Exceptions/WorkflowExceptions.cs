@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core.Exceptions;
+namespace Twf.Flow.Core.Exceptions;
 
 /// <summary>
 /// Base exception for all workflow-related errors.

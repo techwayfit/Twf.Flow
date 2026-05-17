@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core;
+namespace Twf.Flow.Core;
 
 /// <summary>
 /// Default implementation of <see cref="IWorkflowState"/> using an in-memory dictionary.

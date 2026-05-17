@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core.Sanitization;
+namespace Twf.Flow.Core.Sanitization;
 
 /// <summary>
 /// Provides prompt sanitization and validation to prevent injection attacks

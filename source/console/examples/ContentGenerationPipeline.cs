@@ -1,10 +1,10 @@
 using Microsoft.Extensions.Logging;
-using TwfAiFramework.Core;
-using TwfAiFramework.Core.ValueObjects;
-using TwfAiFramework.Nodes;
-using TwfAiFramework.Nodes.AI;
-using TwfAiFramework.Nodes.Control;
-using TwfAiFramework.Nodes.Data;
+using Twf.Flow.Core;
+using Twf.Flow.Core.ValueObjects;
+using Twf.Flow.Nodes;
+using Twf.Flow.Nodes.AI;
+using Twf.Flow.Nodes.Control;
+using Twf.Flow.Nodes.Data;
 
 namespace twf_ai_framework.console.examples;
 

@@ -1,9 +1,9 @@
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-namespace TwfAiFramework.Nodes.AI;
+namespace Twf.Flow.Nodes.AI;
 
 /// <summary>
 /// Parses structured JSON output from LLM responses.

@@ -1,8 +1,8 @@
 using System.Reflection;
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes;
 
-namespace TwfAiFramework.Web.Services;
+namespace Twf.Flow.Web.Services;
 
 /// <summary>
 /// Discovers NodeParameterSchema definitions by scanning the core assembly for

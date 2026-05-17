@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core.Secrets;
+namespace Twf.Flow.Core.Secrets;
 
 /// <summary>
 /// Represents a secure reference to a secret value (e.g., API key).

@@ -1,7 +1,7 @@
 using System.Text.Json;
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
-namespace TwfAiFramework.Nodes.Data;
+namespace Twf.Flow.Nodes.Data;
 
 /// <summary>
 /// Serializes a WorkflowData value to a JSON string.

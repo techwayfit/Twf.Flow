@@ -1,9 +1,9 @@
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes;
 using System.Text;
 using System.Text.Json;
 
-namespace TwfAiFramework.Nodes.AI;
+namespace Twf.Flow.Nodes.AI;
 
 /// <summary>
 /// Generates vector embeddings for text using OpenAI Embeddings API or compatible endpoint.

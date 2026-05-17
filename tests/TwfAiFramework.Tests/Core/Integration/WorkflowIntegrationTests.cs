@@ -1,9 +1,9 @@
-using TwfAiFramework.Core;
-using TwfAiFramework.Core.Execution;
+using Twf.Flow.Core;
+using Twf.Flow.Core.Execution;
 using Microsoft.Extensions.Logging.Abstractions;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Nodes;
 
-namespace TwfAiFramework.Tests.Core.Integration;
+namespace Twf.Flow.Tests.Core.Integration;
 
 /// <summary>
 /// Integration tests for the refactored SOLID architecture.

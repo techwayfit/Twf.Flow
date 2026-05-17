@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using twf_ai_framework.Core.Models;
 
-namespace TwfAiFramework.Core.Execution;
+namespace Twf.Flow.Core.Execution;
 
 /// <summary>
 /// Executes individual node steps with retry, timeout, and error handling.

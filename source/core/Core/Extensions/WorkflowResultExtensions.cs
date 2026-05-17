@@ -1,9 +1,9 @@
-using TwfAiFramework.Nodes.AI;
-using TwfAiFramework.Nodes.Data;
-using TwfAiFramework.Nodes.IO;
-using TwfAiFramework.Core.ValueObjects;
+using Twf.Flow.Nodes.AI;
+using Twf.Flow.Nodes.Data;
+using Twf.Flow.Nodes.IO;
+using Twf.Flow.Core.ValueObjects;
 
-namespace TwfAiFramework.Core.Extensions;
+namespace Twf.Flow.Core.Extensions;
 
 /// <summary>
 /// Typed accessors for well-known WorkflowData keys on <see cref="WorkflowResult"/>

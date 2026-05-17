@@ -1,6 +1,6 @@
 using twf_ai_framework.Core.Models;
 
-namespace TwfAiFramework.Core.Extensions;
+namespace Twf.Flow.Core.Extensions;
 
 /// <summary>
 /// Extension methods for chat-specific workflow state operations.

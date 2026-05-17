@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\source\core\twf_ai_framework.csproj" />
+    <ProjectReference Include="../../source/core/Twf.Flow.csproj" />
   </ItemGroup>
 
 </Project>

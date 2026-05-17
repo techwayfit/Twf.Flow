@@ -1,14 +1,14 @@
-using TwfAiFramework.Core;
-using TwfAiFramework.Core.Http;
-using TwfAiFramework.Core.Secrets;
-using TwfAiFramework.Core.Sanitization;
-using TwfAiFramework.Core.ValueObjects;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Core.Http;
+using Twf.Flow.Core.Secrets;
+using Twf.Flow.Core.Sanitization;
+using Twf.Flow.Core.ValueObjects;
+using Twf.Flow.Nodes;
 using System.Text;
 using System.Text.Json;
 using twf_ai_framework.Core.Models;
 
-namespace TwfAiFramework.Nodes.AI;
+namespace Twf.Flow.Nodes.AI;
 
 /// <summary>
 /// Calls any OpenAI-compatible LLM API (OpenAI, Anthropic, Ollama, Azure OpenAI, etc.)

@@ -1,6 +1,6 @@
-using TwfAiFramework.Web.Data;
+using Twf.Flow.Web.Data;
 
-namespace TwfAiFramework.Web.Repositories;
+namespace Twf.Flow.Web.Repositories;
 
 public interface INodeTypeRepository
 {

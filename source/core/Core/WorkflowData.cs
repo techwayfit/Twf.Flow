@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace TwfAiFramework.Core;
+namespace Twf.Flow.Core;
 
 /// <summary>
 /// The dynamic data packet that flows between nodes — similar to n8n's JSON item payload.

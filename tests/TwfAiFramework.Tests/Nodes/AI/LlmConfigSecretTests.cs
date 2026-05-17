@@ -1,8 +1,8 @@
-using TwfAiFramework.Nodes.AI;
-using TwfAiFramework.Core.Secrets;
+using Twf.Flow.Nodes.AI;
+using Twf.Flow.Core.Secrets;
 using NSubstitute;
 
-namespace TwfAiFramework.Tests.Nodes.AI;
+namespace Twf.Flow.Tests.Nodes.AI;
 
 /// <summary>
 /// Tests for LlmConfig secret resolution.

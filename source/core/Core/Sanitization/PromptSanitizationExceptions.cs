@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core.Sanitization;
+namespace Twf.Flow.Core.Sanitization;
 
 /// <summary>
 /// Exception thrown when prompt validation fails.

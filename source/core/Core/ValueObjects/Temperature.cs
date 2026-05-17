@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core.ValueObjects;
+namespace Twf.Flow.Core.ValueObjects;
 
 /// <summary>
 /// Value object representing an LLM temperature parameter.

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace TwfAiFramework.Web.Extensions;
+namespace Twf.Flow.Web.Extensions;
 
 /// <summary>
 /// Extension methods for enhanced structured logging.

@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Core.ValueObjects;
+namespace Twf.Flow.Core.ValueObjects;
 
 /// <summary>
 /// Value object representing a chunk size for text processing.

@@ -1,6 +1,6 @@
-using TwfAiFramework.Web.Repositories;
+using Twf.Flow.Web.Repositories;
 
-namespace TwfAiFramework.Web.Services.Seeding;
+namespace Twf.Flow.Web.Services.Seeding;
 
 /// <summary>
 /// Service responsible for seeding node type definitions into the database.

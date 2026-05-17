@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace TwfAiFramework.Web.Models;
+namespace Twf.Flow.Web.Models;
 
 /// <summary>
 /// Represents a complete workflow definition with nodes and connections

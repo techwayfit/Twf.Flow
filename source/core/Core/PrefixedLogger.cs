@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace TwfAiFramework.Core;
+namespace Twf.Flow.Core;
 
 /// <summary>Logger that prefixes all messages with a context string.</summary>
 internal sealed class PrefixedLogger : ILogger

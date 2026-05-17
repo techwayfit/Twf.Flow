@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using TwfAiFramework.Web.Data;
-using TwfAiFramework.Web.Services;
-using TwfAiFramework.Web.Services.Seeding;
+using Twf.Flow.Web.Data;
+using Twf.Flow.Web.Services;
+using Twf.Flow.Web.Services.Seeding;
 
-namespace TwfAiFramework.Web.Services.Database;
+namespace Twf.Flow.Web.Services.Database;
 
 /// <summary>
 /// Handles database migrations and seeding for the workflow application.

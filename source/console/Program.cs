@@ -8,11 +8,11 @@ class Program
 {
     static async Task Main(string[] args)
     {
-       // SearchExample.RunAsync("31cc9b23c8dd747dd978b91fa5a856b8489b8c7f5bbaed6d49d04bd39d1db969", "What is TwfAiFramework?").Wait();
+       // SearchExample.RunAsync("31cc9b23c8dd747dd978b91fa5a856b8489b8c7f5bbaed6d49d04bd39d1db969", "What is Twf.Flow?").Wait();
 
 
         Console.WriteLine("╔════════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║ TwfAiFramework - Demo Console Application     ║");
+        Console.WriteLine("║ Twf.Flow - Demo Console Application     ║");
         Console.WriteLine("╚════════════════════════════════════════════════════════════╝\n");
 
         while (true)

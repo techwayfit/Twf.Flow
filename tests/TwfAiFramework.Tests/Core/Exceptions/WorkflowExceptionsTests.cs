@@ -1,8 +1,8 @@
 using FluentAssertions;
-using TwfAiFramework.Core;
-using TwfAiFramework.Core.Exceptions;
+using Twf.Flow.Core;
+using Twf.Flow.Core.Exceptions;
 
-namespace TwfAiFramework.Tests.Core.Exceptions;
+namespace Twf.Flow.Tests.Core.Exceptions;
 
 /// <summary>
 /// Tests for workflow-specific exception classes.

@@ -1,8 +1,8 @@
-using TwfAiFramework.Core.Secrets;
-using TwfAiFramework.Core.Sanitization;
-using TwfAiFramework.Core.ValueObjects;
+using Twf.Flow.Core.Secrets;
+using Twf.Flow.Core.Sanitization;
+using Twf.Flow.Core.ValueObjects;
 
-namespace TwfAiFramework.Nodes.AI;
+namespace Twf.Flow.Nodes.AI;
 /// <summary>
 /// Llm Configuration
 /// </summary>

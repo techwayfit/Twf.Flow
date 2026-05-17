@@ -1,4 +1,4 @@
-namespace TwfAiFramework.Web.Services.Database;
+namespace Twf.Flow.Web.Services.Database;
 
 /// <summary>
 /// Service responsible for database schema migrations and initial setup.

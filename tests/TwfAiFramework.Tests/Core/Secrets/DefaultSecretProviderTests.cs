@@ -1,6 +1,6 @@
-using TwfAiFramework.Core.Secrets;
+using Twf.Flow.Core.Secrets;
 
-namespace TwfAiFramework.Tests.Core.Secrets;
+namespace Twf.Flow.Tests.Core.Secrets;
 
 /// <summary>
 /// Tests for DefaultSecretProvider.

@@ -1,8 +1,8 @@
 global using Xunit;
 global using FluentAssertions;
 global using NSubstitute;
-global using TwfAiFramework.Core;
-global using TwfAiFramework.Nodes;
-global using TwfAiFramework.Tests.Nodes;
+global using Twf.Flow.Core;
+global using Twf.Flow.Nodes;
+global using Twf.Flow.Tests.Nodes;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Logging.Abstractions;

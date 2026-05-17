@@ -1,6 +1,6 @@
-using TwfAiFramework.Core.Http;
+using Twf.Flow.Core.Http;
 
-namespace TwfAiFramework.Tests.Core.Http;
+namespace Twf.Flow.Tests.Core.Http;
 
 /// <summary>
 /// Tests for IHttpClientProvider implementations.

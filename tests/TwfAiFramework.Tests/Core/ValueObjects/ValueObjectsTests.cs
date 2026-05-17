@@ -1,7 +1,7 @@
 using FluentAssertions;
-using TwfAiFramework.Core.ValueObjects;
+using Twf.Flow.Core.ValueObjects;
 
-namespace TwfAiFramework.Tests.Core.ValueObjects;
+namespace Twf.Flow.Tests.Core.ValueObjects;
 
 /// <summary>
 /// Tests for Temperature value object - ensures validation and factory methods work correctly.

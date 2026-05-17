@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes;
-using TwfAiFramework.Web.Models;
-using TwfAiFramework.Web.Services.Execution;
-using TwfAiFramework.Web.Services.NodeFactory;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes;
+using Twf.Flow.Web.Models;
+using Twf.Flow.Web.Services.Execution;
+using Twf.Flow.Web.Services.NodeFactory;
 
-namespace TwfAiFramework.Web.Services.GraphWalker;
+namespace Twf.Flow.Web.Services.GraphWalker;
 
 /// <summary>
 /// Walks a workflow graph by traversing nodes and connections.
