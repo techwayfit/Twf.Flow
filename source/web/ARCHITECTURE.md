@@ -1,8 +1,8 @@
-# TWF AI Framework - Web Application Architecture
+# Twf.Flow - Web Application Architecture
 
 ## System Architecture Overview
 
-This document provides detailed architectural diagrams and design patterns used in the TWF AI Framework Web Application.
+This document provides detailed architectural diagrams and design patterns used in the Twf.Flow Web Application.
 
 ---
 
@@ -842,7 +842,7 @@ Reduces log noise while maintaining correlation.
 
 ## Conclusion
 
-This architecture document provides a comprehensive view of the TWF AI Framework Web Application's internal structure, design patterns, and execution flows. The system is designed for:
+This architecture document provides a comprehensive view of the Twf.Flow Web Application's internal structure, design patterns, and execution flows. The system is designed for:
 
 - **Scalability**: Async/await, connection pooling, scoped services
 - **Maintainability**: Clean architecture, SOLID principles, separation of concerns

@@ -28,10 +28,10 @@ Create a sealed class in `source/core/Nodes/<Category>/` inheriting from `BaseNo
 ### Minimal template
 
 ```csharp
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes;
 
-namespace TwfAiFramework.Nodes.Data;   // adjust namespace to match category
+namespace Twf.Flow.Nodes.Data;   // adjust namespace to match category
 
 /// <summary>
 /// One-line description of what this node does.
@@ -245,10 +245,10 @@ A node that classifies text sentiment and routes to `positive` or `negative`.
 ### `source/core/Nodes/AI/SentimentNode.cs`
 
 ```csharp
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes;
 
-namespace TwfAiFramework.Nodes.AI;
+namespace Twf.Flow.Nodes.AI;
 
 public sealed class SentimentNode : BaseNode
 {

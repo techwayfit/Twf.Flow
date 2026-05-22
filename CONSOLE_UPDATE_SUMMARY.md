@@ -2,7 +2,7 @@
 
 ## Changes Made
 
-The console project has been significantly enhanced with comprehensive examples for all node types in TwfAiFramework.
+The console project has been significantly enhanced with comprehensive examples for all node types in Twf.Flow.
 
 ### New Files Added
 
@@ -132,7 +132,7 @@ Then select options:
 ### Run Programmatically
 
 ```csharp
-using twf_ai_framework.console.node_examples;
+using Twf.Flow.Console.NodeExamples;
 
 // AI nodes
 await AINodeExamples.RunAllExamples(apiKey);

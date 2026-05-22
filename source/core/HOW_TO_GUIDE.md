@@ -1,6 +1,6 @@
-# TwfAiFramework  How-To Guide
+# Twf.Flow  How-To Guide
 
-Complete guide to common tasks and workflows in TwfAiFramework. Each section provides step-by-step instructions with code examples.
+Complete guide to common tasks and workflows in Twf.Flow. Each section provides step-by-step instructions with code examples.
 
 ---
 
@@ -26,15 +26,15 @@ Complete guide to common tasks and workflows in TwfAiFramework. Each section pro
 ### Install the Package
 
 ```bash
-dotnet add package TwfAiFramework
+dotnet add package Twf.Flow
 ```
 
 ### Basic Setup
 
 ```csharp
 using Microsoft.Extensions.Logging;
-using TwfAiFramework.Core;
-using TwfAiFramework.Nodes.AI;
+using Twf.Flow.Core;
+using Twf.Flow.Nodes.AI;
 
 // Setup logging
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -1436,7 +1436,7 @@ ENTRYPOINT ["dotnet", "MyWorkflowApp.dll"]
   "Logging": {
     "LogLevel": {
       "Default": "Information",
-      "TwfAiFramework": "Debug"
+      "Twf.Flow": "Debug"
     }
   },
   "OpenAI": {

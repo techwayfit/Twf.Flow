@@ -1,4 +1,4 @@
-# TWF AI Framework - Web Application Documentation
+# Twf.Flow - Web Application Documentation
 
 ## Table of Contents
 - [Overview](#overview)
@@ -21,7 +21,7 @@
 
 ## Overview
 
-The TWF AI Framework Web Application is a visual workflow designer and execution engine built on ASP.NET Core MVC. It provides a drag-and-drop interface for creating, managing, and executing AI-powered workflows using a node-based visual programming paradigm.
+The Twf.Flow Web Application is a visual workflow designer and execution engine built on ASP.NET Core MVC. It provides a drag-and-drop interface for creating, managing, and executing AI-powered workflows using a node-based visual programming paradigm.
 
 ### Key Features
 - **Visual Workflow Designer**: Drag-and-drop interface with real-time canvas manipulation
@@ -663,7 +663,7 @@ GET /Workflow/GetAvailableNodes
     "color": "#4A90E2",
     "icon": "bi-cpu",
     "idPrefix": "llm",
-    "fullTypeName": "TwfAiFramework.Nodes.AI.LlmNode, TwfAiFramework.Core",
+    "fullTypeName": "Twf.Flow.Nodes.AI.LlmNode, Twf.Flow.Core",
     "defaultParams": {
       "provider": "openai",
       "model": "gpt-4"
@@ -1415,7 +1415,7 @@ dotnet run
   "Logging": {
     "LogLevel": {
   "Default": "Debug",
-      "TwfAiFramework.Web": "Trace"
+      "Twf.Flow.Web": "Trace"
     }
   }
 }

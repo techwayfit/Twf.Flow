@@ -1,6 +1,6 @@
-# TWF AI Framework - Web Application Documentation Index
+# Twf.Flow - Web Application Documentation Index
 
-**Welcome to the comprehensive documentation for the TWF AI Framework Web Application**
+**Welcome to the comprehensive documentation for the Twf.Flow Web Application**
 
 This index will help you find the right documentation for your needs.
 
@@ -387,7 +387,7 @@ Please report documentation errors via GitHub issues with:
 
 ## Thank You!
 
-Thank you for using the TWF AI Framework. We hope this documentation helps you build amazing AI-powered workflows!
+Thank you for using the Twf.Flow. We hope this documentation helps you build amazing AI-powered workflows!
 
 **Happy Building! **
 
@@ -395,4 +395,4 @@ Thank you for using the TWF AI Framework. We hope this documentation helps you b
 
 **Document Version:** 1.0  
 **Last Updated:** 2024  
-**Maintained By:** TWF AI Framework Team
+**Maintained By:** Twf.Flow Team

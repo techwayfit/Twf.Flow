@@ -1,6 +1,6 @@
 # Node Examples
 
-This directory contains comprehensive examples for every node type in TwfAiFramework.
+This directory contains comprehensive examples for every node type in Twf.Flow.
 
 ## Directory Structure
 
@@ -183,7 +183,7 @@ Examples for external system integration:
 Each example class has a `RunAllExamples()` method:
 
 ```csharp
-using twf_ai_framework.console.node_examples;
+using Twf.Flow.Console.NodeExamples;
 
 // AI nodes (requires API key)
 await AINodeExamples.RunAllExamples(apiKey);

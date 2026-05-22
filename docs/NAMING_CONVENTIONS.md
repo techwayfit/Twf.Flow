@@ -1,4 +1,4 @@
-# TWF AI Framework - Naming Conventions
+# Twf.Flow - Naming Conventions
 
 **Version:** 1.0  
 **Last Updated:** January 2025  
@@ -8,7 +8,7 @@
 
 ## Overview
 
-This document establishes consistent naming conventions across the TWF AI Framework to improve code readability, maintainability, and developer experience.
+This document establishes consistent naming conventions across the Twf.Flow to improve code readability, maintainability, and developer experience.
 
 ---
 
@@ -236,15 +236,15 @@ public abstract class NodeException
 **Pattern:** Company.Product.Feature
 
 ```csharp
-TwfAiFramework.Core
-TwfAiFramework.Core.Execution
-TwfAiFramework.Core.ValueObjects
-TwfAiFramework.Core.Exceptions
-TwfAiFramework.Nodes.AI
-TwfAiFramework.Nodes.Data
-TwfAiFramework.Nodes.Control
-TwfAiFramework.Web.Services
-TwfAiFramework.Web.Repositories
+Twf.Flow.Core
+Twf.Flow.Core.Execution
+Twf.Flow.Core.ValueObjects
+Twf.Flow.Core.Exceptions
+Twf.Flow.Nodes.AI
+Twf.Flow.Nodes.Data
+Twf.Flow.Nodes.Control
+Twf.Flow.Web.Services
+Twf.Flow.Web.Repositories
 ```
 
 ---
@@ -558,5 +558,5 @@ dotnet_naming_style.prefix_underscore.required_prefix = _
 
 ---
 
-**Document maintained by:** TWF AI Framework Team  
+**Document maintained by:** Twf.Flow Team  
 **Contributions:** Submit PRs to update conventions based on team consensus

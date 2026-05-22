@@ -2,7 +2,7 @@
 
 ## ? Test Project Created Successfully
 
-A comprehensive xUnit test suite has been created for the **TwfAiFramework** project with **95 passing tests** covering all core functionality.
+A comprehensive xUnit test suite has been created for the **Twf.Flow** project with **95 passing tests** covering all core functionality.
 
 ## Test Results
 
@@ -14,7 +14,7 @@ Build succeeded ?
 ## Project Structure
 
 ```
-tests/TwfAiFramework.Tests/
+tests/Twf.Flow.Tests/
 +-- Core/
 |   +-- WorkflowDataTests.cs        (25 tests) ?
 |   +-- NodeOptionsTests.cs         (15 tests) ?
@@ -24,7 +24,7 @@ tests/TwfAiFramework.Tests/
 +-- Nodes/
 |   +-- BaseNodeTests.cs       (8 tests)  ?
 +-- GlobalUsings.cs
-+-- TwfAiFramework.Tests.csproj
++-- Twf.Flow.Tests.csproj
 +-- README.md
 ```
 

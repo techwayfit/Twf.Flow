@@ -1,6 +1,6 @@
-# TWF AI Framework - Web API Specification
+# Twf.Flow - Web API Specification
 
-**RESTful API specification for the TWF AI Framework Web Application**
+**RESTful API specification for the Twf.Flow Web Application**
 
 Version: 1.0  
 Base URL: `https://localhost:5001`  
@@ -242,7 +242,7 @@ RequestVerificationToken: <anti-forgery-token>
     "color": "#2196F3",
     "icon": "bi-cpu",
     "idPrefix": "llm",
-    "fullTypeName": "TwfAiFramework.Nodes.AI.LlmNode, TwfAiFramework.Core",
+    "fullTypeName": "Twf.Flow.Nodes.AI.LlmNode, Twf.Flow.Core",
     "defaultParams": {
     "provider": "openai",
       "model": "gpt-4",
@@ -257,7 +257,7 @@ RequestVerificationToken: <anti-forgery-token>
     "color": "#FF9800",
     "icon": "bi-globe",
     "idPrefix": "http",
-    "fullTypeName": "TwfAiFramework.Nodes.IO.HttpRequestNode, TwfAiFramework.Core",
+    "fullTypeName": "Twf.Flow.Nodes.IO.HttpRequestNode, Twf.Flow.Core",
     "defaultParams": {
 "method": "GET",
     "url": "https://api.example.com"

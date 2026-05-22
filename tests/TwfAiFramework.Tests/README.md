@@ -1,6 +1,6 @@
-# TwfAiFramework.Tests
+# Twf.Flow.Tests
 
-Comprehensive xUnit test suite for the **TwfAiFramework** - an n8n-inspired workflow automation library for .NET.
+Comprehensive xUnit test suite for the **Twf.Flow** - an n8n-inspired workflow automation library for .NET.
 
 ## What's Tested
 
@@ -149,7 +149,7 @@ public async Task Workflow_Should_Stop_On_First_Failure_By_Default()
 ## Project Structure
 
 ```
-tests/TwfAiFramework.Tests/
+tests/Twf.Flow.Tests/
 +-- Core/
 |   +-- WorkflowDataTests.cs
 |   +-- NodeOptionsTests.cs
@@ -159,7 +159,7 @@ tests/TwfAiFramework.Tests/
 +-- Nodes/
 |   +-- BaseNodeTests.cs
 +-- GlobalUsings.cs
-+-- TwfAiFramework.Tests.csproj
++-- Twf.Flow.Tests.csproj
 +-- README.md (this file)
 ```
 
@@ -189,7 +189,7 @@ These tests are designed to run in CI/CD pipelines:
 
 ## Contributing
 
-When adding new features to TwfAiFramework:
+When adding new features to Twf.Flow:
 1. Write tests first (TDD approach)
 2. Ensure all tests pass before PR
 3. Maintain 80%+ code coverage

@@ -1,6 +1,6 @@
-# TwfAiFramework  Use Cases and Application Scenarios
+# Twf.Flow  Use Cases and Application Scenarios
 
-This document provides detailed use cases demonstrating how TwfAiFramework solves real-world problems across different domains.
+This document provides detailed use cases demonstrating how Twf.Flow solves real-world problems across different domains.
 
 ---
 

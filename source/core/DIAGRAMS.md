@@ -1,6 +1,6 @@
-# TwfAiFramework — System Diagrams
+# Twf.Flow — System Diagrams
 
-This document provides visual diagrams of the TwfAiFramework architecture, request flows, execution flows, and other key system interactions using Mermaid.
+This document provides visual diagrams of the Twf.Flow architecture, request flows, execution flows, and other key system interactions using Mermaid.
 
 ---
 
@@ -1278,7 +1278,7 @@ classDiagram
 
 ## Summary
 
-This document provides comprehensive visual representations of the TwfAiFramework system using Mermaid diagrams:
+This document provides comprehensive visual representations of the Twf.Flow system using Mermaid diagrams:
 
 ? **Architecture** - High-level system design and layer responsibilities  
 ? **Request Flow** - API to workflow execution paths  

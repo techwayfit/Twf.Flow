@@ -1,6 +1,6 @@
-# TwfAiFramework Console Application
+# Twf.Flow Console Application
 
-This console application demonstrates the capabilities of the TwfAiFramework through a menu-driven interface.
+This console application demonstrates the capabilities of the Twf.Flow through a menu-driven interface.
 
 ## Structure
 
@@ -38,7 +38,7 @@ dotnet run
 You'll see a menu with all available options:
 
 ```
-+-- |    TwfAiFramework - Demo Console Application            ?
++-- |    Twf.Flow - Demo Console Application            ?
 +-- 
 +-- |    MAIN MENU        ?
 +-- ?  CONCEPTS - Framework Fundamentals   ?

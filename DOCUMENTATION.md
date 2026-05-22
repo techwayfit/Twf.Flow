@@ -1,6 +1,6 @@
-# TwfAiFramework Documentation
+# Twf.Flow Documentation
 
-Complete documentation for the TwfAiFramework - a lightweight, node-based AI workflow automation library for .NET 10.
+Complete documentation for the Twf.Flow - a lightweight, node-based AI workflow automation library for .NET 10.
 
 ---
 
@@ -175,7 +175,7 @@ These documents are in the `docs/` folder and cover the entire solution:
 
 ### Test Suite
 
-**Comprehensive Tests** (`tests/TwfAiFramework.Tests/`)
+**Comprehensive Tests** (`tests/Twf.Flow.Tests/`)
 - Core framework tests
 - Node-specific tests
 - Integration tests
@@ -199,7 +199,7 @@ These documents are in the `docs/` folder and cover the entire solution:
 
 ### 1. Installation
 ```bash
-dotnet add package TwfAiFramework
+dotnet add package Twf.Flow
 ```
 
 ### 2. Read the Quick Start
@@ -234,4 +234,4 @@ dotnet add package TwfAiFramework
 
 ---
 
-Made with by the TwfAiFramework team
+Made with by the Twf.Flow team

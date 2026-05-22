@@ -1,4 +1,4 @@
-# TWF AI Framework - Web Application Quick Reference
+# Twf.Flow - Web Application Quick Reference
 
 **Quick lookup guide for common tasks and API endpoints**
 
@@ -188,7 +188,7 @@ curl -X POST https://localhost:5001/Workflow/SaveWorkflow \
 ### Create a Custom Node (C#)
 
 ```csharp
-using TwfAiFramework.Core;
+using Twf.Flow.Core;
 
 namespace MyProject.Nodes;
 
@@ -231,8 +231,8 @@ public class MyCustomNode : INode
 ### Register Custom Node in Database
 
 ```csharp
-using TwfAiFramework.Web.Data;
-using TwfAiFramework.Web.Repositories;
+using Twf.Flow.Web.Data;
+using Twf.Flow.Web.Repositories;
 
 // In a seeder or startup service
 public class CustomNodeSeeder
@@ -286,8 +286,8 @@ Icon = "bi-star",
 ### Execute Workflow Programmatically
 
 ```csharp
-using TwfAiFramework.Web.Services;
-using TwfAiFramework.Core;
+using Twf.Flow.Web.Services;
+using Twf.Flow.Core;
 
 public class MyService
 {
@@ -319,8 +319,8 @@ public class MyService
 ### Custom Variable Resolver
 
 ```csharp
-using TwfAiFramework.Web.Services.VariableResolution;
-using TwfAiFramework.Core;
+using Twf.Flow.Web.Services.VariableResolution;
+using Twf.Flow.Core;
 
 public class CustomVariableResolver : IVariableResolver
 {
@@ -522,7 +522,7 @@ EOF
   "Logging": {
     "LogLevel": {
       "Default": "Debug",
-  "TwfAiFramework.Web": "Trace",
+  "Twf.Flow.Web": "Trace",
       "Microsoft.EntityFrameworkCore": "Information"
     }
   }
@@ -663,7 +663,7 @@ export ASPNETCORE_ENVIRONMENT="Production"
       "Default": "Information",        // Global log level
       "Microsoft.AspNetCore": "Warning",     // ASP.NET Core logs
       "Microsoft.EntityFrameworkCore": "Warning", // EF Core logs
-      "TwfAiFramework.Web": "Debug"         // App-specific logs
+      "Twf.Flow.Web": "Debug"         // App-specific logs
     }
   },
   "AllowedHosts": "*",  // CORS allowed hosts
@@ -683,7 +683,7 @@ export ASPNETCORE_ENVIRONMENT="Production"
   "Logging": {
     "LogLevel": {
       "Default": "Debug",
-   "TwfAiFramework.Web": "Trace"
+   "Twf.Flow.Web": "Trace"
     }
   },
   "ConnectionStrings": {
@@ -698,7 +698,7 @@ export ASPNETCORE_ENVIRONMENT="Production"
   "Logging": {
     "LogLevel": {
       "Default": "Warning",
-      "TwfAiFramework.Web": "Information"
+      "Twf.Flow.Web": "Information"
     }
   },
   "ConnectionStrings": {

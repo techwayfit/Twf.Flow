@@ -1,8 +1,8 @@
-# TwfAiFramework  Solution Architecture
+# Twf.Flow  Solution Architecture
 
 ## Overview
 
-**TwfAiFramework** is a lightweight, node-based AI workflow automation library for .NET 10, inspired by visual workflow tools like n8n but implemented as an embeddable C# library. It enables developers to build composable AI pipelines through code-first or designer-driven approaches.
+**Twf.Flow** is a lightweight, node-based AI workflow automation library for .NET 10, inspired by visual workflow tools like n8n but implemented as an embeddable C# library. It enables developers to build composable AI pipelines through code-first or designer-driven approaches.
 
 ---
 
@@ -251,7 +251,7 @@ WorkflowExecutor
 
 ### 5. Node Categories
 
-#### AI Nodes (`TwfAiFramework.Nodes.AI`)
+#### AI Nodes (`Twf.Flow.Nodes.AI`)
 
 | Node | Responsibility | Key Dependencies |
 |------|----------------|------------------|
@@ -262,7 +262,7 @@ WorkflowExecutor
 
 **Pattern:** Strategy (each provider is a strategy)
 
-#### IO Nodes (`TwfAiFramework.Nodes.IO`)
+#### IO Nodes (`Twf.Flow.Nodes.IO`)
 
 | Node | Responsibility | Key Dependencies |
 |------|----------------|------------------|
@@ -271,7 +271,7 @@ WorkflowExecutor
 | `FileWriterNode` | Write files to disk | File system |
 | `GoogleSearchNode` | Web search integration | External API |
 
-#### Data Nodes (`TwfAiFramework.Nodes.Data`)
+#### Data Nodes (`Twf.Flow.Nodes.Data`)
 
 | Node | Responsibility |
 |------|----------------|
@@ -282,7 +282,7 @@ WorkflowExecutor
 | `MemoryNode` | Read/write global state |
 | `SetVariableNode` | Set workflow variables |
 
-#### Control Nodes (`TwfAiFramework.Nodes.Control`)
+#### Control Nodes (`Twf.Flow.Nodes.Control`)
 
 | Node | Responsibility |
 |------|----------------|

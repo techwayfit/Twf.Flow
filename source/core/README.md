@@ -1,6 +1,6 @@
-# TwfAiFramework Complete Documentation Index
+# Twf.Flow Complete Documentation Index
 
-Welcome to the comprehensive documentation for **TwfAiFramework** a lightweight, node-based AI workflow automation library for .NET 10.
+Welcome to the comprehensive documentation for **Twf.Flow** a lightweight, node-based AI workflow automation library for .NET 10.
 
 ---
 
@@ -25,15 +25,15 @@ This documentation suite covers everything from architecture to implementation d
 ### Installation
 
 ```bash
-dotnet add package TwfAiFramework
+dotnet add package Twf.Flow
 ```
 
 ### Your First Workflow
 
 ```csharp
-using TwfAiFramework.Core;
-using TwfAiFramework.Core.Extensions;   // pipeline + result extensions
-using TwfAiFramework.Nodes.AI;
+using Twf.Flow.Core;
+using Twf.Flow.Core.Extensions;   // pipeline + result extensions
+using Twf.Flow.Nodes.AI;
 
 // One call wires PromptBuilderNode → LlmNode → OutputParserNode
 var result = await Workflow.Create("HelloAI")
@@ -140,7 +140,7 @@ Console.WriteLine(result.Data.GetString(LlmNode.OutputResponse));
 | **IO** | 6 | HTTP, FileReader, FileWriter, GoogleSearch, CsvRead, CsvWrite | [NODE_REFERENCE.md](NODE_REFERENCE.md#io-nodes) |
 | **Base** | 3 | BaseNode, SimpleTransformNode, LambdaNode | [NODE_REFERENCE.md](NODE_REFERENCE.md#base-classes) |
 
-### Pipeline Extensions (`using TwfAiFramework.Core.Extensions`)
+### Pipeline Extensions (`using Twf.Flow.Core.Extensions`)
 
 One-call methods that bundle multiple nodes into a common sequence. All return `Workflow` for chaining.
 
@@ -150,7 +150,7 @@ One-call methods that bundle multiple nodes into a common sequence. All return `
 | `workflow.AddEmbeddingPipeline(config)` | (optional) ChunkText → Embedding | `result.Embedding()` / `result.Embeddings()` |
 | `workflow.AddSearchAndSummarizePipeline(config)` | GoogleSearch → format → PromptBuilder → LLM | `result.LlmResponse()` |
 
-### Typed Result Accessors (`using TwfAiFramework.Core.Extensions`)
+### Typed Result Accessors (`using Twf.Flow.Core.Extensions`)
 
 Extension methods on `WorkflowResult` and `WorkflowData` — no magic strings required.
 
@@ -249,7 +249,7 @@ Twf_AI_Framework/
 |   +-- NAMING_CONVENTIONS.md     # Code standards
 
 +-- source/
-|   +-- core/    # TwfAiFramework (NuGet package)
+|   +-- core/    # Twf.Flow (NuGet package)
  |   +-- Core/      # Workflow engine
 |   |   +-- Nodes/    # Built-in nodes
 |   |   +-- AI/         # LLM, Prompt, Embedding, OutputParser
@@ -325,7 +325,7 @@ Twf_AI_Framework/
 ### Official Links
 
 - **GitHub Repository:** https://github.com/techwayfit/Twf_AI_Framework
-- **NuGet Package:** https://www.nuget.org/packages/TwfAiFramework
+- **NuGet Package:** https://www.nuget.org/packages/Twf.Flow
 - **License:** MIT
 
 ### Learning Resources
@@ -528,4 +528,4 @@ Twf_AI_Framework/
 
 ---
 
-Made with by the TwfAiFramework team
+Made with by the Twf.Flow team

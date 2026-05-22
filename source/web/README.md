@@ -1,6 +1,6 @@
-# TWF AI Framework - Workflow Designer
+# Twf.Flow - Workflow Designer
 
-A visual workflow designer for creating and managing AI workflows using the TWF AI Framework.
+A visual workflow designer for creating and managing AI workflows using the Twf.Flow.
 
 ## Documentation
 
@@ -207,7 +207,7 @@ See [QUICK_REFERENCE.md](./QUICK_REFERENCE.md#create-a-custom-node-c) for code e
 ## Testing
 
 ```bash
-cd tests/TwfAiFramework.Tests
+cd tests/Twf.Flow.Tests
 dotnet test
 ```
 
@@ -274,7 +274,7 @@ Contributions are welcome! Please:
 
 ## License
 
-This project is part of the TWF AI Framework.
+This project is part of the Twf.Flow.
 
 ## Acknowledgments
 

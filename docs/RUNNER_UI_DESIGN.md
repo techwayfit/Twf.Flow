@@ -251,7 +251,7 @@ Key structural decisions:
 ### 6.1 Skeleton HTML structure
 
 ```html
-@model TwfAiFramework.Web.Models.WorkflowDefinition
+@model Twf.Flow.Web.Models.WorkflowDefinition
 @{ Layout = null; }
 <!DOCTYPE html>
 <html lang="en">
@@ -766,7 +766,7 @@ function updateStatusBadge(state) {
 The `NodeStepEvent` emits `InputData` and `OutputData` as `Dictionary<string, object?>`. Add this helper to the core `WorkflowData` class if it does not exist:
 
 ```csharp
-// In TwfAiFramework.Core.WorkflowData (or as an extension in the web project)
+// In Twf.Flow.Core.WorkflowData (or as an extension in the web project)
 public Dictionary<string, object?> ToDictionary()
     => new Dictionary<string, object?>(_store);
 ```
