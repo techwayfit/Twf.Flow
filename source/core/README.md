@@ -130,14 +130,14 @@ Console.WriteLine(result.Data.GetString(LlmNode.OutputResponse));
 | **BaseNode** | Template for custom nodes | [creating-a-new-node.md](creating-a-new-node.md) |
 | **NodeOptions** | Per-node retry, timeout, conditions | [HOW_TO_GUIDE.md](HOW_TO_GUIDE.md#error-handling) |
 
-### Built-In Nodes (33 Total)
+### Built-In Nodes (35 Total)
 
 | Category | Count | Key Nodes | Reference |
 |----------|-------|-----------|-----------|
 | **AI** | 4 | LLM, PromptBuilder, OutputParser, Embedding | [NODE_REFERENCE.md](NODE_REFERENCE.md#ai-nodes) |
-| **Data** | 12 | Filter, ChunkText, JsonParse, JsonStringify, Math, List ops, AppendString, Memory | [NODE_REFERENCE.md](NODE_REFERENCE.md#data-nodes) |
+| **Data** | 14 | Filter, ChunkText, JsonParse, JsonStringify, Math, List ops, AppendString, Memory | [NODE_REFERENCE.md](NODE_REFERENCE.md#data-nodes) |
 | **Control** | 8 | Condition, Branch, TryCatch, Loop, Delay | [NODE_REFERENCE.md](NODE_REFERENCE.md#control-nodes) |
-| **IO** | 6 | HTTP, FileReader, FileWriter, GoogleSearch, CsvRead, CsvWrite | [NODE_REFERENCE.md](NODE_REFERENCE.md#io-nodes) |
+| **IO** | 6 | HTTP, FileReader, FileWriter, CsvRead, CsvWrite, GoogleSearch | [NODE_REFERENCE.md](NODE_REFERENCE.md#io-nodes) |
 | **Base** | 3 | BaseNode, SimpleTransformNode, LambdaNode | [NODE_REFERENCE.md](NODE_REFERENCE.md#base-classes) |
 
 ### Pipeline Extensions (`using Twf.Flow.Core.Extensions`)

@@ -1,4 +1,4 @@
-# Twf.Flow — Complete Node Reference
+# Twf.Flow ï¿½ Complete Node Reference
 
 This document provides detailed reference documentation for all built-in nodes in Twf.Flow, including parameters, inputs, outputs, and usage examples.
 
@@ -19,6 +19,14 @@ This document provides detailed reference documentation for all built-in nodes i
 - [ChunkTextNode](#chunktextnode)
 - [MemoryNode](#memorynode)
 - [SetVariableNode](#setvariablenode)
+- [JsonParseNode](#jsonparsenode)
+- [JsonStringifyNode](#jsonstringifynode)
+- [MathOperationNode](#mathoperationnode)
+- [CreateListNode](#createlistnode)
+- [AddListItemNode](#addlistitemnode)
+- [RemoveListItemNode](#removelistitemnode)
+- [MergeListsNode](#mergelistsnode)
+- [AppendStringNode](#appendstringnode)
 
 ### Control Nodes
 - [ConditionNode](#conditionnode)
@@ -34,6 +42,8 @@ This document provides detailed reference documentation for all built-in nodes i
 - [HttpRequestNode](#httprequestnode)
 - [FileReaderNode](#filereadernode)
 - [FileWriterNode](#filewriternode)
+- [CsvReadNode](#csvreadnode)
+- [CsvWriteNode](#csvwritenode)
 - [GoogleSearchNode](#googlesearchnode)
 
 ### Base Classes
@@ -805,6 +815,404 @@ public SetVariableNode(
 
 ---
 
+### JsonParseNode
+
+**Category:** Data  
+**Purpose:** Parse a JSON string stored in WorkflowData into a structured .NET object
+
+#### Constructor
+
+```csharp
+public JsonParseNode(
+    string name,
+    string inputKey,
+    string outputKey = "parsed_json",
+    bool strict = false)
+```
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `name` | string | Yes | Node instance name |
+| `inputKey` | string | Yes | WorkflowData key holding the JSON string |
+| `outputKey` | string | No | Key to write the parsed object to (default: `parsed_json`) |
+| `strict` | bool | No | Throw on parse failure instead of setting success flag |
+
+#### Data In
+
+| Key | Type | Required | Description |
+|-----|------|----------|-------------|
+| `{inputKey}` | string | Yes | JSON string to parse |
+
+#### Data Out
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `{outputKey}` | object | Deserialized JSON value |
+| `json_parse_success` | bool | Whether parsing succeeded |
+
+#### Examples
+
+```csharp
+// Parse an LLM response that was already stored as a JSON string
+var node = new JsonParseNode("ParseConfig", inputKey: "config_json");
+
+// In strict mode â€” throws instead of setting json_parse_success=false
+var node = new JsonParseNode("ParseStrict", inputKey: "data", strict: true);
+
+// Combined with LLM output
+.AddNode(new LlmNode("LLM", llmConfig))
+.AddNode(new JsonParseNode("Parse", inputKey: LlmNode.OutputResponse, outputKey: "structured"))
+```
+
+---
+
+### JsonStringifyNode
+
+**Category:** Data  
+**Purpose:** Serialize any WorkflowData value to a JSON string
+
+#### Constructor
+
+```csharp
+public JsonStringifyNode(
+    string name,
+    string inputKey,
+    string outputKey = "json_string",
+    bool indented = false)
+```
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `name` | string | Yes | Node instance name |
+| `inputKey` | string | Yes | WorkflowData key to serialize |
+| `outputKey` | string | No | Key to write the JSON string to (default: `json_string`) |
+| `indented` | bool | No | Format with indentation for readability |
+
+#### Data In
+
+| Key | Type | Required | Description |
+|-----|------|----------|-------------|
+| `{inputKey}` | object | Yes | Value to serialize |
+
+#### Data Out
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `{outputKey}` | string | JSON string representation |
+
+#### Examples
+
+```csharp
+// Compact output (default)
+var node = new JsonStringifyNode("Stringify", inputKey: "my_data");
+
+// Pretty-printed
+var node = new JsonStringifyNode("StringifyPretty", inputKey: "my_data", indented: true);
+
+// Serialize search results before sending to an API
+.AddNode(new GoogleSearchNode("Search", searchConfig))
+.AddNode(new JsonStringifyNode("ToJson", inputKey: "search_results", outputKey: "payload"))
+.AddNode(new HttpRequestNode("Post", postConfig))
+```
+
+---
+
+### MathOperationNode
+
+**Category:** Data  
+**Purpose:** Perform arithmetic operations on numeric WorkflowData values
+
+#### Constructor
+
+```csharp
+public MathOperationNode(
+    string name,
+    string operation,
+    string outputKey,
+    string? inputKeyA = null,
+    double valueA = 0,
+    string? inputKeyB = null,
+    double? valueB = null)
+```
+
+#### Supported Operations
+
+| Operation | Expression | Operands |
+|-----------|-----------|---------|
+| `add` | A + B | A and B |
+| `subtract` | A âˆ’ B | A and B |
+| `multiply` | A Ã— B | A and B |
+| `divide` | A Ã· B | A and B |
+| `modulo` | A % B | A and B |
+| `power` | A ^ B | A and B |
+| `min` | min(A, B) | A and B |
+| `max` | max(A, B) | A and B |
+| `abs` | \|A\| | A only |
+| `sqrt` | âˆšA | A only |
+| `round` | round(A) | A only |
+| `floor` | floor(A) | A only |
+| `ceil` | ceil(A) | A only |
+| `negate` | âˆ’A | A only |
+
+#### Data Out
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `{outputKey}` | double | Result of the operation |
+
+#### Examples
+
+```csharp
+// Add two WorkflowData values
+new MathOperationNode("Sum", "add", "total", inputKeyA: "count_a", inputKeyB: "count_b")
+
+// Increment a counter by a literal
+new MathOperationNode("Increment", "add", "counter", inputKeyA: "counter", valueB: 1)
+
+// Absolute value
+new MathOperationNode("Abs", "abs", "magnitude", inputKeyA: "delta")
+
+// Divide with literals
+new MathOperationNode("Half", "divide", "half_count", inputKeyA: "total", valueB: 2)
+```
+
+---
+
+### CreateListNode
+
+**Category:** Data  
+**Purpose:** Create a new list and store it in WorkflowData, optionally pre-populated
+
+#### Constructor
+
+```csharp
+public CreateListNode(
+    string name,
+    string listKey,
+    List<object?>? initial = null)
+```
+
+#### Data Out
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `{listKey}` | List&lt;object?&gt; | The newly created list |
+| `list_count` | int | Number of items in the created list |
+
+#### Examples
+
+```csharp
+// Empty list
+new CreateListNode("Init", listKey: "results")
+
+// Pre-populated list
+new CreateListNode("InitTags", listKey: "tags",
+    initial: new() { "ai", "workflow", "dotnet" })
+
+// Use with AddListItemNode to build lists incrementally
+.AddNode(new CreateListNode("InitResults", listKey: "results"))
+.ForEach(itemsKey: "documents", outputKey: "processed", bodyBuilder: loop => loop
+    .AddNode(new LlmNode("Summarize", llmConfig))
+    .AddNode(new AddListItemNode("Collect", listKey: "results", itemKey: LlmNode.OutputResponse))
+)
+```
+
+---
+
+### AddListItemNode
+
+**Category:** Data  
+**Purpose:** Append or prepend an item to an existing list in WorkflowData
+
+#### Constructor
+
+```csharp
+public AddListItemNode(
+    string name,
+    string listKey,
+    string? itemKey = null,
+    string? itemValue = null,
+    bool prepend = false)
+```
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `name` | string | Yes | Node instance name |
+| `listKey` | string | Yes | WorkflowData key of the list to modify (created if absent) |
+| `itemKey` | string | No | Read item from this WorkflowData key (takes priority over `itemValue`) |
+| `itemValue` | string | No | Literal value to add |
+| `prepend` | bool | No | Insert at start rather than end |
+
+#### Data Out
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `{listKey}` | List&lt;object?&gt; | Updated list |
+| `list_count` | int | New length of the list |
+
+#### Examples
+
+```csharp
+// Append a literal
+new AddListItemNode("AddLabel", listKey: "tags", itemValue: "reviewed")
+
+// Append from a WorkflowData key
+new AddListItemNode("CollectReply", listKey: "replies", itemKey: "llm_response")
+
+// Prepend (insert at beginning)
+new AddListItemNode("Prepend", listKey: "messages", itemValue: "SYSTEM", prepend: true)
+```
+
+---
+
+### RemoveListItemNode
+
+**Category:** Data  
+**Purpose:** Remove an item from a list by index or by value
+
+#### Constructor
+
+```csharp
+public RemoveListItemNode(
+    string name,
+    string listKey,
+    int? removeIndex = null,
+    string? removeValue = null)
+```
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `name` | string | Yes | Node instance name |
+| `listKey` | string | Yes | WorkflowData key of the list to modify |
+| `removeIndex` | int? | No | 0-based index to remove; negative values count from end (`-1` = last item) |
+| `removeValue` | string? | No | Remove first item whose string representation matches this value |
+
+#### Data Out
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `{listKey}` | List&lt;object?&gt; | Updated list (item removed) |
+| `list_count` | int | New length |
+| `removed_item` | object | The item that was removed (null if not found) |
+
+#### Examples
+
+```csharp
+// Remove by 0-based index
+new RemoveListItemNode("RemoveFirst", listKey: "items", removeIndex: 0)
+
+// Remove last item
+new RemoveListItemNode("RemoveLast", listKey: "items", removeIndex: -1)
+
+// Remove by value
+new RemoveListItemNode("RemoveLabel", listKey: "tags", removeValue: "draft")
+```
+
+---
+
+### MergeListsNode
+
+**Category:** Data  
+**Purpose:** Concatenate two lists from WorkflowData into a single output list
+
+#### Constructor
+
+```csharp
+public MergeListsNode(
+    string name,
+    string listKeyA,
+    string listKeyB,
+    string outputKey,
+    bool deduplicate = false)
+```
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `name` | string | Yes | Node instance name |
+| `listKeyA` | string | Yes | First list key |
+| `listKeyB` | string | Yes | Second list key |
+| `outputKey` | string | Yes | Key to write the merged list to |
+| `deduplicate` | bool | No | Remove duplicate items (by string representation) |
+
+#### Data Out
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `{outputKey}` | List&lt;object?&gt; | Merged list |
+| `list_count` | int | Total item count |
+
+#### Examples
+
+```csharp
+// Concatenate two result lists
+new MergeListsNode("Combine", listKeyA: "results_a", listKeyB: "results_b", outputKey: "all_results")
+
+// Merge and deduplicate tags
+new MergeListsNode("MergeTags", listKeyA: "tags_old", listKeyB: "tags_new",
+    outputKey: "tags", deduplicate: true)
+```
+
+---
+
+### AppendStringNode
+
+**Category:** Data  
+**Purpose:** Concatenate a value onto an existing string in WorkflowData
+
+#### Constructor
+
+```csharp
+public AppendStringNode(
+    string name,
+    string targetKey,
+    string? appendKey = null,
+    string? appendValue = null,
+    string separator = "")
+```
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `name` | string | Yes | Node instance name |
+| `targetKey` | string | Yes | Key of the string to append to (created empty if missing) |
+| `appendKey` | string | No | WorkflowData key whose value is appended (takes priority over `appendValue`) |
+| `appendValue` | string | No | Literal string to append. Supports `{{variable}}` interpolation |
+| `separator` | string | No | Inserted between the base string and the appended value (default: empty) |
+
+#### Data Out
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `{targetKey}` | string | Resulting concatenated string |
+
+#### Examples
+
+```csharp
+// Append a literal suffix
+new AppendStringNode("AddSuffix", targetKey: "message", appendValue: " (reviewed)")
+
+// Append from another key with a separator
+new AppendStringNode("Join", targetKey: "full_name",
+    appendKey: "last_name", separator: " ")
+
+// Build up a log string in a loop
+.AddNode(new AppendStringNode("Log", targetKey: "log",
+    appendKey: "step_result", separator: "\n"))
+```
+
+---
+
 ## Control Nodes
 
 ### ConditionNode
@@ -1307,6 +1715,125 @@ public FileWriterNode(
 
 ---
 
+### CsvReadNode
+
+**Category:** IO  
+**Purpose:** Parse a CSV string from WorkflowData into a list of row dictionaries (RFC 4180 compliant)
+
+#### Constructor
+
+```csharp
+public CsvReadNode(
+    string name,
+    string csvKey,
+    string outputKey = "csv_rows",
+    bool hasHeader = true,
+    char delimiter = ',')
+```
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `name` | string | Yes | Node instance name |
+| `csvKey` | string | Yes | WorkflowData key that holds the CSV string |
+| `outputKey` | string | No | Key to write the parsed rows to (default: `csv_rows`) |
+| `hasHeader` | bool | No | Treat first row as column names (default: true) |
+| `delimiter` | char | No | Field delimiter character (default: `,`) |
+
+#### Data In
+
+| Key | Type | Required | Description |
+|-----|------|----------|-------------|
+| `{csvKey}` | string | Yes | String containing CSV text |
+
+#### Data Out
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `{outputKey}` | List&lt;Dictionary&lt;string, string&gt;&gt; | Parsed rows, one dictionary per row |
+| `csv_row_count` | int | Number of data rows parsed |
+| `csv_columns` | List&lt;string&gt; | Column names (from header row) |
+
+#### Examples
+
+```csharp
+// Read a CSV file, then parse it
+.AddNode(new FileReaderNode("Read", "data.csv"))
+.AddNode(new CsvReadNode("Parse", csvKey: "content", outputKey: "rows"))
+
+// Custom delimiter (tab-separated)
+new CsvReadNode("ParseTsv", csvKey: "tsv_text", delimiter: '\t')
+
+// Process rows in a loop
+.AddNode(new CsvReadNode("ParseCsv", csvKey: "csv_content"))
+.ForEach(itemsKey: "csv_rows", outputKey: "processed", bodyBuilder: row => row
+    .AddStep("ExtractField", (data, _) =>
+    {
+        var record = data.Get<Dictionary<string, string>>("__loop_item__");
+        return Task.FromResult(data.Set("email", record?["email"]));
+    })
+    .AddNode(new LlmNode("Process", llmConfig))
+)
+```
+
+---
+
+### CsvWriteNode
+
+**Category:** IO  
+**Purpose:** Serialize a list of row dictionaries from WorkflowData back to a CSV string (RFC 4180 compliant)
+
+#### Constructor
+
+```csharp
+public CsvWriteNode(
+    string name,
+    string dataKey,
+    string outputKey = "csv_output",
+    bool includeHeader = true,
+    char delimiter = ',')
+```
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `name` | string | Yes | Node instance name |
+| `dataKey` | string | Yes | WorkflowData key holding the list of row dicts |
+| `outputKey` | string | No | Key to write the CSV string to (default: `csv_output`) |
+| `includeHeader` | bool | No | Write a header row (default: true) |
+| `delimiter` | char | No | Field delimiter character (default: `,`) |
+
+#### Data In
+
+| Key | Type | Required | Description |
+|-----|------|----------|-------------|
+| `{dataKey}` | List of dicts/objects | Yes | Row data to serialize |
+
+#### Data Out
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `{outputKey}` | string | CSV string |
+| `csv_row_count` | int | Number of data rows written |
+
+#### Examples
+
+```csharp
+// Write processed rows to CSV
+new CsvWriteNode("Write", dataKey: "processed_rows", outputKey: "csv_text")
+
+// Then save to file
+.AddNode(new CsvWriteNode("Serialize", dataKey: "results"))
+.AddNode(new FileWriterNode("Save", "output.csv", "csv_output"))
+
+// Tab-separated output without header
+new CsvWriteNode("WriteTsv", dataKey: "rows", includeHeader: false, delimiter: '\t')
+```
+
+---
+
 ### GoogleSearchNode
 
 **Category:** IO  
@@ -1478,16 +2005,16 @@ Created via `Workflow.AddStep()`.
 
 This reference covered:
 
-? **4 AI Nodes** — LLM, PromptBuilder, OutputParser, Embedding  
-? **6 Data Nodes** — Transform, Mapper, Filter, Chunking, Memory, Variables  
-? **8 Control Nodes** — Condition, Branch, TryCatch, Delay, Log, Merge, ErrorRoute, Loop  
-? **4 IO Nodes** — HTTP, FileReader, FileWriter, GoogleSearch  
-? **3 Base Classes** — BaseNode, SimpleTransformNode, LambdaNode  
+âœ… **4 AI Nodes** â€” LLM, PromptBuilder, OutputParser, Embedding  
+âœ… **14 Data Nodes** â€” Transform, Mapper, Filter, Chunking, Memory, Variables, JsonParse, JsonStringify, Math, CreateList, AddListItem, RemoveListItem, MergeLists, AppendString  
+âœ… **8 Control Nodes** â€” Condition, Branch, TryCatch, Delay, Log, Merge, ErrorRoute, Loop  
+âœ… **6 IO Nodes** â€” HTTP, FileReader, FileWriter, CsvRead, CsvWrite, GoogleSearch  
+âœ… **3 Base Classes** â€” BaseNode, SimpleTransformNode, LambdaNode  
 
 For complete examples, see:
-- `source/console/examples/` — Production-ready workflows
-- `tests/` — Comprehensive test coverage
-- `docs/HOW_TO_GUIDE.md` — Step-by-step tutorials
+- `source/console/examples/` ï¿½ Production-ready workflows
+- `tests/` ï¿½ Comprehensive test coverage
+- `docs/HOW_TO_GUIDE.md` ï¿½ Step-by-step tutorials
 
 **All nodes support:**
 - NodeOptions (retry, timeout, conditions, continue-on-error)

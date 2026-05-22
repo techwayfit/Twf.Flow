@@ -9,76 +9,66 @@
     <PackageId>Twf.Flow</PackageId>
     <AssemblyName>Twf.Flow</AssemblyName>
     <RootNamespace>Twf.Flow</RootNamespace>
-    <Version>2.1.0</Version>
+    <Version>1.0.0</Version>
     <Authors>Manas Nayak</Authors>
     <Company>Manas Nayak</Company>
     <Description>A lightweight, node-based AI workflow engine for .NET 10. Build AI pipelines by chaining reusable nodes — LLM calls, HTTP requests, data transforms, embeddings, conditionals, and more — with built-in retry, timeout, parallel execution, and structured logging.</Description>
     <PackageTags>ai;workflow;llm;pipeline;nodes;automation;dotnet</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/manasnayak/Twf_AI_Framework</RepositoryUrl>
+    <RepositoryUrl>https://github.com/techwayfit/Twf.Flow</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://github.com/manasnayak/Twf_AI_Framework</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/techwayfit/Twf.Flow</PackageProjectUrl>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReleaseNotes>
-## 2.1.0
+## 1.0.0
+
+### AI Nodes
+- LlmNode — call OpenAI, Anthropic, Azure OpenAI, Ollama, or any OpenAI-compatible endpoint; supports streaming (SSE), conversation history, temperature control, and prompt sanitization
+- PromptBuilderNode — build dynamic prompts from `{{variable}}` templates with static variable fallbacks
+- OutputParserNode — extract structured JSON from LLM responses, handling markdown code fences and optional field mapping
+- EmbeddingNode — generate vector embeddings via OpenAI or Azure OpenAI; supports single and batch inputs
+
+### Data Nodes
+- TransformNode — apply preset (rename, select, concatenate) or custom transformations to WorkflowData
+- DataMapperNode — map nested source paths to target keys with dot-path syntax, defaults, and strict mode
+- FilterNode — validate WorkflowData with required-non-empty, min/max length, and custom predicate conditions
+- ChunkTextNode — split large text into overlapping chunks (character, word, or sentence strategies) for RAG pipelines
+- MemoryNode — read/write global workflow state that persists across nodes and pipeline runs
+- SetVariableNode — set arbitrary WorkflowData keys to literal values at runtime
+- JsonParseNode — parse a JSON string into structured .NET objects; writes `json_parse_success`
+- JsonStringifyNode — serialize any WorkflowData value to a JSON string with optional pretty-print
+- MathOperationNode — arithmetic operations on WorkflowData values: add, subtract, multiply, divide, modulo, power, min, max, abs, sqrt, round, floor, ceil, negate
+- CreateListNode — create a new list, optionally pre-populated from a JSON array; writes `list_count`
+- AddListItemNode — append or prepend an item to an existing list; writes `list_count`
+- RemoveListItemNode — remove an item by 0-based index (supports negative indexing) or by value; writes `list_count` and `removed_item`
+- MergeListsNode — concatenate two lists with optional deduplication; writes `list_count`
+- AppendStringNode — concatenate strings with a configurable separator
+
+### Control Nodes
+- ConditionNode — evaluate boolean predicates and write results to WorkflowData; factory helpers for key existence, string equality, length, and numeric comparisons
+- BranchNode — switch/case routing based on value matching (up to 3 named cases + default)
+- TryCatchNode — embedded try/catch workflow composition; catch branch receives `caught_error_message`, `caught_failed_node`, `caught_exception_type`
+- ErrorRouteNode — custom error routing logic via a user-supplied router function
+- DelayNode — configurable pause between pipeline steps; factory helpers for ms, seconds, minutes, and rate-limit-based delays
+- LogNode — log all or specific WorkflowData keys at a chosen log level
+- MergeNode — combine multiple WorkflowData string keys into one with a configurable separator
+- LoopNode — iterate over a list and execute a sub-workflow per item; emits `node_start` / `node_done` events
+
+### IO Nodes
+- HttpRequestNode — make HTTP requests with URL template variable substitution, configurable headers, and optional dynamic body from WorkflowData
+- FileReaderNode — read file contents from disk
+- FileWriterNode — write a WorkflowData string key to a file
+- CsvReadNode — parse CSV text into `List&lt;Dictionary&lt;string,string&gt;&gt;` (RFC 4180, configurable delimiter, header detection); writes `csv_row_count` and `csv_columns`
+- CsvWriteNode — serialize row objects back to a CSV string; writes `csv_row_count`
+- GoogleSearchNode — real Google search via SerpApi; returns ranked organic results as a structured `SearchResultItem` list
 
 ### Developer Experience
-- Node key constants: every node now exposes `public const string InputXxx` / `OutputXxx` fields for all WorkflowData keys it reads or writes, eliminating magic strings and enabling IDE autocomplete and refactoring
-- Pipeline extension methods on `Workflow` (`using Twf.Flow.Core.Extensions`):
-  - `AddAIPipeline(AIPipelineConfig)` — wires PromptBuilderNode → LlmNode → optional OutputParserNode in one call
-  - `AddEmbeddingPipeline(EmbeddingPipelineConfig)` — optional ChunkTextNode → EmbeddingNode
-  - `AddSearchAndSummarizePipeline(SearchAndSummarizeConfig)` — GoogleSearchNode → PromptBuilderNode → LlmNode
-- Typed result accessors on `WorkflowResult` and `WorkflowData` (`using Twf.Flow.Core.Extensions`):
-  - `LlmResponse()`, `LlmModel()`, `PromptTokens()`, `CompletionTokens()`
-  - `ParsedOutput()`, `Embedding()`, `Embeddings()`
-  - `SearchResults()`, `HttpResponse()`, `HttpStatusCode()`
-  - `FileContent()`, `Chunks()`, `IsValid()`, `ValidationErrors()`
-
-### New Nodes
-- `CsvReadNode` — parse CSV text into `List&lt;Dictionary&lt;string,string&gt;&gt;` (RFC 4180, configurable delimiter, header detection); writes `csv_row_count` and `csv_columns`
-- `CsvWriteNode` — serialize row objects back to a CSV string; writes `csv_row_count`
-- `JsonParseNode` — parse a JSON string into structured .NET objects; writes `json_parse_success`
-- `JsonStringifyNode` — serialize any WorkflowData value to a JSON string with optional pretty-print
-- `MathOperationNode` — arithmetic operations on WorkflowData values: add, subtract, multiply, divide, modulo, power, min, max, abs, sqrt, round, floor, ceil, negate
-- `CreateListNode` — create a new list, optionally pre-populated from a JSON array; writes `list_count`
-- `AddListItemNode` — append or prepend an item to an existing list; writes `list_count`
-- `RemoveListItemNode` — remove an item by 0-based index (supports negative indexing) or by value; writes `list_count` and `removed_item`
-- `MergeListsNode` — concatenate two lists with optional deduplication; writes `list_count`
-- `AppendStringNode` — concatenate strings with configurable separator
-
-    ## 2.0.0
-### New Nodes
-- GoogleSearchNode: real Google search via SerpApi — returns ranked organic results as structured `SearchResultItem` list; reads `search_query` / `search_results_count` from WorkflowData
-- TransformNode: apply preset or custom transformations to WorkflowData (rename key, select key, concatenate strings, pass-through, and more)
-- MemoryNode: read/write global workflow state memory for maintaining context across pipeline runs
-- ChunkTextNode: split large text into overlapping chunks for embedding and RAG (character, word, and sentence strategies)
-- SetVariableNode: set arbitrary WorkflowData keys at runtime
-- FilterNode: filter WorkflowData entries by key predicate
-- DataMapperNode: map and reshape WorkflowData keys
-- TryCatchNode: embedded try/catch workflow composition — catch workflow receives `caught_error_message`, `caught_failed_node`, `caught_exception_type`
-- ErrorRouteNode: route workflow execution based on upstream error state
-- DelayNode: introduce a configurable delay between pipeline steps
-- ConditionNode: conditional branching with expression evaluation
-- LogNode: log specific WorkflowData keys with dotted-path support for nested values
-
-### API Changes
-- `NodePort` renamed to `NodeData`; `InputPort` / `OutputPort` renamed to `DataIn` / `DataOut` on `INode`
-- `NodeParameterSchema` added to every node — provides structured UI metadata (parameter form fields, data port info) for the visual designer
-- `NodeParameters` helper class added for safe parameter extraction (`GetString`, `GetInt`, `GetBool`, etc.)
-
-### Runner Improvements
-- Runner now emits `node_start` and `node_done` events for `StartNode`, `EndNode`, and `LoopNode`
-
-## 1.0.1
-- LlmNode: added streaming response support via SSE for OpenAI, AzureOpenAI, Anthropic, Ollama, and Custom providers
-- LlmNode: new `Stream` flag on `LlmConfig` (default false, fully backward compatible)
-- LlmNode: new `OnChunk` callback on `LlmConfig` — invoked per text chunk during streaming
-- LlmNode: `stream_options.include_usage` enabled for OpenAI/AzureOpenAI to capture token counts on streamed responses
-- LlmNode: auth header logic extracted and deduplicated
-
-## 1.0.0
-- Initial release
+- Node key constants: every node exposes `public const string` fields for all WorkflowData keys it reads or writes, eliminating magic strings
+- Pipeline extension methods on `Workflow` (`using Twf.Flow.Core.Extensions`): `AddAIPipeline`, `AddEmbeddingPipeline`, `AddSearchAndSummarizePipeline`
+- Typed result accessors on `WorkflowResult` and `WorkflowData` (`using Twf.Flow.Core.Extensions`): `LlmResponse()`, `Embedding()`, `SearchResults()`, `FileContent()`, etc.
+- `NodeParameterSchema` on every node — provides structured UI metadata for visual designers
+- `NodeParameters` helper class for safe parameter extraction (`GetString`, `GetInt`, `GetBool`, etc.)
     </PackageReleaseNotes>
   </PropertyGroup>
 
