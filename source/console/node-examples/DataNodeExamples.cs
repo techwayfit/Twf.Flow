@@ -41,7 +41,7 @@ public static class DataNodeExamples
      using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("ChunkExample");
 
-        var workflow = Workflow.Create("DocumentChunker")
+        var workflow = WorkflowBuilder.Create("DocumentChunker")
       .UseLogger(logger)
             .AddNode(new ChunkTextNode(new ChunkConfig
           {
@@ -78,7 +78,7 @@ public static class DataNodeExamples
 
         // Word-based chunking example
         Console.WriteLine("\n  Word-Based Chunking Example:");
-     var wordWorkflow = Workflow.Create("WordChunker")
+     var wordWorkflow = WorkflowBuilder.Create("WordChunker")
        .UseLogger(logger)
       .AddNode(new ChunkTextNode(new ChunkConfig
         {
@@ -107,7 +107,7 @@ public static class DataNodeExamples
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("MapperExample");
 
-        var workflow = Workflow.Create("APITransformer")
+        var workflow = WorkflowBuilder.Create("APITransformer")
             .UseLogger(logger)
  .AddNode(new DataMapperNode(
    name: "ExtractUserData",
@@ -153,7 +153,7 @@ public static class DataNodeExamples
 
   // Default values example
   Console.WriteLine("\n  Default Values Example:");
-        var defaultWorkflow = Workflow.Create("SafeMapper")
+        var defaultWorkflow = WorkflowBuilder.Create("SafeMapper")
             .UseLogger(logger)
     .AddNode(new DataMapperNode(
 name: "SafeMapping",
@@ -189,7 +189,7 @@ await defaultWorkflow.RunAsync(new WorkflowData().Set("address", new { city = "S
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("FilterExample");
 
-        var workflow = Workflow.Create("UserRegistration")
+        var workflow = WorkflowBuilder.Create("UserRegistration")
        .UseLogger(logger)
        .AddNode(new FilterNode("ValidateInput")
    .RequireNonEmpty("email")
@@ -223,7 +223,7 @@ Console.WriteLine($"? Account created: {result.Data.GetString("account_id")}");
 
         // Soft validation (doesn't throw)
      Console.WriteLine("\n  Soft Validation Example:");
-   var softWorkflow = Workflow.Create("SoftValidation")
+   var softWorkflow = WorkflowBuilder.Create("SoftValidation")
      .UseLogger(logger)
     .AddNode(new FilterNode("CheckOptional", throwOnFail: false)
      .RequireNonEmpty("company_name")
@@ -263,7 +263,7 @@ Console.WriteLine($"? Account created: {result.Data.GetString("account_id")}");
      using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("TransformExample");
 
-        var workflow = Workflow.Create("DataCleaning")
+        var workflow = WorkflowBuilder.Create("DataCleaning")
       .UseLogger(logger)
  .AddNode(new TransformNode("CleanData", data =>
      {
@@ -297,7 +297,7 @@ return data
         Console.WriteLine("\n  Prebuilt Transform Examples:");
 
       // Rename
-        var renameWorkflow = Workflow.Create("Rename")
+        var renameWorkflow = WorkflowBuilder.Create("Rename")
    .UseLogger(logger)
          .AddNode(TransformNode.Rename("old_field", "new_field"))
    .OnComplete(result =>
@@ -307,7 +307,7 @@ return data
         await renameWorkflow.RunAsync(new WorkflowData().Set("old_field", "value"));
 
    // Concat strings
-    var concatWorkflow = Workflow.Create("Concat")
+    var concatWorkflow = WorkflowBuilder.Create("Concat")
         .UseLogger(logger)
      .AddNode(TransformNode.ConcatStrings("full_name", " ", "first_name", "last_name"))
   .OnComplete(result =>
@@ -331,7 +331,7 @@ return data
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("SetVarExample");
 
-        var workflow = Workflow.Create("WorkflowInit")
+        var workflow = WorkflowBuilder.Create("WorkflowInit")
             .UseLogger(logger)
        .AddNode(new SetVariableNode("Initialize", new Dictionary<string, object?>
         {
@@ -358,7 +358,7 @@ Console.WriteLine($"  Timestamp: {result.Data.GetString("timestamp")}");
 
         // Dynamic interpolation
         Console.WriteLine("\n  Template Interpolation Example:");
-        var templateWorkflow = Workflow.Create("DynamicTemplate")
+        var templateWorkflow = WorkflowBuilder.Create("DynamicTemplate")
             .UseLogger(logger)
       .AddNode(new SetVariableNode("BuildMessage", new Dictionary<string, object?>
             {
@@ -391,7 +391,7 @@ Console.WriteLine($"  Timestamp: {result.Data.GetString("timestamp")}");
         var logger = logFactory.CreateLogger("MemoryExample");
 
         // First conversation turn - write to memory
-   var firstTurnWorkflow = Workflow.Create("FirstTurn")
+   var firstTurnWorkflow = WorkflowBuilder.Create("FirstTurn")
             .UseLogger(logger)
             .AddStep("ProcessInput", (data, ctx) =>
         {
@@ -410,11 +410,13 @@ Console.WriteLine($"  Timestamp: {result.Data.GetString("timestamp")}");
  });
 
       var context = new WorkflowContext("ChatSession", logger);
-     await firstTurnWorkflow.RunAsync(new WorkflowData(), context);
+        var executor = new WorkflowExecutor();
+        var firstTurnStructure = firstTurnWorkflow.Build();
+        await executor.ExecuteAsync(firstTurnStructure, new WorkflowData(), context);
 
    // Second conversation turn - read from memory
 Console.WriteLine("\n  Second Turn (reading from memory):");
-    var secondTurnWorkflow = Workflow.Create("SecondTurn")
+    var secondTurnWorkflow = WorkflowBuilder.Create("SecondTurn")
           .UseLogger(logger)
  .AddNode(MemoryNode.Read("user_preference", "session_start", "conversation_count"))
           .AddStep("UpdateCount", (data, ctx) =>
@@ -431,10 +433,11 @@ Console.WriteLine("\n  Second Turn (reading from memory):");
                 Console.WriteLine($"  Turn count: {result.Data.Get<int>("conversation_count")}");
             });
 
-  await secondTurnWorkflow.RunAsync(new WorkflowData(), context);
+        var secondTurnStructure = secondTurnWorkflow.Build();
+        await executor.ExecuteAsync(secondTurnStructure, new WorkflowData(), context);
 
         // Third turn
         Console.WriteLine("\n  Third Turn:");
-        await secondTurnWorkflow.RunAsync(new WorkflowData(), context);
+        await executor.ExecuteAsync(secondTurnStructure, new WorkflowData(), context);
     }
 }

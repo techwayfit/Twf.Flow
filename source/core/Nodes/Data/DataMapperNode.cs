@@ -98,7 +98,7 @@ namespace Twf.Flow.Nodes.Data;
 /// // Output: ONLY name="Bob" and email="bob@test.com" (other keys removed)
 /// 
 /// // Example 6: Use in workflow (API response transformation)
-/// var workflow = Workflow.Create("ProcessAPI")
+/// var workflow = WorkflowBuilder.Create("ProcessAPI")
 ///     .AddNode(new HttpNode("FetchData", httpConfig))
 ///     .AddNode(new DataMapperNode("TransformResponse", new Dictionary&lt;string, string&gt;
 /// {

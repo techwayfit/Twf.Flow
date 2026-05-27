@@ -50,7 +50,7 @@ public static class RagDocumentQA
             new { Source = "product_guide.txt", Content = GetSampleDocument() }
         };
 
-        var ingestionWorkflow = Workflow.Create("DocumentIngestion")
+        var ingestionWorkflow = WorkflowBuilder.Create("DocumentIngestion")
             .UseLogger(logger)
 
             // 1. Chunk the document into overlapping pieces
@@ -117,7 +117,7 @@ public static class RagDocumentQA
         // ─── PHASE 2: QUERY PIPELINE ──────────────────────────────────────────
         Console.WriteLine("🔍 Phase 2: Answering questions via RAG...\n");
 
-        var queryWorkflow = Workflow.Create("RAGQuery")
+        var queryWorkflow = WorkflowBuilder.Create("RAGQuery")
             .UseLogger(logger)
 
             // 1. Validate query

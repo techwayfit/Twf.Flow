@@ -7,7 +7,7 @@ public static class SearchExample
 
     public static async Task RunAsync(string apiKey, string searchQuery)
     {
-        Workflow workflow= Workflow.Create("Search Engine");
+        var workflow = WorkflowBuilder.Create("Search Engine");
        // string apiKey="31cc9b23c8dd747dd978b91fa5a856b8489b8c7f5bbaed6d49d04bd39d1db969";
         workflow.AddNode(new GoogleSearchNode(apiKey)); 
         WorkflowData input = new WorkflowData().Set("search_query", searchQuery);

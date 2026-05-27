@@ -44,7 +44,7 @@ public static class CustomerSupportChatbot
         var llm = LlmConfig.OpenAI(apiKey);
 
         // ─── Build the workflow ───────────────────────────────────────────────
-        var workflow = Workflow.Create("CustomerSupportBot")
+        var workflow = WorkflowBuilder.Create("CustomerSupportBot")
             .UseLogger(logger)
             // 1. Validate input
             .AddNode(new FilterNode("ValidateInput")
@@ -134,6 +134,9 @@ public static class CustomerSupportChatbot
             "Thanks for the quick response, that solved my problem"
         };
 
+        var executor = new WorkflowExecutor();
+        var structure = workflow.Build();
+
         foreach (var message in conversations)
         {
             Console.WriteLine($"\n👤 Customer: {message}");
@@ -141,7 +144,7 @@ public static class CustomerSupportChatbot
             var input = WorkflowData.From("user_message", message)
                 .Set("company_name", "TechFlow Inc.");
 
-            var result = await workflow.RunAsync(input, context);
+            var result = await executor.ExecuteAsync(structure, input, context);
 
             if (result.IsSuccess)
             {

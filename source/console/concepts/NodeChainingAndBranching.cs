@@ -19,7 +19,7 @@ public static class NodeChainingAndBranching
      b.AddConsole().SetMinimumLevel(LogLevel.Debug));
         var logger = logFactory.CreateLogger("NodeChaining");
 
-      var workflow = Workflow.Create("ConceptDemo")
+      var workflow = WorkflowBuilder.Create("ConceptDemo")
          .UseLogger(logger)
 
             // Validate

@@ -8,7 +8,7 @@ namespace Twf.Flow.Nodes.Control;
 /// <summary>
 /// Evaluates a value key and selects one route from case1/case2/case3/default.
 /// Writes explicit routing keys into WorkflowData so downstream branching can
-/// be driven via Workflow.Branch(...) predicates.
+/// be driven via WorkflowBuilder.Branch(...) predicates.
 ///
 /// Writes:
 ///   - "branch_selected_port" : "case1" | "case2" | "case3" | "default"
@@ -55,40 +55,38 @@ public sealed class BranchNode : BaseNode
         ]
     };
 
-    public Dictionary<string, Workflow?> _branchWorkflows { get; } = new(StringComparer.OrdinalIgnoreCase);
+    public Dictionary<string, WorkflowStructure?> _branchWorkflows { get; } = new(StringComparer.OrdinalIgnoreCase);
 
     private readonly string _valueKey;
     
     
-    public BranchNode(
-        string name,
-        string valueKey,
-        string? case1Value = null,
-        string? case2Value = null,
-        string? case3Value = null,
-        bool caseSensitive = false)
+    public BranchNode(string name, string valueKey)
     {
         Name = name;
         _valueKey = valueKey;
     }
-
-    /// <summary>Dictionary constructor for dynamic instantiation.</summary>
-    public BranchNode(Dictionary<string, object?> parameters)
-        : this(
-            NodeParameters.GetString(parameters, "name") ?? "Branch",
-            NodeParameters.GetString(parameters, "valueKey") ?? "",
-            NodeParameters.GetString(parameters, "case1Value"),
-            NodeParameters.GetString(parameters, "case2Value"),
-            NodeParameters.GetString(parameters, "case3Value"),
-            NodeParameters.GetBool(parameters, "caseSensitive"))
-    { }
-
-    public BranchNode(string name, string valueKey, params KeyValuePair<string, Workflow>[] branches)
+    public BranchNode(string name, string valueKey, params KeyValuePair<string, WorkflowStructure>[] branches):this(name, valueKey)
     {
-        Name = name;
-        _valueKey = valueKey;
         foreach (var branch in branches) 
             _branchWorkflows[branch.Key] = branch.Value; //Add or set
+    }
+
+    public BranchNode(string name, string valueKey, params KeyValuePair<string, WorkflowBuilder>[] branches):this(name, valueKey)
+    {
+        foreach (var branch in branches)
+            _branchWorkflows[branch.Key] = branch.Value.Build();
+    }
+
+    public BranchNode AddBranch(string caseValue, WorkflowStructure workflow)
+    {
+        _branchWorkflows[caseValue] = workflow; //Add or set
+        return this;
+    }
+
+    public BranchNode AddBranch(string caseValue, WorkflowBuilder workflow)
+    {
+        _branchWorkflows[caseValue] = workflow.Build();
+        return this;
     }
 
     protected override async Task<WorkflowData> RunAsync(
@@ -101,7 +99,7 @@ public sealed class BranchNode : BaseNode
             input.Set("branch_route_status", "failure");
             return input;
         }
-        if (!_branchWorkflows.TryGetValue(inputValue, out Workflow flow))
+        if (!_branchWorkflows.TryGetValue(inputValue, out WorkflowStructure flow))
         {
             inputValue = "default";
             _branchWorkflows.TryGetValue(inputValue, out flow);
@@ -109,7 +107,8 @@ public sealed class BranchNode : BaseNode
         
         if(null != flow)
         {
-            var result= await flow.RunAsync(input, context);
+            var executor = new WorkflowExecutor();
+            var result = await executor.ExecuteAsync(flow, input, context);
             var data = result.Data.Clone();
             if (!result.IsSuccess)
             {

@@ -48,7 +48,7 @@ namespace Twf.Flow.Nodes.Data;
 ///         "Order must contain at least one item");
 /// 
 /// // Example 5: Use in workflow
-/// var workflow = Workflow.Create("UserRegistration")
+/// var workflow = WorkflowBuilder.Create("UserRegistration")
 ///     .AddNode(new FilterNode("ValidateInput")
 ///      .RequireNonEmpty("email")
 ///         .RequireNonEmpty("password")

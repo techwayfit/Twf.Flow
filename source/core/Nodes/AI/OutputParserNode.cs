@@ -123,7 +123,7 @@ namespace Twf.Flow.Nodes.AI;
 /// var date = result.Data.Get&lt;string&gt;("publish_date");
 /// 
 /// // Example 7: Use in LLM workflow
-/// var workflow = Workflow.Create("StructuredExtraction")
+/// var workflow = WorkflowBuilder.Create("StructuredExtraction")
 ///     .AddNode(new PromptBuilderNode("BuildPrompt", 
 ///      "Extract: {{text}}\nReturn JSON: {\"category\": \"...\", \"priority\": 1-5}"))
 ///     .AddNode(new LlmNode("ExtractData", llmConfig))

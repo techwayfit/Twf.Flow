@@ -109,7 +109,7 @@ public sealed class SearchAndSummarizeConfig
 // ─── Extension Methods ────────────────────────────────────────────────────────
 
 /// <summary>
-/// Fluent extension methods on <see cref="Workflow"/> that add multi-node pipeline
+/// Fluent extension methods on <see cref="WorkflowBuilder"/> that add multi-node pipeline
 /// sequences in a single call.
 /// </summary>
 public static class WorkflowPipelineExtensions
@@ -130,7 +130,7 @@ public static class WorkflowPipelineExtensions
     /// </summary>
     /// <example>
     /// <code>
-    /// var result = await Workflow.Create("Summarizer")
+    /// var result = await WorkflowBuilder.Create("Summarizer")
     ///     .AddAIPipeline(new AIPipelineConfig
     ///     {
     ///         Llm            = LlmConfig.OpenAI(apiKey, "gpt-4o"),
@@ -142,7 +142,7 @@ public static class WorkflowPipelineExtensions
     /// var summary = result.Data.GetString(LlmNode.OutputResponse);
     /// </code>
     /// </example>
-    public static Workflow AddAIPipeline(this Workflow workflow, AIPipelineConfig config)
+    public static WorkflowBuilder AddAIPipeline(this WorkflowBuilder workflow, AIPipelineConfig config)
     {
         ArgumentNullException.ThrowIfNull(config);
 
@@ -182,7 +182,7 @@ public static class WorkflowPipelineExtensions
     /// <example>
     /// <code>
     /// // Simple — embed a single text
-    /// var result = await Workflow.Create("Embed")
+    /// var result = await WorkflowBuilder.Create("Embed")
     ///     .AddEmbeddingPipeline(new EmbeddingPipelineConfig
     ///     {
     ///         Embedding = EmbeddingConfig.OpenAI(apiKey),
@@ -192,7 +192,7 @@ public static class WorkflowPipelineExtensions
     /// var vector = result.Data.Get&lt;float[]&gt;(EmbeddingNode.OutputEmbedding);
     ///
     /// // With chunking — embed a long document as a batch
-    /// var result = await Workflow.Create("ChunkAndEmbed")
+    /// var result = await WorkflowBuilder.Create("ChunkAndEmbed")
     ///     .AddEmbeddingPipeline(new EmbeddingPipelineConfig
     ///     {
     ///         Embedding = EmbeddingConfig.OpenAI(apiKey),
@@ -203,7 +203,7 @@ public static class WorkflowPipelineExtensions
     /// var embeddings = result.Data.Get&lt;List&lt;float[]&gt;&gt;(EmbeddingNode.OutputEmbeddings);
     /// </code>
     /// </example>
-    public static Workflow AddEmbeddingPipeline(this Workflow workflow, EmbeddingPipelineConfig config)
+    public static WorkflowBuilder AddEmbeddingPipeline(this WorkflowBuilder workflow, EmbeddingPipelineConfig config)
     {
         ArgumentNullException.ThrowIfNull(config);
 
@@ -239,7 +239,7 @@ public static class WorkflowPipelineExtensions
     /// </summary>
     /// <example>
     /// <code>
-    /// var result = await Workflow.Create("ResearchBot")
+    /// var result = await WorkflowBuilder.Create("ResearchBot")
     ///     .AddSearchAndSummarizePipeline(new SearchAndSummarizeConfig
     ///     {
     ///         SearchApiKey = serpApiKey,
@@ -250,8 +250,8 @@ public static class WorkflowPipelineExtensions
     /// var summary = result.Data.GetString(LlmNode.OutputResponse);
     /// </code>
     /// </example>
-    public static Workflow AddSearchAndSummarizePipeline(
-        this Workflow workflow, SearchAndSummarizeConfig config)
+    public static WorkflowBuilder AddSearchAndSummarizePipeline(
+        this WorkflowBuilder workflow, SearchAndSummarizeConfig config)
     {
         ArgumentNullException.ThrowIfNull(config);
 

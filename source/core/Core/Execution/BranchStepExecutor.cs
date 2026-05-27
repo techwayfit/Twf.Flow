@@ -64,7 +64,10 @@ internal sealed class BranchStepExecutor : ITypedStepExecutor
         }
 
         // Execute the selected branch
-        var branchResult = await pipeline.RunAsync(data, context).ConfigureAwait(false);
+        var branchExecutor = new WorkflowExecutor();
+        var branchResult = await branchExecutor
+            .ExecuteAsync(pipeline, data, context)
+            .ConfigureAwait(false);
 
         if (branchResult.IsSuccess)
         {

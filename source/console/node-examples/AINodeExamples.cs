@@ -38,7 +38,7 @@ public static class AINodeExamples
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("LlmExample");
 
-        var workflow = Workflow.Create("SimpleLLM")
+        var workflow = WorkflowBuilder.Create("SimpleLLM")
          .UseLogger(logger)
      .AddNode(new LlmNode(
              name: "Summarizer",
@@ -73,7 +73,7 @@ public static class AINodeExamples
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("EmbeddingExample");
 
-        var workflow = Workflow.Create("EmbeddingDemo")
+        var workflow = WorkflowBuilder.Create("EmbeddingDemo")
             .UseLogger(logger)
   .AddNode(new EmbeddingNode(
           name: "Embedder",
@@ -93,7 +93,7 @@ public static class AINodeExamples
 
         // Batch example
         Console.WriteLine("\n  Batch Embedding Example:");
-        var batchWorkflow = Workflow.Create("BatchEmbedding")
+        var batchWorkflow = WorkflowBuilder.Create("BatchEmbedding")
                   .UseLogger(logger)
                   .AddNode(new EmbeddingNode("BatchEmbedder", EmbeddingConfig.OpenAI(apiKey)))
       .OnComplete(result =>
@@ -129,7 +129,7 @@ public static class AINodeExamples
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("PromptBuilderExample");
 
-        var workflow = Workflow.Create("DynamicPrompt")
+        var workflow = WorkflowBuilder.Create("DynamicPrompt")
             .UseLogger(logger)
             .AddNode(new PromptBuilderNode(
         name: "ChatPrompt",
@@ -152,7 +152,7 @@ public static class AINodeExamples
 
         // Static variables example
         Console.WriteLine("\n  Static Variables Example:");
-        var staticWorkflow = Workflow.Create("StaticTemplate")
+        var staticWorkflow = WorkflowBuilder.Create("StaticTemplate")
          .UseLogger(logger)
             .AddNode(new PromptBuilderNode(
         name: "TranslatePrompt",
@@ -182,7 +182,7 @@ public static class AINodeExamples
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("ParserExample");
 
-        var workflow = Workflow.Create("StructuredExtraction")
+        var workflow = WorkflowBuilder.Create("StructuredExtraction")
             .UseLogger(logger)
             .AddNode(new LlmNode(
   name: "Extractor",
@@ -219,7 +219,7 @@ Return ONLY valid JSON.");
 
         // Markdown fence example
         Console.WriteLine("\n  Markdown Code Fence Example:");
-        var fenceWorkflow = Workflow.Create("FencedJSON")
+        var fenceWorkflow = WorkflowBuilder.Create("FencedJSON")
             .UseLogger(logger)
                .AddNode(new OutputParserNode("ParseFenced"))
         .OnComplete(result =>

@@ -40,7 +40,7 @@ public static class ContentGenerationPipeline
         // ─── Token usage tracker ──────────────────────────────────────────────
         var totalTokens = 0;
 
-        var workflow = Workflow.Create("ContentGenerator")
+        var workflow = WorkflowBuilder.Create("ContentGenerator")
             .UseLogger(logger)
 
             // ── Step 1: Validate inputs ─────────────────────────────────────────

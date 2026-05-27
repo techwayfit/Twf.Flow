@@ -19,7 +19,7 @@ public static class ParallelExecution
            b.AddConsole().SetMinimumLevel(LogLevel.Debug));
         var logger = logFactory.CreateLogger("ParallelExec");
 
-        var parallelWorkflow = Workflow.Create("ParallelDemo")
+        var parallelWorkflow = WorkflowBuilder.Create("ParallelDemo")
             .UseLogger(logger)
             .Parallel(
                 new TransformNode("Task1", d => d.Clone().Set("result_1", "Alpha completed")),

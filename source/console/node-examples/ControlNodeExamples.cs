@@ -47,43 +47,47 @@ public static class ControlNodeExamples
         var logger = logFactory.CreateLogger("BranchExample");
 
         // Define branch workflows
-        var approvedFlow = Workflow.Create("ApprovedHandler")
+        var approvedFlow = WorkflowBuilder.Create("ApprovedHandler")
  .AddStep("ProcessApproved", (data, ctx) =>
         {
             ctx.Logger.LogInformation("✓ Processing approved order: {OrderId}", data.GetString("order_id"));
             return Task.FromResult(data.Set("message", "Order approved and shipped"));
-        });
+        })
+            .Build();
 
-        var pendingFlow = Workflow.Create("PendingHandler")
+        var pendingFlow = WorkflowBuilder.Create("PendingHandler")
             .AddStep("ProcessPending", (data, ctx) =>
             {
                 ctx.Logger.LogInformation("⏳ Order pending review: {OrderId}", data.GetString("order_id"));
                 return Task.FromResult(data.Set("message", "Order awaiting approval"));
-            });
+            })
+            .Build();
 
-        var rejectedFlow = Workflow.Create("RejectedHandler")
+        var rejectedFlow = WorkflowBuilder.Create("RejectedHandler")
         .AddStep("ProcessRejected", (data, ctx) =>
             {
                 ctx.Logger.LogInformation("✗ Order rejected: {OrderId}", data.GetString("order_id"));
                 return Task.FromResult(data.Set("message", "Order rejected - refund initiated"));
-            });
+            })
+            .Build();
 
-        var defaultFlow = Workflow.Create("DefaultHandler")
+        var defaultFlow = WorkflowBuilder.Create("DefaultHandler")
        .AddStep("ProcessUnknown", (data, ctx) =>
      {
          ctx.Logger.LogWarning("⚠️  Unknown status: {Status}", data.GetString("status"));
          return Task.FromResult(data.Set("message", "Unknown status - manual review required"));
-     });
+     })
+            .Build();
 
-        var workflow = Workflow.Create("OrderRouter")
+        var workflow = WorkflowBuilder.Create("OrderRouter")
          .UseLogger(logger)
      .AddNode(new BranchNode(
       name: "RouteByStatus",
                 valueKey: "status",
-                new KeyValuePair<string, Workflow>("approved", approvedFlow),
-                new KeyValuePair<string, Workflow>("pending", pendingFlow),
-     new KeyValuePair<string, Workflow>("rejected", rejectedFlow),
-           new KeyValuePair<string, Workflow>("default", defaultFlow)
+                    new KeyValuePair<string, WorkflowStructure>("approved", approvedFlow),
+                    new KeyValuePair<string, WorkflowStructure>("pending", pendingFlow),
+             new KeyValuePair<string, WorkflowStructure>("rejected", rejectedFlow),
+                 new KeyValuePair<string, WorkflowStructure>("default", defaultFlow)
    ))
         .OnComplete(result =>
             {
@@ -115,7 +119,7 @@ public static class ControlNodeExamples
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("ConditionExample");
 
-        var workflow = Workflow.Create("DiscountEligibility")
+        var workflow = WorkflowBuilder.Create("DiscountEligibility")
   .UseLogger(logger)
     .AddNode(new ConditionNode("CheckEligibility",
          ("is_premium", data => data.GetString("tier") == "premium"),
@@ -161,7 +165,7 @@ public static class ControlNodeExamples
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("LoopExample");
 
-        var workflow = Workflow.Create("EmailProcessor")
+        var workflow = WorkflowBuilder.Create("EmailProcessor")
         .UseLogger(logger)
        .AddNode(new LoopNode(
        name: "ProcessEmails",
@@ -214,7 +218,7 @@ public static class ControlNodeExamples
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("TryCatchExample");
 
-        var workflow = Workflow.Create("ResilientAPI")
+        var workflow = WorkflowBuilder.Create("ResilientAPI")
   .UseLogger(logger)
    .AddNode(new TryCatchNode(
      name: "CallAPI",
@@ -260,7 +264,7 @@ tryBuilder: w => w
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("DelayExample");
 
-        var workflow = Workflow.Create("RateLimitedAPI")
+        var workflow = WorkflowBuilder.Create("RateLimitedAPI")
      .UseLogger(logger)
             .AddStep("APICall1", (data, ctx) =>
          {
@@ -299,7 +303,7 @@ tryBuilder: w => w
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("LogExample");
 
-        var workflow = Workflow.Create("DebuggableWorkflow")
+        var workflow = WorkflowBuilder.Create("DebuggableWorkflow")
       .UseLogger(logger)
             .AddStep("ProcessInput", (data, ctx) =>
             {
@@ -339,7 +343,7 @@ tryBuilder: w => w
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("MergeExample");
 
-        var workflow = Workflow.Create("ReportGenerator")
+        var workflow = WorkflowBuilder.Create("ReportGenerator")
  .UseLogger(logger)
             .AddStep("GenerateSections", (data, ctx) =>
             {
@@ -375,7 +379,7 @@ tryBuilder: w => w
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
         var logger = logFactory.CreateLogger("ErrorRouteExample");
 
-        var workflow = Workflow.Create("APIResponseHandler")
+        var workflow = WorkflowBuilder.Create("APIResponseHandler")
  .UseLogger(logger)
             .AddNode(new ErrorRouteNode(
       name: "CheckResponse",

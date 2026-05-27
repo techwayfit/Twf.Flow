@@ -19,7 +19,7 @@ public static class LoopForEach
         var logger = logFactory.CreateLogger("LoopDemo");
 
         var items = new List<string> { "apple", "banana", "cherry" };
-        var loopWorkflow = Workflow.Create("LoopDemo")
+        var loopWorkflow = WorkflowBuilder.Create("LoopDemo")
               .UseLogger(logger)
                .ForEach(
                     itemsKey: "fruits",

@@ -40,10 +40,20 @@ public sealed class WorkflowBuilder
     }
 
     /// <summary>
+    /// Gets the workflow name.
+    /// </summary>
+    public string Name => _name;
+
+    /// <summary>
     /// Creates a new workflow builder.
     /// </summary>
     /// <param name="workflowName">The name of the workflow.</param>
     public static WorkflowBuilder Create(string workflowName) => new(workflowName);
+
+    /// <summary>
+    /// Implicitly builds this builder into a <see cref="WorkflowStructure"/>.
+    /// </summary>
+    public static implicit operator WorkflowStructure(WorkflowBuilder builder) => builder.Build();
 
     // ─── Configuration Methods ────────────────────────────────────────────────
 
@@ -154,8 +164,8 @@ public sealed class WorkflowBuilder
         _steps.Add(new PipelineStep(twf_ai_framework.Core.Models.StepType.Branch)
         {
             BranchCondition = condition,
-            TrueBranch = truePipeline.BuildInternal(),
-            FalseBranch = falsePipeline?.BuildInternal()
+            TrueBranch = truePipeline.Build(),
+            FalseBranch = falsePipeline?.Build()
         });
 
         return this;
@@ -201,7 +211,7 @@ public sealed class WorkflowBuilder
         {
             LoopItemsKey = itemsKey,
             LoopOutputKey = outputKey,
-            LoopBody = bodyPipeline.BuildInternal()
+            LoopBody = bodyPipeline.Build()
         });
 
         return this;
@@ -227,53 +237,18 @@ public sealed class WorkflowBuilder
     }
 
     /// <summary>
-    /// Internal build method that returns a Workflow for nested pipelines (branches, loops).
-    /// </summary>
-    internal Workflow BuildInternal()
-    {
-        // Create a Workflow instance for backward compatibility with nested structures
-        var workflow = Workflow.Create(_name);
-
-        // Copy configuration
-        workflow.UseLogger(_logger);
-        if (_onComplete != null) workflow.OnComplete(_onComplete);
-        if (_onError != null) workflow.OnError(_onError);
-        if (_errorStrategy == GlobalErrorStrategy.ContinueOnFailure) workflow.ContinueOnErrors();
-
-        // Add all steps (this is a bit hacky but maintains compatibility)
-        foreach (var step in _steps)
-        {
-            switch (step.Type)
-            {
-                case twf_ai_framework.Core.Models.StepType.Node:
-                    workflow.AddNode(step.Node!, step.Options);
-                    break;
-
-                case twf_ai_framework.Core.Models.StepType.Branch:
-                    workflow.Branch(
-         step.BranchCondition!,
-          tb => { /* Already built */ },
-        fb => { /* Already built */ });
-                    break;
-
-                    // Other types handled similarly
-            }
-        }
-
-        return workflow;
-    }
-
-    /// <summary>
     /// Convenience method: Build and execute the workflow in one call.
     /// </summary>
     /// <param name="initialData">Initial workflow data.</param>
+    /// <param name="context">Execution context (optional, will be created if null).</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     public async Task<WorkflowResult> RunAsync(
           WorkflowData? initialData = null,
+          WorkflowContext? context = null,
           CancellationToken cancellationToken = default)
     {
         var structure = Build();
         var executor = new WorkflowExecutor();
-        return await executor.ExecuteAsync(structure, initialData, null, cancellationToken);
+        return await executor.ExecuteAsync(structure, initialData, context, cancellationToken);
     }
 }

@@ -46,7 +46,7 @@ public static class IONodeExamples
         var logger = logFactory.CreateLogger("HttpExample");
 
         // GET request
-        var workflow = Workflow.Create("FetchUser")
+        var workflow = WorkflowBuilder.Create("FetchUser")
             .UseLogger(logger)
             .AddNode(HttpRequestNode.Get(
      name: "GetUser",
@@ -64,7 +64,7 @@ public static class IONodeExamples
 
         // POST request
   Console.WriteLine("\n  POST Request Example:");
-        var postWorkflow = Workflow.Create("CreatePost")
+        var postWorkflow = WorkflowBuilder.Create("CreatePost")
           .UseLogger(logger)
             .AddNode(HttpRequestNode.Post(
     name: "CreatePost",
@@ -85,7 +85,7 @@ public static class IONodeExamples
 
         // Custom headers
         Console.WriteLine("\n  Custom Headers Example:");
-        var headerWorkflow = Workflow.Create("WithHeaders")
+        var headerWorkflow = WorkflowBuilder.Create("WithHeaders")
      .UseLogger(logger)
     .AddNode(new HttpRequestNode(
     name: "AuthenticatedRequest",
@@ -134,7 +134,7 @@ public static class IONodeExamples
 "- Data transformation\n" +
          "- Error handling");
 
-        var workflow = Workflow.Create("LoadDocument")
+        var workflow = WorkflowBuilder.Create("LoadDocument")
             .UseLogger(logger)
 .AddNode(new FileReaderNode(testFilePath))
          .OnComplete(result =>
@@ -154,7 +154,7 @@ public static class IONodeExamples
 
         // Dynamic path example
         Console.WriteLine("\n  Dynamic File Path Example:");
-   var dynamicWorkflow = Workflow.Create("DynamicLoader")
+   var dynamicWorkflow = WorkflowBuilder.Create("DynamicLoader")
  .UseLogger(logger)
          .AddNode(new FileReaderNode())
    .OnComplete(result =>
@@ -183,7 +183,7 @@ Console.WriteLine("\n??? 3. FileWriterNode Example ?????????????????????????????
 
         var outputPath = Path.Combine(Path.GetTempPath(), "twf_output_report.txt");
 
-   var workflow = Workflow.Create("GenerateReport")
+   var workflow = WorkflowBuilder.Create("GenerateReport")
             .UseLogger(logger)
         .AddStep("CreateReport", (data, ctx) =>
         {
@@ -229,7 +229,7 @@ if (File.Exists(outputPath))
 
         // Template path with variables
         Console.WriteLine("\n  Template Path Example:");
-        var templateWorkflow = Workflow.Create("TemplateOutput")
+        var templateWorkflow = WorkflowBuilder.Create("TemplateOutput")
     .UseLogger(logger)
   .AddStep("PrepareData", (data, ctx) =>
             {
@@ -265,7 +265,7 @@ if (File.Exists(outputPath))
         using var logFactory = LoggerFactory.Create(b => b.AddConsole().SetMinimumLevel(LogLevel.Information));
     var logger = logFactory.CreateLogger("SearchExample");
 
-   var workflow = Workflow.Create("WebResearch")
+   var workflow = WorkflowBuilder.Create("WebResearch")
       .UseLogger(logger)
             .AddNode(new GoogleSearchNode(apiKey))
             .OnComplete(result =>
@@ -307,7 +307,7 @@ if (File.Exists(outputPath))
 
         // Custom result count example
         Console.WriteLine("\n  Custom Result Count Example:");
-        var limitedWorkflow = Workflow.Create("LimitedSearch")
+        var limitedWorkflow = WorkflowBuilder.Create("LimitedSearch")
             .UseLogger(logger)
          .AddNode(new GoogleSearchNode(apiKey))
             .OnComplete(result =>

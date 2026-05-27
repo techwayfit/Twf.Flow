@@ -11,8 +11,8 @@ internal sealed class PipelineStep
 
     // Branch
     public Func<WorkflowData, bool>? BranchCondition { get; init; }
-    public Workflow? TrueBranch { get; init; }
-    public Workflow? FalseBranch { get; init; }
+    public WorkflowStructure? TrueBranch { get; init; }
+    public WorkflowStructure? FalseBranch { get; init; }
 
     // Parallel
     public INode[]? ParallelNodes { get; init; }
@@ -20,7 +20,7 @@ internal sealed class PipelineStep
     // Loop
     public string? LoopItemsKey { get; init; }
     public string? LoopOutputKey { get; init; }
-    public Workflow? LoopBody { get; init; }
+    public WorkflowStructure? LoopBody { get; init; }
 
     public PipelineStep(StepType type, INode? node = null, NodeOptions? options = null)
     {

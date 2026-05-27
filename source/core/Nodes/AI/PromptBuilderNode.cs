@@ -88,7 +88,7 @@ namespace Twf.Flow.Nodes.AI;
 ///     .Set("max_words", "150");
 /// 
 /// // Example 5: Use in LLM workflow
-/// var workflow = Workflow.Create("ChatBot")
+/// var workflow = WorkflowBuilder.Create("ChatBot")
 ///   .AddNode(new PromptBuilderNode(
 ///      "BuildPrompt",
 ///         promptTemplate: "{{user_message}}",

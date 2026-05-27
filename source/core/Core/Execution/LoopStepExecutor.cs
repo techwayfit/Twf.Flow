@@ -66,8 +66,10 @@ internal sealed class LoopStepExecutor : ITypedStepExecutor
        items.Count);
 
             // Execute loop body
-            var loopResult = await loopBody.RunAsync(itemData, context)
-              .ConfigureAwait(false);
+                        var loopExecutor = new WorkflowExecutor();
+                        var loopResult = await loopExecutor
+                                .ExecuteAsync(loopBody, itemData, context)
+                                .ConfigureAwait(false);
 
             allResults.AddRange(loopResult.NodeResults);
 

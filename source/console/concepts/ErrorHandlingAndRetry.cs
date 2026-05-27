@@ -21,7 +21,7 @@ public static class ErrorHandlingAndRetry
 
         _attempts = 0; // Reset counter for demo
 
-        var errorWorkflow = Workflow.Create("ErrorDemo")
+        var errorWorkflow = WorkflowBuilder.Create("ErrorDemo")
        .UseLogger(logger)
             .AddStep("FlakyOperation", (data, _) =>
 {

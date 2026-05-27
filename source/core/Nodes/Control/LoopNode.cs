@@ -88,7 +88,7 @@ public sealed class LoopNode : BaseNode
     private readonly string _outputKey;
     private readonly string _loopItemKey;
     private readonly int _maxIterations;
-    private readonly Workflow? _body;
+    private readonly WorkflowStructure? _body;
 
     /// <param name="name">Node name shown in logs.</param>
     /// <param name="itemsKey">WorkflowData key that holds the collection to iterate.</param>
@@ -102,7 +102,7 @@ public sealed class LoopNode : BaseNode
         string outputKey     = DefaultOutputKey,
         string loopItemKey   = DefaultLoopItemKey,
         int    maxIterations = 0,
-        Action<Workflow>? bodyBuilder = null)
+        Action<WorkflowBuilder>? bodyBuilder = null)
     {
         Name           = name;
         _itemsKey      = itemsKey;
@@ -112,8 +112,9 @@ public sealed class LoopNode : BaseNode
 
         if (bodyBuilder is not null)
         {
-            _body = Workflow.Create($"{name}/Body");
-            bodyBuilder(_body);
+            var body = WorkflowBuilder.Create($"{name}/Body");
+            bodyBuilder(body);
+            _body = body.Build();
         }
     }
 
@@ -155,7 +156,8 @@ public sealed class LoopNode : BaseNode
 
             if (_body is not null)
             {
-                var result = await _body.RunAsync(itemData, context);
+                var executor = new WorkflowExecutor();
+                var result = await executor.ExecuteAsync(_body, itemData, context);
                 if (!result.IsSuccess)
                 {
                     nodeCtx.Log($"  ✘ Iteration {i} failed: {result.ErrorMessage}");

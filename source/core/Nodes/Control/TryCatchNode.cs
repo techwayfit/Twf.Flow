@@ -26,30 +26,33 @@ public sealed class TryCatchNode : BaseNode
     public override string Category => "Control";
     public override string Description => "Executes try workflow and catches failures with fallback workflow";
 
-    private readonly Workflow _tryWorkflow;
-    private readonly Workflow? _catchWorkflow;
+    private readonly WorkflowStructure _tryWorkflow;
+    private readonly WorkflowStructure? _catchWorkflow;
 
     public TryCatchNode(
         string name,
-        Action<Workflow> tryBuilder,
-        Action<Workflow>? catchBuilder = null)
+        Action<WorkflowBuilder> tryBuilder,
+        Action<WorkflowBuilder>? catchBuilder = null)
     {
         Name = name;
 
-        _tryWorkflow = Workflow.Create($"{name}/Try");
-        tryBuilder(_tryWorkflow);
+        var tryWorkflow = WorkflowBuilder.Create($"{name}/Try");
+        tryBuilder(tryWorkflow);
+        _tryWorkflow = tryWorkflow.Build();
 
         if (catchBuilder is not null)
         {
-            _catchWorkflow = Workflow.Create($"{name}/Catch");
-            catchBuilder(_catchWorkflow);
+            var catchWorkflow = WorkflowBuilder.Create($"{name}/Catch");
+            catchBuilder(catchWorkflow);
+            _catchWorkflow = catchWorkflow.Build();
         }
     }
 
     protected override async Task<WorkflowData> RunAsync(
         WorkflowData input, WorkflowContext context, NodeExecutionContext nodeCtx)
     {
-        var tryResult = await _tryWorkflow.RunAsync(input.Clone(), context);
+        var executor = new WorkflowExecutor();
+        var tryResult = await executor.ExecuteAsync(_tryWorkflow, input.Clone(), context);
         if (tryResult.IsSuccess)
         {
             nodeCtx.Log("Try workflow completed successfully");
@@ -73,7 +76,7 @@ public sealed class TryCatchNode : BaseNode
                 $"Failed node: {tryResult.FailedNodeName}, Error: {tryResult.ErrorMessage}");
         }
 
-        var catchResult = await _catchWorkflow.RunAsync(catchInput, context);
+        var catchResult = await executor.ExecuteAsync(_catchWorkflow, catchInput, context);
         if (catchResult.IsSuccess)
         {
             nodeCtx.Log("Catch workflow handled the failure successfully");
@@ -90,8 +93,8 @@ public sealed class TryCatchNode : BaseNode
 
     public static TryCatchNode Create(
         string name,
-        Action<Workflow> tryBuilder,
-        Action<Workflow>? catchBuilder = null)
+        Action<WorkflowBuilder> tryBuilder,
+        Action<WorkflowBuilder>? catchBuilder = null)
     {
         return new TryCatchNode(name, tryBuilder, catchBuilder);
     }
