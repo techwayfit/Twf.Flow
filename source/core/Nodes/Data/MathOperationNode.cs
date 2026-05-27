@@ -21,61 +21,6 @@ public sealed class MathOperationNode : BaseNode
     public override string Name     { get; }
     public override string Category => "Data";
     public override string Description => $"{_operation}({_inputKeyA ?? _valueA.ToString()}, {_inputKeyB ?? _valueB?.ToString() ?? "–"}) → {_outputKey}";
-    public override string IdPrefix => "math";
-
-    public override IReadOnlyList<NodeData> DataIn
-    {
-        get
-        {
-            var ports = new List<NodeData>();
-            if (!string.IsNullOrWhiteSpace(_inputKeyA))
-                ports.Add(new(_inputKeyA, typeof(double), Required: false, "First operand"));
-            if (!string.IsNullOrWhiteSpace(_inputKeyB))
-                ports.Add(new(_inputKeyB, typeof(double), Required: false, "Second operand"));
-            return ports;
-        }
-    }
-
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_outputKey, typeof(double), Description: "Result of the math operation"),
-    ];
-
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "MathOperationNode",
-        Description = "Perform a math operation on one or two numeric values",
-        Parameters  =
-        [
-            new() { Name = "operation",  Label = "Operation", Type = ParameterType.Select, Required = true, DefaultValue = "add",
-                Options =
-                [
-                    new() { Value = "add",       Label = "Add (A + B)" },
-                    new() { Value = "subtract",  Label = "Subtract (A − B)" },
-                    new() { Value = "multiply",  Label = "Multiply (A × B)" },
-                    new() { Value = "divide",    Label = "Divide (A ÷ B)" },
-                    new() { Value = "modulo",    Label = "Modulo (A % B)" },
-                    new() { Value = "power",     Label = "Power (A ^ B)" },
-                    new() { Value = "min",       Label = "Min (A, B)" },
-                    new() { Value = "max",       Label = "Max (A, B)" },
-                    new() { Value = "abs",       Label = "Absolute Value (|A|)" },
-                    new() { Value = "sqrt",      Label = "Square Root (√A)" },
-                    new() { Value = "round",     Label = "Round (A)" },
-                    new() { Value = "floor",     Label = "Floor (A)" },
-                    new() { Value = "ceil",      Label = "Ceiling (A)" },
-                    new() { Value = "negate",    Label = "Negate (−A)" },
-                ]
-            },
-            new() { Name = "inputKeyA",  Label = "Operand A — Key",     Type = ParameterType.Text,   Required = false, Placeholder = "count",
-                Description = "WorkflowData key for operand A (overrides Operand A Value)" },
-            new() { Name = "valueA",     Label = "Operand A — Value",   Type = ParameterType.Number, Required = false, DefaultValue = 0 },
-            new() { Name = "inputKeyB",  Label = "Operand B — Key",     Type = ParameterType.Text,   Required = false, Placeholder = "step",
-                Description = "WorkflowData key for operand B (overrides Operand B Value)" },
-            new() { Name = "valueB",     Label = "Operand B — Value",   Type = ParameterType.Number, Required = false, DefaultValue = 0 },
-            new() { Name = "outputKey",  Label = "Output Key",          Type = ParameterType.Text,   Required = true,  Placeholder = "result",
-                Description = "WorkflowData key where the result is stored" },
-        ]
-    };
 
     private readonly string  _operation;
     private readonly string? _inputKeyA;

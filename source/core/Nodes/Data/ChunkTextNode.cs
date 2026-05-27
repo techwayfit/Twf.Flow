@@ -18,13 +18,12 @@ namespace Twf.Flow.Nodes.Data;
 /// </summary>
 public sealed class ChunkTextNode : BaseNode
 {
-    public override string Name => Schema.NodeType;
+    public override string Name => "ChunkTextNode";
     public override string Category => "Data";
     public override string Description =>
         $"Splits text into {_config.ChunkSize}-char chunks with {_config.Overlap}-char overlap";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "chunk";
 
     // WorkflowData keys
     public const string InputText    = "text";
@@ -33,37 +32,8 @@ public sealed class ChunkTextNode : BaseNode
     public const string OutputChunkCount = "chunk_count";
 
     /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(InputText,   typeof(string), Required: true,  "Source text to split"),
-        new(InputSource, typeof(string), Required: false, "Label attached to each chunk for provenance")
-    ];
 
     /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(OutputChunks,     typeof(List<TextChunk>), Description: "List of text chunks"),
-        new(OutputChunkCount, typeof(int),             Description: "Number of chunks produced")
-    ];
-
-    /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType = "ChunkTextNode",
-        Description = "Split text into overlapping chunks (character/word/sentence)",
-        Parameters =
-        [
-            new() { Name = "chunkSize", Label = "Chunk Size",          Type = ParameterType.Number, Required = false, DefaultValue = 500,  MinValue = 50, MaxValue = 10000 },
-            new() { Name = "overlap",   Label = "Overlap",             Type = ParameterType.Number, Required = false, DefaultValue = 50,   MinValue = 0,  MaxValue = 1000 },
-            new() { Name = "strategy",  Label = "Chunking Strategy",   Type = ParameterType.Select, Required = false, DefaultValue = "Character",
-                Options =
-                [
-                    new() { Value = "Character", Label = "By Character" },
-                    new() { Value = "Word",      Label = "By Word" },
-                    new() { Value = "Sentence",  Label = "By Sentence" },
-                ] },
-        ]
-    };
 
     private readonly ChunkConfig _config;
 

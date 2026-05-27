@@ -26,11 +26,9 @@ namespace Twf.Flow.Nodes.IO;
 /// </summary>
 public sealed class GoogleSearchNode : BaseNode
 {
-    public override string Name => Schema.NodeType;
+    public override string Name => "GoogleSearchNode";
     public override string Category => "IO";
-    public override string Description => Schema.Description;
-
-    public override string IdPrefix => "gsearch";
+    public override string Description => "Runs a Google search via SerpApi and writes structured results";
 
     // WorkflowData keys
     public const string InputQuery        = "search_query";
@@ -38,32 +36,6 @@ public sealed class GoogleSearchNode : BaseNode
     public const string OutputResults     = "search_results";
     public const string OutputQueryUsed   = "search_query_used";
     public const string OutputResultCount = "search_results_count";
-
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(InputQuery,       typeof(string), Required: true,  Description: "Search query string"),
-        new(InputResultCount, typeof(int),    Required: false, Description: "Number of results to return (default 5)")
-    ];
-
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(OutputResults,     typeof(List<SearchResultItem>), Description: "Parsed organic search result items"),
-        new(OutputQueryUsed,   typeof(string),                 Description: "Query submitted to Google"),
-        new(OutputResultCount, typeof(int),                    Description: "Number of results returned")
-    ];
-
-    /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "GoogleSearchNode",
-        Description = "Search Google via SerpApi and return structured organic results",
-        Parameters  =
-        [
-            new() { Name = "apiKey", Label = "SerpApi Key", Type = ParameterType.Text, Required = true,
-                Placeholder = "your-serpapi-key",
-                Description = "Get a free key at serpapi.com (100 searches/month)" },
-        ]
-    };
 
     /// <summary>Dictionary constructor for dynamic instantiation by the runner.</summary>
     public GoogleSearchNode(Dictionary<string, object?> parameters)

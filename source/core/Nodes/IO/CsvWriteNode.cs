@@ -22,31 +22,6 @@ public sealed class CsvWriteNode : BaseNode
     public override string Name     { get; }
     public override string Category => "IO";
     public override string Description => $"Serializes '{_dataKey}' → CSV in '{_outputKey}'";
-    public override string IdPrefix => "csvwrite";
-
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(_dataKey, typeof(IEnumerable), Required: true, "List of row dicts to serialize"),
-    ];
-
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_outputKey,    typeof(string), Description: "Serialized CSV string"),
-        new(OutputRowCount, typeof(int),    Description: "Number of data rows written"),
-    ];
-
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "CsvWriteNode",
-        Description = "Serialize a list of row objects to a CSV string",
-        Parameters  =
-        [
-            new() { Name = "dataKey",       Label = "Data Source Key",    Type = ParameterType.Text,    Required = true,  Placeholder = "csv_rows" },
-            new() { Name = "outputKey",     Label = "Output Key",         Type = ParameterType.Text,    Required = false, DefaultValue = "csv_output" },
-            new() { Name = "includeHeader", Label = "Include Header Row", Type = ParameterType.Boolean, Required = false, DefaultValue = true },
-            new() { Name = "delimiter",     Label = "Delimiter",          Type = ParameterType.Text,    Required = false, DefaultValue = ",", Placeholder = "," },
-        ]
-    };
 
     // WorkflowData keys
     public const string DefaultDataKey   = "csv_rows";

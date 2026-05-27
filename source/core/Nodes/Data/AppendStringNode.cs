@@ -20,37 +20,9 @@ public sealed class AppendStringNode : BaseNode
     public override string Name     { get; }
     public override string Category => "Data";
     public override string Description => $"Appends a value to '{_targetKey}'";
-    public override string IdPrefix => "appendstr";
 
     // WorkflowData keys
     public const string DefaultTargetKey = "my_text";
-
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(_targetKey, typeof(string), Required: false, "Base string (created empty if missing)"),
-    ];
-
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_targetKey, typeof(string), Description: "Resulting concatenated string"),
-    ];
-
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "AppendStringNode",
-        Description = "Append a string value to an existing WorkflowData string",
-        Parameters  =
-        [
-            new() { Name = "targetKey",   Label = "Target Key",       Type = ParameterType.Text, Required = true,  Placeholder = "my_text",
-                Description = "Key of the string to append to" },
-            new() { Name = "appendKey",   Label = "Append from Key",  Type = ParameterType.Text, Required = false, Placeholder = "other_value",
-                Description = "WorkflowData key whose value is appended (takes priority over Append Value)" },
-            new() { Name = "appendValue", Label = "Append Value",     Type = ParameterType.Text, Required = false, Placeholder = " more text",
-                Description = "Literal string to append. Supports {{variable}} interpolation." },
-            new() { Name = "separator",   Label = "Separator",        Type = ParameterType.Text, Required = false, Placeholder = "",
-                Description = "String inserted between the base and the appended value (default: empty)" },
-        ]
-    };
 
     private readonly string  _targetKey;
     private readonly string? _appendKey;

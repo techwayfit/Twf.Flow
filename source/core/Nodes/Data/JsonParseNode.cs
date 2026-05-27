@@ -20,37 +20,11 @@ public sealed class JsonParseNode : BaseNode
     public override string Name     { get; }
     public override string Category => "Data";
     public override string Description => $"Parses JSON from '{_inputKey}' → '{_outputKey}'";
-    public override string IdPrefix => "jsonparse";
 
     // WorkflowData keys
     public const string DefaultInputKey    = "json_string";
     public const string DefaultOutputKey   = "parsed_json";
     public const string OutputParseSuccess = "json_parse_success";
-
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(_inputKey, typeof(string), Required: true, "JSON string to parse"),
-    ];
-
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_outputKey,        typeof(object), Description: "Parsed JSON value"),
-        new(OutputParseSuccess, typeof(bool),   Description: "Whether parsing succeeded"),
-    ];
-
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "JsonParseNode",
-        Description = "Parse a JSON string into a structured object",
-        Parameters  =
-        [
-            new() { Name = "inputKey",   Label = "Input Key",  Type = ParameterType.Text, Required = true,  Placeholder = "json_string",
-                Description = "WorkflowData key holding the JSON string" },
-            new() { Name = "outputKey",  Label = "Output Key", Type = ParameterType.Text, Required = false, DefaultValue = "parsed_json" },
-            new() { Name = "strict",     Label = "Strict Mode", Type = ParameterType.Boolean, Required = false, DefaultValue = false,
-                Description = "If true, throws on parse failure instead of setting json_parse_success=false" },
-        ]
-    };
 
     private readonly string _inputKey;
     private readonly string _outputKey;

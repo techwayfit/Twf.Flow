@@ -26,7 +26,6 @@ public sealed class EmbeddingNode : BaseNode
         $"Generates vector embeddings using {_config.Model}";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "embed";
 
     // WorkflowData keys
     public const string InputText       = "text";
@@ -36,38 +35,10 @@ public sealed class EmbeddingNode : BaseNode
     public const string OutputModel      = "embedding_model";
 
     /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(InputText,  typeof(string),       Required: false, "Single text to embed"),
-        new(InputTexts, typeof(List<string>), Required: false, "Batch of texts to embed")
-    ];
 
     /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(OutputEmbedding,  typeof(float[]),       Required: false, "Single embedding vector"),
-        new(OutputEmbeddings, typeof(List<float[]>), Required: false, "Batch embedding vectors"),
-        new(OutputModel,      typeof(string),        Description: "Model name used")
-    ];
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "EmbeddingNode",
-        Description = "Generate vector embeddings for RAG and semantic search",
-        Parameters  =
-        [
-            new() { Name = "model",  Label = "Embedding Model", Type = ParameterType.Select, Required = true, DefaultValue = "text-embedding-3-small",
-                Options =
-                [
-                    new() { Value = "text-embedding-3-small", Label = "OpenAI Embedding Small" },
-                    new() { Value = "text-embedding-3-large", Label = "OpenAI Embedding Large" },
-                    new() { Value = "text-embedding-ada-002", Label = "OpenAI Ada 002 (Legacy)" },
-                ] },
-            new() { Name = "apiKey", Label = "API Key", Type = ParameterType.Text,   Required = false, Placeholder = "Leave empty to use environment variable" },
-            new() { Name = "apiUrl", Label = "API URL", Type = ParameterType.Text,   Required = false, DefaultValue = "https://api.openai.com/v1/embeddings" },
-        ]
-    };
 
     private readonly EmbeddingConfig _config;
     private readonly HttpClient _httpClient;

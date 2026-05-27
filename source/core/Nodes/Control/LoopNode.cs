@@ -38,7 +38,6 @@ public sealed class LoopNode : BaseNode
         $"Iterates over '{_itemsKey}', writing each result to '{_outputKey}'";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "loop";
 
     // WorkflowData keys — defaults for configurable keys and hardcoded internal keys
     public const string DefaultItemsKey    = "items";
@@ -48,11 +47,6 @@ public sealed class LoopNode : BaseNode
     public const string OutputIterationCount = "loop_iteration_count";
 
     /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(_itemsKey, typeof(IEnumerable<object>), Required: true,
-            "Collection to iterate — each element is placed in the loop body as loopItemKey")
-    ];
 
     /// <inheritdoc/>
     /// <remarks>
@@ -60,29 +54,8 @@ public sealed class LoopNode : BaseNode
     ///   "body"   — connects to the first node of the per-item body chain (orange handle in UI).
     ///   "output" — connects to the next step after the loop completes (grey handle in UI).
     /// </remarks>
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_outputKey,        typeof(List<WorkflowData>), Description: "Collected per-item WorkflowData results"),
-        new(OutputIterationCount, typeof(int),                Description: "Number of items iterated")
-    ];
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "LoopNode",
-        Description = "Iterate over each item in a list and collect results",
-        Parameters  =
-        [
-            new() { Name = "itemsKey",      Label = "Items Key",           Type = ParameterType.Text,   Required = true,  Placeholder = "e.g. documents, users",
-                Description = "WorkflowData key containing the collection to iterate" },
-            new() { Name = "outputKey",     Label = "Output Key",          Type = ParameterType.Text,   Required = true,  Placeholder = "e.g. results",
-                Description = "Where to store the array of per-item results" },
-            new() { Name = "loopItemKey",   Label = "Loop Item Variable",  Type = ParameterType.Text,   Required = false, DefaultValue = "__item__",
-                Description = "Variable name for the current item inside the loop body" },
-            new() { Name = "maxIterations", Label = "Max Iterations",      Type = ParameterType.Number, Required = false, DefaultValue = 0, MinValue = 0, MaxValue = 10000,
-                Description = "Safety cap — 0 means unlimited" },
-        ]
-    };
 
     private readonly string _itemsKey;
     private readonly string _outputKey;

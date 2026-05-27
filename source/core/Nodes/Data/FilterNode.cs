@@ -67,7 +67,6 @@ public sealed class FilterNode : BaseNode
     public override string Description => $"Data validation filter: {Name}";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "filter";
 
     // WorkflowData keys
     public const string OutputIsValid          = "is_valid";
@@ -80,28 +79,8 @@ public sealed class FilterNode : BaseNode
               .ToList<NodeData>();
 
     /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(OutputIsValid,          typeof(bool),         Description: "True if all rules passed"),
-        new(OutputValidationErrors, typeof(List<string>), Required: false, "List of failure messages")
-    ];
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "FilterNode",
-        Description = "Validate data — fails or flags when rules are not met",
-        Parameters  =
-        [
-            new() { Name = "throwOnFail", Label = "Throw on Failure", Type = ParameterType.Boolean, Required = false, DefaultValue = true,
-                Description = "If false, writes is_valid=false instead of throwing" },
-            new() { Name = "requireKey",  Label = "Require Non-Empty Key", Type = ParameterType.Text, Required = false, Placeholder = "e.g. prompt",
-                Description = "Fail if this key is missing or blank" },
-            new() { Name = "maxLengthKey",Label = "Max Length Key",        Type = ParameterType.Text, Required = false, Placeholder = "e.g. prompt" },
-            new() { Name = "maxLength",   Label = "Max Length",            Type = ParameterType.Number, Required = false, DefaultValue = 0, MinValue = 0,
-                Description = "Maximum allowed character length (0 = no limit)" },
-        ]
-    };
 
     private readonly List<FilterRule> _rules;
     private readonly bool _throwOnFail;

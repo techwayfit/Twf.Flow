@@ -18,35 +18,10 @@ public sealed class JsonStringifyNode : BaseNode
     public override string Name     { get; }
     public override string Category => "Data";
     public override string Description => $"Serializes '{_inputKey}' to JSON → '{_outputKey}'";
-    public override string IdPrefix => "jsonstringify";
 
     // WorkflowData keys
     public const string DefaultInputKey  = "my_object";
     public const string DefaultOutputKey = "json_string";
-
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(_inputKey, typeof(object), Required: true, "Value to serialize to JSON"),
-    ];
-
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_outputKey, typeof(string), Description: "JSON string representation"),
-    ];
-
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "JsonStringifyNode",
-        Description = "Serialize a WorkflowData value to a JSON string",
-        Parameters  =
-        [
-            new() { Name = "inputKey",  Label = "Input Key",   Type = ParameterType.Text,    Required = true,  Placeholder = "my_object",
-                Description = "WorkflowData key to serialize" },
-            new() { Name = "outputKey", Label = "Output Key",  Type = ParameterType.Text,    Required = false, DefaultValue = "json_string" },
-            new() { Name = "indented",  Label = "Pretty Print", Type = ParameterType.Boolean, Required = false, DefaultValue = false,
-                Description = "Format with indentation for readability" },
-        ]
-    };
 
     private readonly string _inputKey;
     private readonly string _outputKey;

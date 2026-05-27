@@ -18,36 +18,9 @@ public sealed class MergeListsNode : BaseNode
     public override string Name     { get; }
     public override string Category => "Data";
     public override string Description => $"Merges '{_listKeyA}' + '{_listKeyB}' → '{_outputKey}'";
-    public override string IdPrefix => "mergelist";
-
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(_listKeyA, typeof(List<object?>), Required: true,  "First list"),
-        new(_listKeyB, typeof(List<object?>), Required: true,  "Second list"),
-    ];
 
     // WorkflowData keys
     public const string OutputListCount = "list_count";
-
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_outputKey,      typeof(List<object?>), Description: "Merged list"),
-        new(OutputListCount, typeof(int),           Description: "Total item count"),
-    ];
-
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "MergeListsNode",
-        Description = "Combine two lists into one, with optional deduplication",
-        Parameters  =
-        [
-            new() { Name = "listKeyA",     Label = "List Key A",    Type = ParameterType.Text,    Required = true,  Placeholder = "list_a" },
-            new() { Name = "listKeyB",     Label = "List Key B",    Type = ParameterType.Text,    Required = true,  Placeholder = "list_b" },
-            new() { Name = "outputKey",    Label = "Output Key",    Type = ParameterType.Text,    Required = true,  Placeholder = "merged_list" },
-            new() { Name = "deduplicate",  Label = "Deduplicate",   Type = ParameterType.Boolean, Required = false, DefaultValue = false,
-                Description = "Remove duplicate items from the merged list" },
-        ]
-    };
 
     private readonly string _listKeyA;
     private readonly string _listKeyB;

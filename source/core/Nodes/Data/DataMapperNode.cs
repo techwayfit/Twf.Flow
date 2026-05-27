@@ -117,7 +117,6 @@ public sealed class DataMapperNode : BaseNode
         $"Maps {_mappings.Count} field(s) from source paths to target keys";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "mapper";
 
     /// <inheritdoc/>
     public override IReadOnlyList<NodeData> DataIn =>
@@ -133,20 +132,6 @@ public sealed class DataMapperNode : BaseNode
                  .ToList<NodeData>();
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "DataMapperNode",
-        Description = "Map source paths to target keys with dot-path support",
-        Parameters  =
-        [
-            new() { Name = "mappings",       Label = "Mappings (JSON)",        Type = ParameterType.Json,    Required = true,
-                Placeholder = "{\"prompt\": \"llm_response\", \"user_id\": \"http_response.data.id\"}",
-                Description = "targetKey → sourcePath. Source supports dot-path notation." },
-            new() { Name = "throwOnMissing", Label = "Throw on Missing Source",Type = ParameterType.Boolean, Required = false, DefaultValue = false },
-            new() { Name = "removeUnmapped", Label = "Output Only Mapped Keys",Type = ParameterType.Boolean, Required = false, DefaultValue = false,
-                Description = "If enabled, unmapped keys are dropped from output" },
-        ]
-    };
 
     private readonly IReadOnlyDictionary<string, string> _mappings;
     private readonly IReadOnlyDictionary<string, object?> _defaultValues;

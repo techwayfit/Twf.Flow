@@ -17,7 +17,6 @@ public sealed class MemoryNode : BaseNode
             : $"Writes {string.Join(", ", _keys)} to global memory";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "memory";
 
     /// <inheritdoc/>
     public override IReadOnlyList<NodeData> DataIn =>
@@ -32,22 +31,6 @@ public sealed class MemoryNode : BaseNode
             : [];
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "MemoryNode",
-        Description = "Read or write keys from persistent workflow memory (state)",
-        Parameters  =
-        [
-            new() { Name = "mode", Label = "Mode", Type = ParameterType.Select, Required = true, DefaultValue = "read",
-                Options =
-                [
-                    new() { Value = "read",  Label = "Read from Memory" },
-                    new() { Value = "write", Label = "Write to Memory" },
-                ] },
-            new() { Name = "keys", Label = "Keys (JSON array)", Type = ParameterType.Json, Required = true,
-                Placeholder = "[\"user_id\", \"session_state\"]" },
-        ]
-    };
 
     private readonly MemoryMode _mode;
     private readonly string[] _keys;

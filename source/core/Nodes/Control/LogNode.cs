@@ -18,7 +18,6 @@ public sealed class LogNode : BaseNode
         $"Logs WorkflowData state at checkpoint '{_label}'";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "log";
 
     /// <inheritdoc/>
     public override IReadOnlyList<NodeData> DataIn =>
@@ -26,26 +25,6 @@ public sealed class LogNode : BaseNode
                           .ToList<NodeData>();
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "LogNode",
-        Description = "Emit a log checkpoint for debugging",
-        Parameters  =
-        [
-            new() { Name = "keysToLog", Label = "Keys to Log (JSON array)", Type = ParameterType.Json, Required = false,
-                Placeholder = "[\"prompt\", \"llm_response\"]",
-                Description = "Leave empty to log all keys" },
-            new() { Name = "logLevel", Label = "Log Level", Type = ParameterType.Select, Required = false, DefaultValue = "Information",
-                Options =
-                [
-                    new() { Value = "Trace",       Label = "Trace" },
-                    new() { Value = "Debug",       Label = "Debug" },
-                    new() { Value = "Information", Label = "Information" },
-                    new() { Value = "Warning",     Label = "Warning" },
-                    new() { Value = "Error",       Label = "Error" },
-                ] },
-        ]
-    };
 
     private readonly string _label;
     private readonly string[]? _keysToLog;
@@ -89,11 +68,6 @@ public sealed class LogNode : BaseNode
         input.Set("log_message", messages.ToArray());
         return Task.FromResult(input);
     }
-    public override IReadOnlyList<NodeData> DataOut => [
-        new ("logged_keys", typeof(string[]), Description:  "Keys that were logged"),
-        new ("log_label",   typeof(string),   Description:  "Log checkpoint label"),
-        new ("log_message", typeof(string[]),   Description:  "Formatted log message")
-    ];
     public static LogNode All(string label) => new(label);
     public static LogNode Keys(string label, params string[] keys) => new(label, keys);
 }

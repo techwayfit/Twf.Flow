@@ -160,51 +160,13 @@ public sealed class OutputParserNode : BaseNode
 
     public override string Name => _name;
     public override string Category => "AI";
-    public override string Description => Schema.Description;
+    public override string Description => "Parses JSON content from LLM output into structured workflow data";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "parser";
 
     // WorkflowData keys
     public const string InputResponse   = "llm_response";
     public const string OutputParsedOutput = "parsed_output";
-
-    /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(InputResponse, typeof(string), Required: true, "Raw LLM text to parse JSON from")
-    ];
-
-    /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataOut
-    {
-        get
-        {
-            var ports = new List<NodeData>
-            {
-                new(OutputParsedOutput, typeof(Dictionary<string, object?>), Description: "Full parsed JSON object")
-            };
-            if (_fieldMapping is not null)
-                foreach (var (_, dataKey) in _fieldMapping)
-                    ports.Add(new NodeData(dataKey, typeof(object), Required: false, $"Mapped from JSON field"));
-            return ports;
-        }
-    }
-
-    /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "OutputParserNode",
-        Description = "Extract structured JSON from LLM text responses",
-        Parameters  =
-        [
-            new() { Name = "fieldMapping", Label = "Field Mapping (JSON)", Type = ParameterType.Json, Required = false,
-                Placeholder = "{\"sentiment\": \"sentiment\", \"score\": \"confidence\"}",
-                Description = "Map JSON keys to WorkflowData keys. Leave empty to write all fields directly." },
-            new() { Name = "strict", Label = "Strict Mode", Type = ParameterType.Boolean, Required = false, DefaultValue = false,
-                Description = "Fail the node if valid JSON cannot be extracted" },
-        ]
-    };
 
     private readonly Dictionary<string, string>? _fieldMapping;
     private readonly bool _strict;

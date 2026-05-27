@@ -18,19 +18,8 @@ public sealed class DelayNode : BaseNode
         $"Waits for {_delay.TotalMilliseconds}ms before passing data to next node";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "delay";
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "DelayNode",
-        Description = "Pause execution for a fixed duration",
-        Parameters  =
-        [
-            new() { Name = "durationMs", Label = "Duration (ms)", Type = ParameterType.Number, Required = true, DefaultValue = 1000, MinValue = 0, MaxValue = 60000 },
-            new() { Name = "reason",     Label = "Reason",        Type = ParameterType.Text,   Required = false, Placeholder = "e.g. Rate limit" },
-        ]
-    };
 
     private readonly TimeSpan _delay;
     private readonly string? _reason;

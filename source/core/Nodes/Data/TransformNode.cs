@@ -22,29 +22,8 @@ public sealed class TransformNode : BaseNode
     public override string Description => $"Custom data transformation: {Name}";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "transform";
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "TransformNode",
-        Description = "Apply a preset or pass-through transformation to workflow data",
-        Parameters  =
-        [
-            new() { Name = "preset",    Label = "Preset",    Type = ParameterType.Select, Required = false, DefaultValue = "",
-                Options =
-                [
-                    new() { Value = "",             Label = "Pass-through (no-op)" },
-                    new() { Value = "rename",       Label = "Rename Key" },
-                    new() { Value = "selectkey",    Label = "Select Key" },
-                    new() { Value = "concatstrings",Label = "Concatenate Strings" },
-                ] },
-            new() { Name = "fromKey",   Label = "From Key",  Type = ParameterType.Text,   Required = false, Placeholder = "Source key" },
-            new() { Name = "toKey",     Label = "To Key",    Type = ParameterType.Text,   Required = false, Placeholder = "Target key" },
-            new() { Name = "keys",      Label = "Keys (JSON array, for concat)", Type = ParameterType.Json, Required = false, Placeholder = "[\"key1\",\"key2\"]" },
-            new() { Name = "separator", Label = "Separator", Type = ParameterType.Text,   Required = false, DefaultValue = " " },
-        ]
-    };
 
     private readonly Func<WorkflowData, Task<WorkflowData>> _transform;
 

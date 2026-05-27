@@ -16,32 +16,10 @@ public sealed class CreateListNode : BaseNode
     public override string Name     { get; }
     public override string Category => "Data";
     public override string Description => $"Creates a list stored as '{_listKey}'";
-    public override string IdPrefix => "list";
 
     // WorkflowData keys
     public const string DefaultListKey  = "my_list";
     public const string OutputListCount = "list_count";
-
-    public override IReadOnlyList<NodeData> DataIn  => [];
-
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_listKey,        typeof(List<object?>), Description: "The created list"),
-        new(OutputListCount, typeof(int),           Description: "Number of items in the list"),
-    ];
-
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "CreateListNode",
-        Description = "Create a new list, optionally pre-populated from a JSON array",
-        Parameters  =
-        [
-            new() { Name = "listKey",      Label = "List Key",          Type = ParameterType.Text,  Required = true,  Placeholder = "my_list",
-                Description = "WorkflowData key where the list is stored" },
-            new() { Name = "initialItems", Label = "Initial Items (JSON Array)", Type = ParameterType.Json, Required = false, Placeholder = "[\"item1\", \"item2\"]",
-                Description = "Optional JSON array to pre-populate the list" },
-        ]
-    };
 
     private readonly string _listKey;
     private readonly List<object?> _initial;

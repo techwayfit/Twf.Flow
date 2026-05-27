@@ -35,7 +35,6 @@ public sealed class SetVariableNode : BaseNode
         $"Sets {_assignments.Count} workflow variable(s)";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "setvar";
 
     /// <inheritdoc/>
     // Input ports are the {{variable}} placeholders referenced inside assignment values.
@@ -48,17 +47,6 @@ public sealed class SetVariableNode : BaseNode
             .ToList<NodeData>();
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "SetVariableNode",
-        Description = "Write literal or {{interpolated}} values into workflow data",
-        Parameters  =
-        [
-            new() { Name = "assignments", Label = "Assignments (JSON)", Type = ParameterType.Json, Required = true,
-                Placeholder = "{\"greeting\": \"Hello {{name}}\", \"count\": 0}",
-                Description = "Key/value pairs to write. String values support {{variable}} interpolation." },
-        ]
-    };
 
     private readonly IReadOnlyDictionary<string, object?> _assignments;
 

@@ -24,11 +24,9 @@ public sealed class ConditionNode : BaseNode
         $"Evaluates {_conditions.Count} condition(s) and writes results to WorkflowData";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "cond";
 
     /// <inheritdoc/>
     // Inputs are the data keys referenced by predicates — not statically knowable in all cases.
-    public override IReadOnlyList<NodeData> DataIn => [];
 
     /// <inheritdoc/>
     public override IReadOnlyList<NodeData> DataOut =>
@@ -36,17 +34,6 @@ public sealed class ConditionNode : BaseNode
                    .ToList<NodeData>();
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "ConditionNode",
-        Description = "Evaluate conditions and write boolean flags to workflow data",
-        Parameters  =
-        [
-            new() { Name = "condition", Label = "Condition Expression", Type = ParameterType.Text, Required = false,
-                Placeholder = "e.g. score > 5",
-                Description = "In JSON mode, conditions are evaluated by upstream nodes. This field is for documentation." },
-        ]
-    };
 
     private readonly List<(string Key, Func<WorkflowData, bool> Predicate)> _conditions;
 

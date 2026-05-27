@@ -21,22 +21,9 @@ namespace Twf.Flow.Nodes.IO;
 /// </summary>
 public sealed class FileReaderNode : BaseNode
 {
-    public override string Name => Schema.NodeType;
+    public override string Name => "FileReaderNode";
     public override string Category => "IO";
-    public override string Description => Schema.Description;
-
-    /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "FileReaderNode",
-        Description = "Read a file from the local file system into workflow data",
-        Parameters  =
-        [
-            new() { Name = "filePath", Label = "File Path", Type = ParameterType.Text, Required = true,
-                Placeholder = "/data/input/{{filename}}",
-                Description = "Supports {{variable}} substitution" },
-        ]
-    };
+    public override string Description => "Reads a file from disk and writes content and metadata to workflow data";
 
     // WorkflowData keys
     public const string InputFilePath      = "file_path";

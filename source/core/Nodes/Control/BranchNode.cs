@@ -24,36 +24,11 @@ public sealed class BranchNode : BaseNode
         $"Routes by '{_valueKey}' using switch/case matching";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "branch";
 
     /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(_valueKey, typeof(string), Required: true, "Value used to select a branch")
-    ];
 
     /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new("branch_selected_port", typeof(string), Description: "Matched case key (case1/case2/default)"),
-        new("branch_input_value",   typeof(string), Description: "String representation of the input value"),
-        new("branch_status",        typeof(string), Description: "success or failure")
-    ];
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "BranchNode",
-        Description = "Route flow based on value matching (up to 3 cases + default)",
-        Parameters  =
-        [
-            new() { Name = "valueKey",      Label = "Value Key",    Type = ParameterType.Text,    Required = true,  Placeholder = "e.g. status, type, category",
-                Description = "WorkflowData key containing the value to match" },
-            new() { Name = "case1Value",    Label = "Case 1 Value", Type = ParameterType.Text,    Required = false, Placeholder = "e.g. approved" },
-            new() { Name = "case2Value",    Label = "Case 2 Value", Type = ParameterType.Text,    Required = false, Placeholder = "e.g. pending" },
-            new() { Name = "case3Value",    Label = "Case 3 Value", Type = ParameterType.Text,    Required = false, Placeholder = "e.g. rejected" },
-            new() { Name = "caseSensitive", Label = "Case Sensitive", Type = ParameterType.Boolean, Required = false, DefaultValue = false },
-        ]
-    };
 
     public Dictionary<string, WorkflowStructure?> _branchWorkflows { get; } = new(StringComparer.OrdinalIgnoreCase);
 

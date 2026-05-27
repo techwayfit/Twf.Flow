@@ -14,10 +14,9 @@ public sealed class MergeNode : BaseNode
 {
     public override string Name { get; }
     public override string Category => "Control";
-    public override string Description => Schema.Description;
+    public override string Description => "Merges multiple workflow data keys into a single output value";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "merge";
 
     /// <inheritdoc/>
     public override IReadOnlyList<NodeData> DataIn =>
@@ -25,23 +24,6 @@ public sealed class MergeNode : BaseNode
                    .ToList<NodeData>();
 
     /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_outputKey, typeof(string), Description: "Merged result")
-    ];
-
-    /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "MergeNode",
-        Description = "Concatenate multiple data keys into one output key",
-        Parameters  =
-        [
-            new() { Name = "sourceKeys", Label = "Source Keys (JSON array)", Type = ParameterType.Json,   Required = true,  Placeholder = "[\"key1\", \"key2\", \"key3\"]" },
-            new() { Name = "outputKey",  Label = "Output Key",               Type = ParameterType.Text,   Required = true,  Placeholder = "merged_output" },
-            new() { Name = "separator",  Label = "Separator",                Type = ParameterType.Text,   Required = false, DefaultValue = "\n" },
-        ]
-    };
 
     private readonly string[] _sourceKeys;
     private readonly string _outputKey;

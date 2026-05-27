@@ -30,62 +30,12 @@ public sealed class HttpRequestNode : BaseNode
         $"HTTP {_config.Method} {_config.UrlTemplate}";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "http";
 
     // WorkflowData keys
     public const string InputRequestBody  = "request_body";
     public const string OutputResponse    = "http_response";
     public const string OutputStatusCode  = "http_status_code";
     public const string OutputHeaders     = "http_headers";
-
-    /// <inheritdoc/>
-    // Input ports = {{variable}} placeholders extracted from UrlTemplate at construction time.
-    public override IReadOnlyList<NodeData> DataIn
-    {
-        get
-        {
-            var ports = System.Text.RegularExpressions.Regex
-                .Matches(_config.UrlTemplate, @"\{\{(\w+)\}\}")
-                .Select(m => new NodeData(m.Groups[1].Value, typeof(string), Required: false,
-                    "URL template variable"))
-                .DistinctBy(p => p.Key)
-                .ToList<NodeData>();
-            if (_config.Method is "POST" or "PUT" or "PATCH")
-                ports.Add(new NodeData(InputRequestBody, typeof(object), Required: false, "Request body (if no static body configured)"));
-            return ports;
-        }
-    }
-
-    /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(OutputResponse,   typeof(object), Description: "Parsed JSON or raw response string"),
-        new(OutputStatusCode, typeof(int),    Description: "HTTP status code"),
-        new(OutputHeaders,    typeof(Dictionary<string,string>), Required: false, "Response headers")
-    ];
-
-    /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "HttpRequestNode",
-        Description = "Make an HTTP/REST API call with configurable method and headers",
-        Parameters  =
-        [
-            new() { Name = "method",      Label = "HTTP Method",     Type = ParameterType.Select, Required = true, DefaultValue = "GET",
-                Options =
-                [
-                    new() { Value = "GET",    Label = "GET" },
-                    new() { Value = "POST",   Label = "POST" },
-                    new() { Value = "PUT",    Label = "PUT" },
-                    new() { Value = "PATCH",  Label = "PATCH" },
-                    new() { Value = "DELETE", Label = "DELETE" },
-                ] },
-            new() { Name = "url",          Label = "URL Template",    Type = ParameterType.Text,   Required = true,  Placeholder = "https://api.example.com/users/{{user_id}}" },
-            new() { Name = "headers",      Label = "Headers (JSON)",  Type = ParameterType.Json,   Required = false, Placeholder = "{\"Authorization\": \"Bearer {{token}}\"}" },
-            new() { Name = "timeoutMs",    Label = "Timeout (ms)",    Type = ParameterType.Number, Required = false, DefaultValue = 30000, MinValue = 1000, MaxValue = 300000 },
-            new() { Name = "throwOnError", Label = "Throw on HTTP Error", Type = ParameterType.Boolean, Required = false, DefaultValue = true },
-        ]
-    };
 
     private readonly HttpRequestConfig _config;
     private readonly HttpClient _httpClient;

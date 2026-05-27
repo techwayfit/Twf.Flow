@@ -27,20 +27,6 @@ public sealed class ErrorRouteNode : BaseNode
         $"Routes by error indicators (message='{_errorMessageKey}', status='{_statusCodeKey}')";
 
     /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "ErrorRouteNode",
-        Description = "Detect errors and route to success or error path",
-        Parameters  =
-        [
-            new() { Name = "errorMessageKey",     Label = "Error Message Key",     Type = ParameterType.Text,   Required = false, DefaultValue = "error_message",
-                Description = "WorkflowData key that holds an error message string" },
-            new() { Name = "statusCodeKey",       Label = "Status Code Key",       Type = ParameterType.Text,   Required = false, DefaultValue = "http_status_code",
-                Description = "WorkflowData key that holds an HTTP status code" },
-            new() { Name = "errorStatusThreshold",Label = "Error Status Threshold",Type = ParameterType.Number, Required = false, DefaultValue = 400, MinValue = 100, MaxValue = 599,
-                Description = "Status codes >= this value are treated as errors" },
-        ]
-    };
 
     private readonly string _errorMessageKey;
     private readonly string _statusCodeKey;

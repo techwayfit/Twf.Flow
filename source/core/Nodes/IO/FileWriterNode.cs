@@ -11,25 +11,9 @@ namespace Twf.Flow.Nodes.IO;
 /// </summary>
 public sealed class FileWriterNode : BaseNode
 {
-    public override string Name => Schema.NodeType;
+    public override string Name => "FileWriterNode";
     public override string Category => "IO";
-    public override string Description => Schema.Description;
-
-    /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "FileWriterNode",
-        Description = "Write a workflow data key to a local file",
-        Parameters  =
-        [
-            new() { Name = "filePath",   Label = "File Path",   Type = ParameterType.Text, Required = true,
-                Placeholder = "/data/output/{{request_id}}.txt",
-                Description = "Supports {{variable}} substitution" },
-            new() { Name = "contentKey", Label = "Content Key", Type = ParameterType.Text, Required = true,
-                Placeholder = "e.g. llm_response",
-                Description = "WorkflowData key whose value is written to the file" },
-        ]
-    };
+    public override string Description => "Writes workflow data content to a file";
 
     // WorkflowData keys
     public const string DefaultDataKey = "llm_response";

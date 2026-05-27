@@ -20,38 +20,9 @@ public sealed class AddListItemNode : BaseNode
     public override string Name     { get; }
     public override string Category => "Data";
     public override string Description => $"Adds an item to list '{_listKey}'";
-    public override string IdPrefix => "additem";
 
     // WorkflowData keys
     public const string OutputListCount = "list_count";
-
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(_listKey, typeof(List<object?>), Required: false, "List to append to (created if missing)"),
-    ];
-
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_listKey,        typeof(List<object?>), Description: "Updated list"),
-        new(OutputListCount, typeof(int),           Description: "New length of the list"),
-    ];
-
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "AddListItemNode",
-        Description = "Append or prepend an item to a list",
-        Parameters  =
-        [
-            new() { Name = "listKey",    Label = "List Key",        Type = ParameterType.Text, Required = true, Placeholder = "my_list",
-                Description = "WorkflowData key of the list to modify" },
-            new() { Name = "itemKey",    Label = "Item Source Key", Type = ParameterType.Text, Required = false, Placeholder = "item_value",
-                Description = "Read the item from this WorkflowData key (takes priority over Item Value)" },
-            new() { Name = "itemValue",  Label = "Item Value",      Type = ParameterType.Text, Required = false, Placeholder = "hello world",
-                Description = "Literal value to add (used when Item Source Key is empty)" },
-            new() { Name = "position",   Label = "Position",        Type = ParameterType.Select, Required = false, DefaultValue = "end",
-                Options = [new() { Value = "end", Label = "End (append)" }, new() { Value = "start", Label = "Start (prepend)" }] },
-        ]
-    };
 
     private readonly string  _listKey;
     private readonly string? _itemKey;

@@ -131,10 +131,9 @@ public sealed class PromptBuilderNode : BaseNode
 {
     public override string Name { get; }
     public override string Category => "AI";
-    public override string Description => Schema.Description;
+    public override string Description => "Builds prompt text from templates and workflow data";
 
     /// <inheritdoc/>
-    public override string IdPrefix => "prompt";
 
     // WorkflowData keys
     public const string OutputPrompt       = "prompt";
@@ -145,25 +144,6 @@ public sealed class PromptBuilderNode : BaseNode
     public override IReadOnlyList<NodeData> DataIn => ExtractTemplatePorts();
 
     /// <inheritdoc/>
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(OutputPrompt,       typeof(string), Description: "Rendered prompt text"),
-        new(OutputSystemPrompt, typeof(string), Required: false, Description: "Rendered system instruction")
-    ];
-
-    /// <summary>UI schema: parameter form fields shown in the properties panel.</summary>
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "PromptBuilderNode",
-        Description = "Build a dynamic prompt from a template with {{variable}} slots",
-        Parameters  =
-        [
-            new() { Name = "promptTemplate", Label = "Prompt Template", Type = ParameterType.TextArea, Required = true,
-                Placeholder = "Use {{variable}} syntax, e.g. 'Summarize: {{content}}'" },
-            new() { Name = "systemTemplate", Label = "System Template", Type = ParameterType.TextArea, Required = false,
-                Placeholder = "Optional system prompt template" },
-        ]
-    };
 
     private readonly string _promptTemplate;
     private readonly string? _systemTemplate;

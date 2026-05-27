@@ -2,12 +2,12 @@ namespace Twf.Flow.Core;
 
 /// <summary>
 /// Describes a single input or output data slot on a node.
-/// Used by the UI to show available variables and by the runner to validate data flow.
+/// Used for optional metadata/validation and explicit data contracts.
 /// </summary>
 /// <param name="Key">WorkflowData key this port reads from / writes to.</param>
 /// <param name="DataType">CLR type of the value (typeof(string), typeof(int), etc.).</param>
-/// <param name="Required">If true the runner will fail before executing if the key is absent.</param>
-/// <param name="Description">Human-readable hint shown in the UI.</param>
+/// <param name="Required">If true the key is expected by the node contract.</param>
+/// <param name="Description">Human-readable hint.</param>
 public record NodeData(
     string Key,
     Type   DataType,
@@ -29,23 +29,13 @@ public interface INode
     /// <summary>A short description of what this node does.</summary>
     string Description { get; }
 
-    /// <summary>
-    /// Short prefix used to generate human-readable node IDs in the designer
-    /// (e.g. "llm" → llm001, llm002). Must be lowercase, letters only.
-    /// </summary>
+    /// <summary>Short prefix used for node identity metadata.</summary>
     string IdPrefix { get; }
 
-    /// <summary>
-    /// WorkflowData keys this node reads. Required ports are validated by the runner
-    /// before execution; missing keys produce a clear error instead of a silent null.
-    /// </summary>
+    /// <summary>WorkflowData keys this node reads.</summary>
     IReadOnlyList<NodeData> DataIn { get; }
 
-    /// <summary>
-    /// WorkflowData keys this node writes. The runner also writes each key under
-    /// the scoped form "nodeId.key" so downstream nodes can reference a specific
-    /// node's output via {{nodeId.key}} even when multiple nodes write the same key.
-    /// </summary>
+    /// <summary>WorkflowData keys this node writes.</summary>
     IReadOnlyList<NodeData> DataOut { get; }
 
     /// <summary>

@@ -20,35 +20,6 @@ public sealed class CsvReadNode : BaseNode
     public override string Name     { get; }
     public override string Category => "IO";
     public override string Description => $"Parses CSV from '{_csvKey}' → '{_outputKey}'";
-    public override string IdPrefix => "csvread";
-
-    public override IReadOnlyList<NodeData> DataIn =>
-    [
-        new(_csvKey, typeof(string), Required: true, "String containing CSV text"),
-    ];
-
-    public override IReadOnlyList<NodeData> DataOut =>
-    [
-        new(_outputKey,    typeof(List<Dictionary<string, string>>), Description: "Parsed rows as list of dicts"),
-        new(OutputRowCount, typeof(int),                              Description: "Number of data rows"),
-        new(OutputColumns,  typeof(List<string>),                     Description: "Column names"),
-    ];
-
-    public static NodeParameterSchema Schema { get; } = new()
-    {
-        NodeType    = "CsvReadNode",
-        Description = "Parse CSV text into a list of row dictionaries",
-        Parameters  =
-        [
-            new() { Name = "csvKey",    Label = "CSV Source Key", Type = ParameterType.Text, Required = true, Placeholder = "csv_text",
-                Description = "WorkflowData key that holds the CSV string" },
-            new() { Name = "outputKey", Label = "Output Key",     Type = ParameterType.Text, Required = false, DefaultValue = "csv_rows" },
-            new() { Name = "hasHeader", Label = "First Row is Header", Type = ParameterType.Boolean, Required = false, DefaultValue = true,
-                Description = "When true, the first row is treated as column names" },
-            new() { Name = "delimiter", Label = "Delimiter",      Type = ParameterType.Text, Required = false, DefaultValue = ",",
-                Placeholder = "," },
-        ]
-    };
 
     // WorkflowData keys
     public const string DefaultCsvKey    = "csv_text";
