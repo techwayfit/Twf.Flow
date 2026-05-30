@@ -63,9 +63,9 @@ public sealed class LogNode : BaseNode
             context.Logger.Log(_level, "   {Key}: {Value}", key, display);
             messages.Add($"{key}: {display}");
         }
-        input.Set("logged_keys", keys);
-        input.Set("log_label", _label);
-        input.Set("log_message", messages.ToArray());
+        input.Set(WorkflowDataKeys.Logging.LoggedKeys, keys);
+        input.Set(WorkflowDataKeys.Logging.LogLabel, _label);
+        input.Set(WorkflowDataKeys.Logging.LogMessage, messages.ToArray());
         return Task.FromResult(input);
     }
     public static LogNode All(string label) => new(label);

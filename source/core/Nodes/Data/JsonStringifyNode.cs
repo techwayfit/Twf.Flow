@@ -56,7 +56,7 @@ public sealed class JsonStringifyNode : BaseNode
         var output = input.Clone().Set(_outputKey, json);
 
         nodeCtx.Log($"Serialized '{_inputKey}' → {json.Length} chars{(_is_indented ? " (pretty)" : "")}");
-        nodeCtx.SetMetadata("json_length", json.Length);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.JsonLength, json.Length);
 
         return Task.FromResult(output);
     }

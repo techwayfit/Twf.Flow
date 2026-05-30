@@ -271,7 +271,7 @@ public static class WorkflowPipelineExtensions
                     var results = data.Get<List<SearchResultItem>>(GoogleSearchNode.OutputResults) ?? [];
                     var formatted = string.Join("\n\n", results.Select((r, i) =>
                         $"{i + 1}. {r.Title}\n{r.Description}\n{r.LinkedPage}"));
-                    return Task.FromResult(data.Clone().Set("search_results", formatted));
+                    return Task.FromResult(data.Clone().Set(WorkflowDataKeys.Pipelines.SearchResults, formatted));
                 })
             .AddNode(new PromptBuilderNode(
                 $"{config.NodePrefix}:PromptBuilder",

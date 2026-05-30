@@ -146,7 +146,7 @@ public sealed class LoopNode : BaseNode
             }
         }
 
-        nodeCtx.SetMetadata("iteration_count", items.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Control.IterationCount, items.Count);
         nodeCtx.Log($"Loop complete: {items.Count} iteration(s)");
 
         return input.Clone()

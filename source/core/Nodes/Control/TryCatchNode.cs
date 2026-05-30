@@ -57,17 +57,17 @@ public sealed class TryCatchNode : BaseNode
         {
             nodeCtx.Log("Try workflow completed successfully");
             return tryResult.Data.Clone()
-                .Set("try_catch_route", "success")
-                .Set("try_success", true)
-                .Set("try_error", false);
+                .Set(WorkflowDataKeys.TryCatch.Route, "success")
+                .Set(WorkflowDataKeys.TryCatch.Success, true)
+                .Set(WorkflowDataKeys.TryCatch.Error, false);
         }
 
         nodeCtx.Log($"Try workflow failed at '{tryResult.FailedNodeName}': {tryResult.ErrorMessage}");
 
         var catchInput = tryResult.Data.Clone()
-            .Set("caught_error_message", tryResult.ErrorMessage ?? string.Empty)
-            .Set("caught_failed_node", tryResult.FailedNodeName ?? string.Empty)
-            .Set("caught_exception_type", tryResult.Exception?.GetType().Name ?? string.Empty);
+            .Set(WorkflowDataKeys.TryCatch.CaughtErrorMessage, tryResult.ErrorMessage ?? string.Empty)
+            .Set(WorkflowDataKeys.TryCatch.CaughtFailedNode, tryResult.FailedNodeName ?? string.Empty)
+            .Set(WorkflowDataKeys.TryCatch.CaughtExceptionType, tryResult.Exception?.GetType().Name ?? string.Empty);
 
         if (_catchWorkflow is null)
         {
@@ -81,9 +81,9 @@ public sealed class TryCatchNode : BaseNode
         {
             nodeCtx.Log("Catch workflow handled the failure successfully");
             return catchResult.Data.Clone()
-                .Set("try_catch_route", "catch")
-                .Set("try_success", false)
-                .Set("try_error", true);
+                .Set(WorkflowDataKeys.TryCatch.Route, "catch")
+                .Set(WorkflowDataKeys.TryCatch.Success, false)
+                .Set(WorkflowDataKeys.TryCatch.Error, true);
         }
 
         throw new InvalidOperationException(

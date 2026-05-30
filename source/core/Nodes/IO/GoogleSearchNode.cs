@@ -82,8 +82,8 @@ public sealed class GoogleSearchNode : BaseNode
         var results = ParseResults(json, count);
 
         nodeCtx.Log($"Returned {results.Count} results");
-        nodeCtx.SetMetadata("result_count", results.Count);
-        nodeCtx.SetMetadata("query", query);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.ResultCount, results.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.Query, query);
 
         return input.Clone()
             .Set(OutputResults,     results)

@@ -81,9 +81,9 @@ public sealed class MathOperationNode : BaseNode
         var output = input.Clone().Set(_outputKey, result);
 
         nodeCtx.Log($"{_operation}({a}, {b}) = {result}");
-        nodeCtx.SetMetadata("a", a);
-        nodeCtx.SetMetadata("b", b);
-        nodeCtx.SetMetadata("result", result);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.A, a);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.B, b);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.Result, result);
 
         return Task.FromResult(output);
     }

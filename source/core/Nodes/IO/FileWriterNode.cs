@@ -48,8 +48,8 @@ public sealed class FileWriterNode : BaseNode
         await File.WriteAllTextAsync(_outputPath, content, context.CancellationToken);
 
         nodeCtx.Log($"Wrote {content.Length} chars to {_outputPath}");
-        nodeCtx.SetMetadata("output_path", _outputPath);
-        nodeCtx.SetMetadata("bytes_written", content.Length);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.OutputPath, _outputPath);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.BytesWritten, content.Length);
 
         return input.Clone().Set(OutputFile, _outputPath);
     }

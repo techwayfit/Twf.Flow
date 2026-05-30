@@ -80,8 +80,8 @@ public sealed class CsvWriteNode : BaseNode
             .Set(OutputRowCount, count);
 
         nodeCtx.Log($"Wrote {count} row(s) to CSV ({csv.Length} chars)");
-        nodeCtx.SetMetadata("row_count", count);
-        nodeCtx.SetMetadata("csv_length", csv.Length);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.RowCount, count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.CsvLength, csv.Length);
 
         return Task.FromResult(output);
     }

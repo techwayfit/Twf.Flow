@@ -70,7 +70,7 @@ public sealed class MergeListsNode : BaseNode
             .Set(OutputListCount, merged.Count);
 
         nodeCtx.Log($"Merged '{_listKeyA}' ({listA.Count}) + '{_listKeyB}' ({listB.Count}) → '{_outputKey}' ({merged.Count})");
-        nodeCtx.SetMetadata("merged_count", merged.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.MergedCount, merged.Count);
         return Task.FromResult(output);
     }
 }

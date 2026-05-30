@@ -76,8 +76,8 @@ public sealed class JsonParseNode : BaseNode
                 .Set(OutputParseSuccess, true);
 
             nodeCtx.Log($"Parsed JSON ({jsonStr.Length} chars) → {parsed.ValueKind}");
-            nodeCtx.SetMetadata("value_kind",  parsed.ValueKind.ToString());
-            nodeCtx.SetMetadata("input_length", jsonStr.Length);
+            nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.ValueKind,  parsed.ValueKind.ToString());
+            nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.InputLength, jsonStr.Length);
 
             return Task.FromResult(output);
         }

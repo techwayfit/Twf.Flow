@@ -96,8 +96,8 @@ public sealed class RemoveListItemNode : BaseNode
             .Set(OutputListCount,  list.Count)
             .Set(OutputRemovedItem, removed);
 
-        nodeCtx.SetMetadata("removed", found);
-        nodeCtx.SetMetadata("list_count", list.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.Removed, found);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.ListCount, list.Count);
         return Task.FromResult(output);
     }
 }

@@ -60,8 +60,8 @@ public sealed class FileReaderNode : BaseNode
         var content = await File.ReadAllTextAsync(filePath, context.CancellationToken);
         var ext = info.Extension.TrimStart('.').ToLower();
 
-        nodeCtx.SetMetadata("file_size", info.Length);
-        nodeCtx.SetMetadata("file_extension", ext);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.FileSize, info.Length);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.FileExtension, ext);
 
         return input.Clone()
             .Set(OutputText,          content)

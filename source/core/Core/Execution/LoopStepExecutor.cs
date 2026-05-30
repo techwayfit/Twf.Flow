@@ -56,9 +56,9 @@ internal sealed class LoopStepExecutor : ITypedStepExecutor
         {
             // Inject loop variables
             var itemData = data.Clone()
-         .Set("__loop_item__", items[i])
-      .Set("__loop_index__", i)
-       .Set("__loop_total__", items.Count);
+            .Set(WorkflowDataKeys.Loop.LoopItem, items[i])
+        .Set(WorkflowDataKeys.Loop.LoopIndex, i)
+         .Set(WorkflowDataKeys.Loop.LoopTotal, items.Count);
 
             context.Logger.LogDebug(
          "  Iteration {Index}/{Total}",

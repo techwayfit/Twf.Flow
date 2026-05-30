@@ -94,7 +94,7 @@ public sealed class HttpRequestNode : BaseNode
         var statusCode = (int)response.StatusCode;
 
         nodeCtx.Log($"Response: {statusCode} {response.StatusCode}");
-        nodeCtx.SetMetadata("status_code", statusCode);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.StatusCode, statusCode);
 
         if (!response.IsSuccessStatusCode && _config.ThrowOnError)
             throw new HttpRequestException(

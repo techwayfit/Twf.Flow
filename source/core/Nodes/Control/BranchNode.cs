@@ -71,7 +71,7 @@ public sealed class BranchNode : BaseNode
         if (string.IsNullOrEmpty(inputValue))
         {
             nodeCtx.Log("Branch route failure.");
-            input.Set("branch_route_status", "failure");
+            input.Set(WorkflowDataKeys.Branch.RouteStatus, "failure");
             return input;
         }
         if (!_branchWorkflows.TryGetValue(inputValue, out WorkflowStructure flow))
@@ -88,22 +88,22 @@ public sealed class BranchNode : BaseNode
             if (!result.IsSuccess)
             {
                 nodeCtx.Log($"Branch route failure: {result.ErrorMessage}");
-                data.Set("branch_status", "failure");
+                data.Set(WorkflowDataKeys.Branch.Status, "failure");
             }
             else
             {
                 nodeCtx.Log("Branch route success.");
-                data.Set("branch_status", "success");
+                data.Set(WorkflowDataKeys.Branch.Status, "success");
 
             }
-            data.Set("branch_route", flow.Name)
-                .Set("branch_selected_port", inputValue);
+            data.Set(WorkflowDataKeys.Branch.Route, flow.Name)
+                .Set(WorkflowDataKeys.Branch.SelectedPort, inputValue);
 
             return data;
         }
     
         nodeCtx.Log("Branch route failure.");
-        input.Set("branch_route_status", "failure");
+        input.Set(WorkflowDataKeys.Branch.RouteStatus, "failure");
         
         return input;
     }

@@ -195,9 +195,9 @@ public sealed class DataMapperNode : BaseNode
             nodeCtx.Log($"⚠️  Mapping missing: '{sourcePath}' → '{targetKey}'");
         }
 
-        nodeCtx.SetMetadata("mapped_count", mappedCount);
-        nodeCtx.SetMetadata("missing_count", missingCount);
-        nodeCtx.SetMetadata("remove_unmapped", _removeUnmapped);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.MappedCount, mappedCount);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.MissingCount, missingCount);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.RemoveUnmapped, _removeUnmapped);
 
         if (_throwOnMissing && missingCount > 0)
         {

@@ -1,4 +1,5 @@
 using Twf.Flow.Core;
+using Twf.Flow.Nodes.IO;
 
 namespace Twf.Flow.Nodes.Control;
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -34,8 +35,8 @@ public sealed class ErrorRouteNode : BaseNode
 
     public ErrorRouteNode(
         string name = "ErrorRoute",
-        string errorMessageKey = "error_message",
-        string statusCodeKey = "http_status_code",
+        string errorMessageKey = WorkflowDataKeys.ErrorRoute.InputErrorMessage,
+        string statusCodeKey = HttpRequestNode.OutputStatusCode,
         int errorStatusThreshold = 400)
     {
         Name = name;
@@ -48,8 +49,8 @@ public sealed class ErrorRouteNode : BaseNode
     public ErrorRouteNode(Dictionary<string, object?> parameters)
         : this(
             NodeParameters.GetString(parameters, "name") ?? "Error Route",
-            NodeParameters.GetString(parameters, "errorMessageKey")  ?? "error_message",
-            NodeParameters.GetString(parameters, "statusCodeKey")    ?? "http_status_code",
+            NodeParameters.GetString(parameters, "errorMessageKey")  ?? WorkflowDataKeys.ErrorRoute.InputErrorMessage,
+            NodeParameters.GetString(parameters, "statusCodeKey")    ?? HttpRequestNode.OutputStatusCode,
             NodeParameters.GetInt(parameters,    "errorStatusThreshold", 400))
     { }
 
@@ -70,15 +71,15 @@ public sealed class ErrorRouteNode : BaseNode
 
         nodeCtx.Log(
             $"Error route={route} (hasErrorMessage={hasErrorMessage}, hasStatusCode={hasStatusCode}, statusCode={(hasStatusCode ? statusCode : 0)})");
-        nodeCtx.SetMetadata("route", route);
-        nodeCtx.SetMetadata("status_code", hasStatusCode ? statusCode : -1);
-        nodeCtx.SetMetadata("threshold", _errorStatusThreshold);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Control.Route, route);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Control.StatusCode, hasStatusCode ? statusCode : -1);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Control.Threshold, _errorStatusThreshold);
 
         return Task.FromResult(input.Clone()
-            .Set("error_route", route)
-            .Set("route_error", isError)
-            .Set("route_success", !isError)
-            .Set("routed_error_message", errorMessage));
+            .Set(WorkflowDataKeys.ErrorRoute.ErrorRouteKey, route)
+            .Set(WorkflowDataKeys.ErrorRoute.RouteError, isError)
+            .Set(WorkflowDataKeys.ErrorRoute.RouteSuccess, !isError)
+            .Set(WorkflowDataKeys.ErrorRoute.RoutedErrorMessage, errorMessage));
     }
 
     public static ErrorRouteNode HttpStatusAware(
@@ -88,7 +89,7 @@ public sealed class ErrorRouteNode : BaseNode
     {
         return new ErrorRouteNode(
             name: name,
-            errorMessageKey: "error_message",
+            errorMessageKey: WorkflowDataKeys.ErrorRoute.InputErrorMessage,
             statusCodeKey: statusCodeKey,
             errorStatusThreshold: errorStatusThreshold);
     }

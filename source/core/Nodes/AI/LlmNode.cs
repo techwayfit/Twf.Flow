@@ -192,9 +192,9 @@ public sealed class LlmNode : BaseNode
             usage = ExtractUsage(response);
         }
 
-        nodeCtx.SetMetadata("model", _config.Model);
-        nodeCtx.SetMetadata("prompt_tokens", usage.PromptTokens);
-        nodeCtx.SetMetadata("completion_tokens", usage.CompletionTokens);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.AI.Model, _config.Model);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.AI.PromptTokens, usage.PromptTokens);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.AI.CompletionTokens, usage.CompletionTokens);
         nodeCtx.Log($"Response length: {llmResponse.Length} chars | Tokens: {usage.PromptTokens}+{usage.CompletionTokens}");
 
         // Optionally append to conversation history

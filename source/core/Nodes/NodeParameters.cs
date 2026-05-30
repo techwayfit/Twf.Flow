@@ -10,6 +10,83 @@ namespace Twf.Flow.Nodes;
 /// </summary>
 public static class NodeParameters
 {
+    public static class Keys
+    {
+        public const string Name = "name";
+        public const string Provider = "provider";
+        public const string Model = "model";
+        public const string ApiKey = "apiKey";
+        public const string ApiUrl = "apiUrl";
+        public const string SystemPrompt = "systemPrompt";
+        public const string Temperature = "temperature";
+        public const string MaxTokens = "maxTokens";
+        public const string MaintainHistory = "maintainHistory";
+        public const string PromptTemplate = "promptTemplate";
+        public const string SystemTemplate = "systemTemplate";
+        public const string FieldMapping = "fieldMapping";
+        public const string Strict = "strict";
+        public const string Strategy = "strategy";
+        public const string ChunkSize = "chunkSize";
+        public const string Overlap = "overlap";
+        public const string InputKey = "inputKey";
+        public const string OutputKey = "outputKey";
+        public const string DataKey = "dataKey";
+        public const string CsvKey = "csvKey";
+        public const string IncludeHeader = "includeHeader";
+        public const string HasHeader = "hasHeader";
+        public const string Delimiter = "delimiter";
+        public const string FilePath = "filePath";
+        public const string ContentKey = "contentKey";
+        public const string Method = "method";
+        public const string Url = "url";
+        public const string UrlTemplate = "urlTemplate";
+        public const string Headers = "headers";
+        public const string ThrowOnError = "throwOnError";
+        public const string TimeoutMs = "timeoutMs";
+        public const string ErrorMessageKey = "errorMessageKey";
+        public const string StatusCodeKey = "statusCodeKey";
+        public const string ErrorStatusThreshold = "errorStatusThreshold";
+        public const string ItemsKey = "itemsKey";
+        public const string LoopItemKey = "loopItemKey";
+        public const string MaxIterations = "maxIterations";
+        public const string Keys = "keys";
+        public const string KeysToLog = "keysToLog";
+        public const string SourceKeys = "sourceKeys";
+        public const string ListKey = "listKey";
+        public const string ListKeyA = "listKeyA";
+        public const string ListKeyB = "listKeyB";
+        public const string ItemKey = "itemKey";
+        public const string ItemValue = "itemValue";
+        public const string Position = "position";
+        public const string RemoveIndex = "removeIndex";
+        public const string RemoveValue = "removeValue";
+        public const string Mappings = "mappings";
+        public const string Assignments = "assignments";
+        public const string ThrowOnMissing = "throwOnMissing";
+        public const string RemoveUnmapped = "removeUnmapped";
+        public const string Operation = "operation";
+        public const string InputKeyA = "inputKeyA";
+        public const string InputKeyB = "inputKeyB";
+        public const string ValueA = "valueA";
+        public const string ValueB = "valueB";
+        public const string TargetKey = "targetKey";
+        public const string AppendKey = "appendKey";
+        public const string AppendValue = "appendValue";
+        public const string Preset = "preset";
+        public const string FromKey = "fromKey";
+        public const string ToKey = "toKey";
+        public const string ThrowOnFail = "throwOnFail";
+        public const string RequireKey = "requireKey";
+        public const string MaxLengthKey = "maxLengthKey";
+        public const string MaxLength = "maxLength";
+        public const string Indented = "indented";
+        public const string Mode = "mode";
+        public const string DurationMs = "durationMs";
+        public const string Reason = "reason";
+        public const string Separator = "separator";
+        public const string Deduplicate = "deduplicate";
+    }
+
     /// <summary>
     /// Retrieves a string value from the parameter dictionary.
     /// </summary>

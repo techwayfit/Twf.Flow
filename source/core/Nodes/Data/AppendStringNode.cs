@@ -73,8 +73,8 @@ public sealed class AppendStringNode : BaseNode
         var output = input.Set(_targetKey, result);
 
         nodeCtx.Log($"'{_targetKey}': {baseStr.Length} chars → {result.Length} chars");
-        nodeCtx.SetMetadata("original_length", baseStr.Length);
-        nodeCtx.SetMetadata("result_length",   result.Length);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.OriginalLength, baseStr.Length);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.ResultLength,   result.Length);
 
         return Task.FromResult(output);
     }

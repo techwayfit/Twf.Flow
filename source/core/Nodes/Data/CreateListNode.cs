@@ -78,8 +78,8 @@ public sealed class CreateListNode : BaseNode
             .Set(OutputListCount, list.Count);
 
         nodeCtx.Log($"Created list '{_listKey}' with {list.Count} item(s)");
-        nodeCtx.SetMetadata("list_key",   _listKey);
-        nodeCtx.SetMetadata("list_count", list.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.ListKey,   _listKey);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.ListCount, list.Count);
 
         return Task.FromResult(output);
     }

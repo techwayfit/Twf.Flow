@@ -168,8 +168,8 @@ public sealed class FilterNode : BaseNode
             nodeCtx.Log($"✅ All {_rules.Count} validation rules passed");
         }
 
-        nodeCtx.SetMetadata("rules_checked", _rules.Count);
-        nodeCtx.SetMetadata("failures", failures.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.RulesChecked, _rules.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.Failures, failures.Count);
 
         return Task.FromResult(output);
     }

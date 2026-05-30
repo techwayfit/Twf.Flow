@@ -74,7 +74,7 @@ public sealed class EmbeddingNode : BaseNode
             nodeCtx.Log($"Embedding single text ({singleText.Length} chars)");
             var embedding = await GetEmbeddingAsync(singleText, context.CancellationToken);
             output.Set(OutputEmbedding, embedding);
-            nodeCtx.SetMetadata("dimensions", embedding.Length);
+            nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.AI.Dimensions, embedding.Length);
         }
         // Batch texts
         else if (input.TryGet<List<string>>(InputTexts, out var texts) && texts is not null)
@@ -87,7 +87,7 @@ public sealed class EmbeddingNode : BaseNode
                 embeddings.Add(emb);
             }
             output.Set(OutputEmbeddings, embeddings);
-            nodeCtx.SetMetadata("batch_size", texts.Count);
+            nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.AI.BatchSize, texts.Count);
         }
         else
         {
@@ -96,7 +96,7 @@ public sealed class EmbeddingNode : BaseNode
         }
 
         output.Set(OutputModel, _config.Model);
-        nodeCtx.SetMetadata("model", _config.Model);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.AI.Model, _config.Model);
 
         return output;
     }

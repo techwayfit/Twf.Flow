@@ -74,8 +74,8 @@ public sealed class AddListItemNode : BaseNode
             .Set(_listKey,        list)
             .Set(OutputListCount, list.Count);
 
-        nodeCtx.SetMetadata("list_key",   _listKey);
-        nodeCtx.SetMetadata("list_count", list.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.ListKey,   _listKey);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.ListCount, list.Count);
         return Task.FromResult(output);
     }
 

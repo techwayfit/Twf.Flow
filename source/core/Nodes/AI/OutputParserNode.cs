@@ -244,7 +244,7 @@ public sealed class OutputParserNode : BaseNode
                 nodeCtx.Log($"Extracted {parsedDict.Count} fields from JSON");
             }
 
-            nodeCtx.SetMetadata("parsed_keys", string.Join(", ", parsedDict.Keys));
+            nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.AI.ParsedKeys, string.Join(", ", parsedDict.Keys));
         }
         catch (JsonException ex)
         {

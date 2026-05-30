@@ -70,8 +70,8 @@ public sealed class ChunkTextNode : BaseNode
 
         nodeCtx.Log($"Split {text.Length} chars into {chunks.Count} chunks " +
                     $"(strategy={_config.Strategy}, size={_config.ChunkSize})");
-        nodeCtx.SetMetadata("chunk_count", chunks.Count);
-        nodeCtx.SetMetadata("avg_chunk_size",
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.ChunkCount, chunks.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.Data.AvgChunkSize,
             chunks.Count > 0 ? chunks.Average(c => c.Text.Length) : 0);
 
         return Task.FromResult(input.Clone()

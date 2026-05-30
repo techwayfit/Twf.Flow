@@ -90,8 +90,8 @@ public sealed class CsvReadNode : BaseNode
             .Set(OutputColumns,  columns);
 
         nodeCtx.Log($"Parsed {rows.Count} row(s), {columns.Count} column(s)");
-        nodeCtx.SetMetadata("row_count",    rows.Count);
-        nodeCtx.SetMetadata("column_count", columns.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.RowCount,    rows.Count);
+        nodeCtx.SetMetadata(WorkflowDataKeys.Metadata.IO.ColumnCount, columns.Count);
 
         return Task.FromResult(output);
     }
